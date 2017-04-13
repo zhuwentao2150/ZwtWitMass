@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ffffff"
+              android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_horizontal_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:background="#c5c5c5"
+        android:scaleType="fitXY"/>
+
+    <!-- 广告的小黑点 -->
+    <LinearLayout
+        android:id="@+id/ll_dot_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ff0000"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal"/>
+
+</LinearLayout>

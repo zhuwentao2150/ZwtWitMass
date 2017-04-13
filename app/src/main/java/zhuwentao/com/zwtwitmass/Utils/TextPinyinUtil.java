@@ -101,7 +101,7 @@ public class TextPinyinUtil {
         return result;
     }
 
-    // 词组解析
+    // 汉字词组解析
     public String getPinyin(String chs) {
         String key, value;
         buffer = new StringBuilder();

@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
 
-        <!--下载进度条-->
+        <!-- 带小圆点的下载进度条 -->
         <activity android:name=".UImodule.ProgressBarActivity">
 
         </activity>

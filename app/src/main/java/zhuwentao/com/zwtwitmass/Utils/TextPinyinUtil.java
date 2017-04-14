@@ -120,5 +120,20 @@ public class TextPinyinUtil {
         return buffer.toString();
     }
 
+    /**
+     * 判断是否为中文
+     * @param text 内容
+     * @return true=中文
+     */
+    public static boolean isChinaString(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if ((c >= 0x4e00) && (c <= 0x9fbb)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

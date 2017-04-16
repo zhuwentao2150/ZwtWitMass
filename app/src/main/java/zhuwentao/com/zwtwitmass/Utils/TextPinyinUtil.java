@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.Utils;
+package zhuwentao.com.zwtwitmass.utils;
 
 /**
  * 汉子转拼音工具

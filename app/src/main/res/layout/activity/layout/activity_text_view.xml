@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <zhuwentao.com.zwtwitmass.UImodule.custom.autotextview.AutofitTextView
+    <zhuwentao.com.zwtwitmass.uimodule.custom.autotextview.AutofitTextView
         android:id="@+id/output_autofit"
         android:layout_width="280dp"
         android:layout_height="60dp"

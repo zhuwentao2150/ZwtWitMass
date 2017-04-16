@@ -24,7 +24,7 @@
 
         <!-- 横向滚动的GridView，带分页效果 -->
         <activity
-            android:name=".UImodule.HorizontalGridViewAct"
+            android:name=".uimodule.HorizontalGridViewAct"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -32,12 +32,12 @@
         </activity>
 
         <!-- 各种TextView -->
-        <activity android:name=".UImodule.TextViewActivity">
+        <activity android:name=".uimodule.TextViewActivity">
 
         </activity>
 
         <!-- 带小圆点的下载进度条 -->
-        <activity android:name=".UImodule.ProgressBarActivity">
+        <activity android:name=".uimodule.ProgressBarActivity">
 
         </activity>
 

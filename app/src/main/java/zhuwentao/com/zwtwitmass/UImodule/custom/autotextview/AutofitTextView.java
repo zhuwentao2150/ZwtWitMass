@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule.custom.autotextview;
+package zhuwentao.com.zwtwitmass.uimodule.custom.autotextview;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.Utils;
+package zhuwentao.com.zwtwitmass.utils;
 
 import android.content.Context;
 import android.view.View;
@@ -30,7 +30,6 @@ public class KeyboardUtil {
 	 * 显示键盘
 	 * 
 	 * @param view	view对象
-	 * @author yansu
 	 */
 	public static void showVirtualKeyboard(View view) {
 		if (view == null) {

@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:max="100" />
 
-    <zhuwentao.com.zwtwitmass.UImodule.custom.DotProgressBar
+    <zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar
         android:id="@+id/dpb_h_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>

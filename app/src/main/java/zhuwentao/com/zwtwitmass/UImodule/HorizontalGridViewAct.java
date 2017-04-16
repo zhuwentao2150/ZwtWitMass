@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule;
+package zhuwentao.com.zwtwitmass.uimodule;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zhuwentao.com.zwtwitmass.R;
-import zhuwentao.com.zwtwitmass.UImodule.adapter.HorizontalGvAdapter;
-import zhuwentao.com.zwtwitmass.UImodule.adapter.HorizontalGvPagerAdapter;
+import zhuwentao.com.zwtwitmass.uimodule.adapter.HorizontalGvAdapter;
+import zhuwentao.com.zwtwitmass.uimodule.adapter.HorizontalGvPagerAdapter;
 
 /**
  * 实现横向滚动的GridView，底部加圆点导航

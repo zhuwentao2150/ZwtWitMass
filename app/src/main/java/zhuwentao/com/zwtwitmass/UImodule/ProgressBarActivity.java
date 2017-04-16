@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule;
+package zhuwentao.com.zwtwitmass.uimodule;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import zhuwentao.com.zwtwitmass.R;
-import zhuwentao.com.zwtwitmass.UImodule.custom.DotProgressBar;
+import zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar;
 
 public class ProgressBarActivity extends AppCompatActivity {
 

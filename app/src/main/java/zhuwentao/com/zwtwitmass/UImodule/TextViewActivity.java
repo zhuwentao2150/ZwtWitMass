@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule;
+package zhuwentao.com.zwtwitmass.uimodule;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import zhuwentao.com.zwtwitmass.R;
-import zhuwentao.com.zwtwitmass.UImodule.custom.autotextview.AutofitTextView;
-import zhuwentao.com.zwtwitmass.Utils.TextPinyinUtil;
+import zhuwentao.com.zwtwitmass.uimodule.custom.autotextview.AutofitTextView;
+import zhuwentao.com.zwtwitmass.utils.TextPinyinUtil;
 
 /**
  * 各种TextView

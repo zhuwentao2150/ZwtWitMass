@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule.custom;
+package zhuwentao.com.zwtwitmass.uimodule.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;

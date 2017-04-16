@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule.adapter;
+package zhuwentao.com.zwtwitmass.uimodule.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;

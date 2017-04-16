@@ -1,4 +1,4 @@
-package zhuwentao.com.zwtwitmass.UImodule.adapter;
+package zhuwentao.com.zwtwitmass.uimodule.adapter;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zhuwentao.com.zwtwitmass.R;
-import zhuwentao.com.zwtwitmass.UImodule.HorizontalGridViewAct;
+import zhuwentao.com.zwtwitmass.uimodule.HorizontalGridViewAct;
 
 /**
  * Created by zhuwentao on 2017-03-09.

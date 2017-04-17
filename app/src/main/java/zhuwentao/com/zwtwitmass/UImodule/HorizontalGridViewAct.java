@@ -43,31 +43,41 @@ public class HorizontalGridViewAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_horizontal_gridview);
-        initViews();
-        viewPager = (ViewPager) findViewById(R.id.vp_horizontal_gridview);
-        mGvPagerAdapter = new HorizontalGvPagerAdapter(mGridViewList);
-        viewPager.setAdapter(mGvPagerAdapter);
-        viewPager.addOnPageChangeListener(new MyPageChangeListener());
 
+        viewPager = (ViewPager) findViewById(R.id.vp_horizontal_gridview);
+
+        initViews(getAppData());
     }
 
     /**
      * 获取系统所有的应用程序，根据每页需要显示的item数量，生成相应的GridView页面
      */
-    public void initViews() {
-        // 获得手机中所有的App
-        List<ResolveInfo> apps = getAppData();
+    public void initViews(List<ResolveInfo> datas) {
+        int dataSize = datas.size();
+
         // （需要页数 = 总数量 ÷ 每页显示数量）向上取整数
-        int PageCount = (int) Math.ceil(apps.size() / APP_SIZE);
-        mGridViewList = new ArrayList<GridView>();
+        int PageCount = (int) Math.ceil(dataSize / APP_SIZE);
+        mGridViewList = new ArrayList<>();
         for (int i = 0; i <= PageCount; i++) {
             GridView appPage = new GridView(this);
-            appPage.setAdapter(new HorizontalGvAdapter(this, apps, i));
+            appPage.setAdapter(new HorizontalGvAdapter(this, datas, i));
             appPage.setNumColumns(4);
             appPage.setVerticalSpacing(1);
             appPage.setHorizontalSpacing(1);
+            appPage.setHorizontalScrollBarEnabled(false);
+            appPage.setVerticalScrollBarEnabled(false);
             mGridViewList.add(appPage);
         }
+
+        if(dataSize % APP_SIZE == 0){
+            mGridViewList.remove(mGridViewList.size()-1);
+            PageCount--;
+        }
+
+        mGvPagerAdapter = new HorizontalGvPagerAdapter(mGridViewList);
+        viewPager.setAdapter(mGvPagerAdapter);
+        viewPager.addOnPageChangeListener(new MyPageChangeListener());
+
         addDot(PageCount);
     }
 
@@ -85,11 +95,12 @@ public class HorizontalGridViewAct extends AppCompatActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
             // 圆点与圆点之间的距离
-            params.leftMargin = 30;
+            params.leftMargin = 10;
+            params.rightMargin = 10;
 
             // 圆点的大小
-            params.height = 30;
-            params.width = 30;
+            params.height = 15;
+            params.width = 15;
 
             dotLayout.addView(dotView, params);
             dotViewsList.add(dotView);
@@ -107,6 +118,8 @@ public class HorizontalGridViewAct extends AppCompatActivity {
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
+
+            // 循环切换
             switch (arg0) {
                 case ViewPager.SCROLL_STATE_DRAGGING:
                     // 手势滑动，空闲中

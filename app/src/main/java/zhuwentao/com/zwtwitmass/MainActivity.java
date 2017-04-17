@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import zhuwentao.com.zwtwitmass.uimodule.HorizontalGridViewAct;
 import zhuwentao.com.zwtwitmass.uimodule.TextViewActivity;
 
 /**
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button mTextSizeBtn;
+    private Button mHorizontalGridViewBtn;
     private Toolbar mTitleBar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mTextSizeBtn = (Button) findViewById(R.id.btn_text_size);
+        mHorizontalGridViewBtn = (Button) findViewById(R.id.btn_text_horizontal_gridview);
 
 
         toggle = new ActionBarDrawerToggle(
@@ -58,6 +61,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TextViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mHorizontalGridViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HorizontalGridViewAct.class);
                 startActivity(intent);
             }
         });

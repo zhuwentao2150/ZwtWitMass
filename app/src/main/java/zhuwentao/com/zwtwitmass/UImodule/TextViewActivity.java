@@ -31,13 +31,13 @@ public class TextViewActivity extends AppCompatActivity {
         mAutotv = (AutofitTextView) findViewById(R.id.output_autofit);
 
         // 汉字转拼音
-        String str = "阿里巴巴";
+        String str = "重庆";
         String strPull = TextPinyinUtil.getInstance().getPinyin(str);
         mAutotv.setText(strPull);
 
         // 对汉字进行排序
         Comparator<Object> com= Collator.getInstance(java.util.Locale.CHINA);
-        String[] newArray={"中山","华山","西门子","阿里巴巴","阳江","南京","武汉","北京","安阳","北方","电控系统","朝阳"};
+        String[] newArray={"中山","华山","西门子","阿里巴巴","阳江","南京","重庆","北京","安阳","北方","电控系统","朝阳"};
         List<String> list = Arrays.asList(newArray);
         Collections.sort(list, com);
         for(String i:list){

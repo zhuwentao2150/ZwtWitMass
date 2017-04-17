@@ -107,6 +107,7 @@ public class TextPinyinUtil {
         buffer = new StringBuilder();
         for (int i = 0; i < chs.length(); i++) {
             key = chs.substring(i, i + 1);
+            // 判断是否为汉字（汉字为两个以上字符）
             if (key.getBytes().length >= 2) {
                 value = (String) convert(key);
                 if (value == null) {

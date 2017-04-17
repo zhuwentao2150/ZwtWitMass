@@ -19,7 +19,7 @@
         android:id="@+id/ll_dot_container"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ff0000"
+        android:background="#4b4b4b"
         android:layout_gravity="bottom"
         android:gravity="center"
         android:orientation="horizontal"/>

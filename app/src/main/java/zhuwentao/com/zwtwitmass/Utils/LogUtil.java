@@ -8,7 +8,7 @@ import android.util.SparseArray;
  * 
  * @author zhuwentao
  */
-public class LogUtils {
+public class LogUtil {
 
     /**
      * 是否启用调试模式, 如果为false不记录任何日志

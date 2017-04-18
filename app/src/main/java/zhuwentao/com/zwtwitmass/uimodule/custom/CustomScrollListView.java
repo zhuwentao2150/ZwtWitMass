@@ -24,5 +24,4 @@ public class CustomScrollListView extends ListView {
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
-
 }

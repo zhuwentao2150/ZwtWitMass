@@ -7,6 +7,7 @@ import android.widget.RadioGroup;
 
 /**
  * 流式布局的RadioGroup
+ * 用于处理多个宽度不一致的RadioButton的布局显示
  * Created by zhuwentao on 2017-04-18.
  */
 public class FlowRadioGroup extends RadioGroup {

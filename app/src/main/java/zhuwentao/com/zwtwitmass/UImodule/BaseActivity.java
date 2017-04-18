@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.utils.ToastUtil;
 
-
+/**
+ * 基类Activity
+ */
 public class BaseActivity extends Activity {
 
 	/**
@@ -27,7 +29,6 @@ public class BaseActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
 

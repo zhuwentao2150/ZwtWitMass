@@ -4,7 +4,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 /**
- * 自定义动画-实现左右摇摆的动画效果
+ * 实现左右摇摆的动画效果
  * Created by zhuwentao on 2017-04-18.
  */
 public class CustomRotateAnim extends Animation {

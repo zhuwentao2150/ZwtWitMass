@@ -14,16 +14,19 @@ import android.view.View;
 import android.widget.Button;
 
 import zhuwentao.com.zwtwitmass.uimodule.HorizontalGridViewAct;
+import zhuwentao.com.zwtwitmass.uimodule.HorizontalGridViewLineAct;
 import zhuwentao.com.zwtwitmass.uimodule.TextViewActivity;
 
 /**
  * 首页
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private Button mTextSizeBtn;
     private Button mHorizontalGridViewBtn;
+    private Button mHorizontalGridViewLineBtn;
+
     private Toolbar mTitleBar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mTextSizeBtn = (Button) findViewById(R.id.btn_text_size);
         mHorizontalGridViewBtn = (Button) findViewById(R.id.btn_text_horizontal_gridview);
-
+        mHorizontalGridViewLineBtn = (Button) findViewById(R.id.btn_text_horizontal_gridview_line);
 
         toggle = new ActionBarDrawerToggle(
                 this, drawer, mTitleBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -56,22 +59,10 @@ public class MainActivity extends AppCompatActivity
 
     public void initListener(){
         navigationView.setNavigationItemSelectedListener(this);
+        mTextSizeBtn.setOnClickListener(this);
+        mHorizontalGridViewBtn.setOnClickListener(this);
+        mHorizontalGridViewLineBtn.setOnClickListener(this);
 
-        mTextSizeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TextViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mHorizontalGridViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HorizontalGridViewAct.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -130,5 +121,24 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        switch (v.getId()){
+            case R.id.btn_text_size:
+                intent = new Intent(MainActivity.this, TextViewActivity.class);
+                break;
+            case R.id.btn_text_horizontal_gridview:
+                intent = new Intent(MainActivity.this, HorizontalGridViewAct.class);
+                break;
+            case R.id.btn_text_horizontal_gridview_line:
+                intent = new Intent(MainActivity.this, HorizontalGridViewLineAct.class);
+                break;
+        }
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 }

@@ -23,4 +23,10 @@
         android:layout_height="wrap_content"
         android:text="横向滚动的GridView"/>
 
+    <Button
+        android:id="@+id/btn_text_horizontal_gridview_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单行横向滚动的GridView"/>
+
 </LinearLayout>

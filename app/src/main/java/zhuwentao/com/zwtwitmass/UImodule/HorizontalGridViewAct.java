@@ -1,7 +1,5 @@
 package zhuwentao.com.zwtwitmass.uimodule;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -18,6 +16,7 @@ import java.util.List;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.adapter.HorizontalGvAdapter;
 import zhuwentao.com.zwtwitmass.uimodule.adapter.HorizontalGvPagerAdapter;
+import zhuwentao.com.zwtwitmass.utils.DataUtil;
 
 /**
  * 实现横向滚动的GridView，底部加圆点导航
@@ -46,7 +45,7 @@ public class HorizontalGridViewAct extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.vp_horizontal_gridview);
 
-        initViews(getAppData());
+        initViews(DataUtil.getAppData(HorizontalGridViewAct.this));
     }
 
     /**
@@ -169,17 +168,5 @@ public class HorizontalGridViewAct extends AppCompatActivity {
                 dotViewsList.get(i).setBackgroundResource(R.drawable.ic_short_home_dot_hover_off);
             }
         }
-    }
-
-    /**
-     * 获取手机中所有App
-     *
-     * @return
-     */
-    private List<ResolveInfo> getAppData() {
-        PackageManager packageManager = getPackageManager();
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        return packageManager.queryIntentActivities(mainIntent, 0);
     }
 }

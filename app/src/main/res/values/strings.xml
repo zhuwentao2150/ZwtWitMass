@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string name="demo_horizontal_gridview">横向滚动的GridView，带分页效果</string>
+    <string name="demo_horizontal_gridview_line">单行横向滚动的GridView</string>
+    <string name="demo_auto_textview">动态放大缩小的TextView</string>
+    <string name="demo_dot_progress_bar">带小圆点的下载进度条</string>
 </resources>

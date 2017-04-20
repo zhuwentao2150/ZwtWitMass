@@ -16,7 +16,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -25,27 +24,45 @@
         <!-- 横向滚动的GridView，带分页效果 -->
         <activity
             android:name=".uimodule.HorizontalGridViewAct"
-            android:label="@string/app_name"
+            android:label="@string/demo_horizontal_gridview"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE" />
+            </intent-filter>
         </activity>
 
         <!-- 单行横向滚动的GridView -->
         <activity
             android:name=".uimodule.HorizontalGridViewLineAct"
-            android:label="@string/app_name"
+            android:label="@string/demo_horizontal_gridview_line"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE" />
+            </intent-filter>
         </activity>
 
         <!-- 各种TextView -->
-        <activity android:name=".uimodule.TextViewActivity">
+        <activity android:name=".uimodule.TextViewActivity"
+                  android:label="@string/demo_auto_textview">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE" />
+            </intent-filter>
         </activity>
 
         <!-- 带小圆点的下载进度条 -->
-        <activity android:name=".uimodule.ProgressBarActivity">
+        <activity android:name=".uimodule.ProgressBarActivity"
+                  android:label="@string/demo_dot_progress_bar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE" />
+            </intent-filter>
         </activity>
 
     </application>

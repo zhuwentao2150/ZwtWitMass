@@ -11,22 +11,9 @@
     tools:context="zhuwentao.com.zwtwitmass.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <Button
-        android:id="@+id/btn_text_size"
+    <ListView
+        android:id="@+id/lv_main_demo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="动态改变文字大小"/>
-
-    <Button
-        android:id="@+id/btn_text_horizontal_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="横向滚动的GridView"/>
-
-    <Button
-        android:id="@+id/btn_text_horizontal_gridview_line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="单行横向滚动的GridView"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -12,4 +12,5 @@
     <string name="demo_auto_textview">动态放大缩小的TextView</string>
     <string name="demo_dot_progress_bar">带小圆点的下载进度条</string>
     <string name="demo_js_html_java">Android与js的交互</string>
+    <string name="demo_rematin_edittext">监听EditText文本输入框</string>
 </resources>

@@ -28,6 +28,7 @@ public class ToastUtil {
         } else {
             toast.setText(content);
         }
+        toast.show();
     }
 
     /**

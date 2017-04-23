@@ -1,10 +1,10 @@
 package zhuwentao.com.zwtwitmass.uimodule;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,7 +15,7 @@ import zhuwentao.com.zwtwitmass.utils.ToastUtil;
 /**
  * 基类Activity
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
 	/**
 	 * 内容布局

@@ -2,7 +2,10 @@ package zhuwentao.com.zwtwitmass.uimodule;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.text.Collator;
 import java.util.Arrays;
@@ -23,12 +26,14 @@ public class TextViewActivity extends AppCompatActivity {
      * 能动态改变字体大小
      */
     private AutofitTextView mAutotv;
+    private EditText mInputEdt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_view);
         mAutotv = (AutofitTextView) findViewById(R.id.output_autofit);
+        mInputEdt = (EditText) findViewById(R.id.edt_autofit_text);
 
         // 汉字转拼音
         String str = "重庆";
@@ -45,6 +50,22 @@ public class TextViewActivity extends AppCompatActivity {
         }
 
 
+        mInputEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mAutotv.setText(s.toString());
+            }
+        });
 
     }
 }

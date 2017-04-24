@@ -2,11 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:autofit="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_text_view"
     android:layout_margin="6dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <zhuwentao.com.zwtwitmass.uimodule.custom.autotextview.AutofitTextView
         android:id="@+id/output_autofit"
@@ -15,10 +15,15 @@
         android:background="@drawable/bg_edit_radius"
         android:gravity="center_vertical"
         android:maxLines="2"
-        android:padding="10dp"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         autofit:minTextSize="10sp"/>
+
+
+    <EditText
+        android:id="@+id/edt_autofit_text"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 
 
 </LinearLayout>

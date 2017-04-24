@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="zhuwentao.com.zwtwitmass">
 
+    <!-- 配置NFC权限 -->
+    <uses-permission android:name="android.permission.NFC"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -92,5 +96,23 @@
             </intent-filter>
         </activity>
     </application>
+
+    <activity
+        android:name=".ui.NFCActivity"
+        android:label="@string/demo_nfc_activity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+        </intent-filter>
+
+        <!-- 设置NFC监听 -->
+        <intent-filter>
+            <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <!-- 过滤文本数据 -->
+            <data android:mimeType="text/plain"/>
+        </intent-filter>
+    </activity>
 
 </manifest>

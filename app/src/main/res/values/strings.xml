@@ -14,5 +14,5 @@
     <string name="demo_js_html_java">Android与js的交互</string>
     <string name="demo_rematin_edittext">监听EditText文本输入框</string>
     <string name="demo_verify_activity">各种输入校验</string>
-
+    <string name="demo_nfc_activity">NFC测试</string>
 </resources>

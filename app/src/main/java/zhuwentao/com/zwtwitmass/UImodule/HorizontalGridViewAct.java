@@ -30,8 +30,7 @@ public class HorizontalGridViewAct extends AppCompatActivity {
     // GridView集合
     private List<GridView> mGridViewList;
 
-    // 放圆点的list
-    private List<View> dotViewsList;
+
 
     private ViewPager viewPager;
 
@@ -80,6 +79,9 @@ public class HorizontalGridViewAct extends AppCompatActivity {
         addDot(PageCount);
     }
 
+    // 放圆点的list
+    private List<View> dotViewsList;
+
     /**
      * 创建指定数量的圆点
      * @param dotNumber viewPager的数量
@@ -91,7 +93,9 @@ public class HorizontalGridViewAct extends AppCompatActivity {
         LinearLayout dotLayout = (LinearLayout) findViewById(R.id.ll_dot_container);
         for (int i = 0; i <= dotNumber; i++) {
             ImageView dotView = new ImageView(this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT);
 
             // 圆点与圆点之间的距离
             params.leftMargin = 10;

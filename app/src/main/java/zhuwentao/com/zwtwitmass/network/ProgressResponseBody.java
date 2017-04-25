@@ -12,6 +12,7 @@ import okio.Okio;
 import okio.Source;
 
 /**
+ * 扩展ResponseBody类
  * Created by zhuwentao on 2017-04-25.
  */
 public class ProgressResponseBody extends ResponseBody{
@@ -41,7 +42,6 @@ public class ProgressResponseBody extends ResponseBody{
         }
         return bufferedSource;
     }
-
     private Source source(Source source) {
         return new ForwardingSource(source) {
             long totalBytesRead = 0L;
@@ -49,7 +49,9 @@ public class ProgressResponseBody extends ResponseBody{
             @Override
             public long read(Buffer sink, long byteCount) throws IOException {
                 long bytesRead = super.read(sink, byteCount);
+                //增加当前读取的字节数，如果读取完成了bytesRead会返回-1
                 totalBytesRead += bytesRead != -1 ? bytesRead : 0;
+                //回调，如果contentLength()不知道长度，会返回-1
                 listener.onProgress(totalBytesRead, responseBody.contentLength(), bytesRead == -1);
                 return bytesRead;
             }

@@ -13,7 +13,7 @@ public class LogUtil {
     /**
      * 是否启用调试模式, 如果为false不记录任何日志
      */
-    private static boolean ADB = false;
+    private static boolean ADB = true;
     
     /**
      * 设置Log打开标记，发布版本需要设置为false

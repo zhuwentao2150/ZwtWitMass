@@ -44,7 +44,7 @@ public class RetrofitDownLoadUtil {
 
     }
 
-    public OkHttpClient getHttpClient(){
+    public OkHttpClient getHttpClient() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new Interceptor() {
                     @Override

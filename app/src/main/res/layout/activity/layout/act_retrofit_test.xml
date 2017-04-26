@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
 
+    <zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar
+        android:id="@+id/dpb_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btn_download"
         android:layout_width="match_parent"

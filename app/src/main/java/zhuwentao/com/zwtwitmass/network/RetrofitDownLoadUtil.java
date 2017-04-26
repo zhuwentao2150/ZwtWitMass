@@ -1,5 +1,7 @@
 package zhuwentao.com.zwtwitmass.network;
 
+import android.content.Context;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -17,7 +19,14 @@ import zhuwentao.com.zwtwitmass.utils.LogUtil;
  */
 public class RetrofitDownLoadUtil {
 
+    private Context mContext;
     public static final String TAG = "下载进度：";
+
+    public RetrofitDownLoadUtil(Context context){
+        this.mContext = context;
+    }
+
+    private ProgressListener onProgressListener;
 
     public void download(String url, String path) {
 
@@ -53,12 +62,18 @@ public class RetrofitDownLoadUtil {
                         return orginalResponse.newBuilder().body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
                             @Override
                             public void onProgress(long progress, long total, boolean done) {
-                                LogUtil.e("下载进度：onProgress: " + "total ---->" + total + "done ---->" + progress);
+                                if(onProgressListener != null){
+                                    onProgressListener.onProgress(progress, total, done);
+                                }
                             }
                         })).build();
                     }
                 }).build();
 
         return client;
+    }
+
+    public void setOnProgressListener(ProgressListener callback){
+        this.onProgressListener = callback;
     }
 }

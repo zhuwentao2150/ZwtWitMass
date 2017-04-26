@@ -3,21 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:autofit="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_text_view"
-    android:layout_margin="6dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="6dp"
     android:orientation="vertical">
 
     <zhuwentao.com.zwtwitmass.uimodule.custom.autotextview.AutofitTextView
         android:id="@+id/output_autofit"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
         android:background="@drawable/bg_edit_radius"
         android:gravity="center_vertical"
-        android:maxLines="2"
+        android:maxLines="3"
+        android:padding="5dp"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
-        autofit:minTextSize="10sp"/>
+        android:textSize="24dp"
+        autofit:minTextSize="8sp"/>
 
 
     <EditText

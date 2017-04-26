@@ -5,7 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
- *
+ * 下载请求接口
  * Created by zhuwentao on 2017-04-25.
  */
 public interface RetrofitService {

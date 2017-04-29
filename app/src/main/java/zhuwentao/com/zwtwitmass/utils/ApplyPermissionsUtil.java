@@ -16,8 +16,14 @@ import android.support.v4.content.PermissionChecker;
 public class ApplyPermissionsUtil {
 
     /**
+     *
+     *
+     */
+    /**
      * 检查是否有该权限
-     * true=有权限 false=无权限
+     * @param context 上下文
+     * @param permission 要申请的权限
+     * @return true=有权限 false=无权限
      */
     public static boolean checkHavePermissions(Context context, String permission) {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -37,6 +43,9 @@ public class ApplyPermissionsUtil {
 
     /**
      * 权限校验
+     * @param context 上下文
+     * @param permission 权限
+     * @param requestCode 申请标识
      */
     public static void checkRequestPermissions(Context context, String permission, int requestCode) {
         if (permission == null) {

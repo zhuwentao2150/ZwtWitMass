@@ -123,8 +123,6 @@
             </intent-filter>
         </activity>
 
-
-
         <activity
             android:name=".ui.RetrofitDownLoadActivity"
             android:label="@string/demo_retrofit_download_activity">

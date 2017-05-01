@@ -16,10 +16,6 @@ import android.support.v4.content.PermissionChecker;
 public class ApplyPermissionsUtil {
 
     /**
-     *
-     *
-     */
-    /**
      * 检查是否有该权限
      * @param context 上下文
      * @param permission 要申请的权限

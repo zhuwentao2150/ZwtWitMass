@@ -23,22 +23,22 @@ public class CustomDialog extends Dialog{
     /**
      * 提示
      */
-    protected TextView hintTv;
+    private TextView hintTv;
 
     /**
      * 两个按钮：左边按钮
      */
-    protected Button doubleLeftBtn;
+    private Button doubleLeftBtn;
 
     /**
      * 两个按钮：右边按钮
      */
-    protected Button doubleRightBtn;
+    private Button doubleRightBtn;
 
     /**
      * 一根横线
      */
-    protected View lineView;
+    private View lineView;
 
     /**
      * 键盘控制器

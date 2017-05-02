@@ -30,9 +30,8 @@ public class BitmapUtil {
     public static void saveBitmapToSD(Bitmap mbitmap, Context context) {
         FileOutputStream outStream = null;
         // 指定图片保存的路径和文件名
-        String fileName = getPhotoFileName(context);
         try {
-            outStream = new FileOutputStream(fileName);
+            outStream = new FileOutputStream(getPhotoFileName(context));
             // 把数据写入文件
             mbitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
         } catch (Exception e) {

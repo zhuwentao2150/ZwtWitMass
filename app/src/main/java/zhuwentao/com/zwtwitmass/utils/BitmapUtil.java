@@ -21,7 +21,6 @@ import java.util.Locale;
  */
 public class BitmapUtil {
 
-
     /**
      * 保存图片路径
      *

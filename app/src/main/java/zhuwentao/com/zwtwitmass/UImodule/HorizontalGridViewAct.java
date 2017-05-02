@@ -30,8 +30,6 @@ public class HorizontalGridViewAct extends AppCompatActivity {
     // GridView集合
     private List<GridView> mGridViewList;
 
-
-
     private ViewPager viewPager;
 
     // ViewPager的适配器

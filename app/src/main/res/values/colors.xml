@@ -3,4 +3,86 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!--橘色-->
+    <color name="orange">#ff9c44</color>
+
+    <!--淡蓝色-->
+    <color name="c_61acf9">#61acf9</color>
+    <!--深天蓝-->
+    <color name="deep_sky_blue">#1fbaf4</color>
+    <!--暗灰-->
+    <color name="dim_gray">#969696</color>
+
+    <!-- 灰色半透明 -->
+    <color name="transparent_black_dark">#05000000</color>
+    <color name="button_blue">#62ACF9</color><!--蓝色按钮-->
+    <color name="button_blue_dark">#478EF9</color><!--深蓝蓝色按钮-->
+
+
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <color name="c_28000000">#28000000</color>
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    <!-- 暗灰色 -->
+    <color name="dark_grey">#C2C2C2</color>
+    <!-- 深灰色 -->
+    <color name="height_grey">#393939</color>
+    <!-- 橘色 -->
+    <color name="light_orange">#FF8938</color>
+    <!-- 浅灰色 -->
+    <color name="light_gray">#5D5B5B</color>
+    <!-- 红色 -->
+    <color name="red">#ff0000</color>
+    <!-- 红色 -->
+    <color name="c_ff773d">#ff773d</color>
+
+    <!-- 红色 -->
+    <color name="c_FF5E29">#FF5E29</color>
+
+    <!-- 红色 -->
+    <color name="c_F95631">#F95631</color>
+
+    <!-- 浅红 -->
+    <color name="light_red">#FF8897</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 黑底半透明 -->
+    <color name="transparent_half_black">#78000000</color>
+    <!-- 白底半透明 -->
+    <color name="transparent_half_white">#78ffffff</color>
+    <!-- 绿色 -->
+    <color name="green">#66CC33</color>
+    <!-- 蓝色 -->
+    <color name="blue">#99CCFF</color>
+    <color name="blue_size">#0080ff</color>
+    <!-- 金色 -->
+    <color name="gold">#b89766</color>
+    <!-- 点击效果 -->
+    <color name="selector">#55dcdcdc</color>
+    <color name="bule_overlay">#660D92DD</color>
+    <color name="light_yellow">#f8f8ea</color>
+    <color name="red2">#ed174b</color>
+
+
+
+
+
+    <!-- ***********************************drawable******************************************* -->
+    <drawable name="red">#f00</drawable><!--红色-->
+    <drawable name="green">#0f0</drawable><!--绿色-->
+    <drawable name="blue">#00f</drawable><!--蓝色-->
+    <drawable name="gray">#ccc</drawable><!--灰色-->
+    <drawable name="white">#fff</drawable><!--白色-->
+    <drawable name="black">#000</drawable><!--黑色-->
+    <drawable name="transparent">#0000</drawable><!--透明色-->
+    <drawable name="transparent_half_black">#7000</drawable><!--黑色透明-->
+    <drawable name="transparent_half_white">#7fff</drawable><!--白色透明-->
+
+
+
+
+
 </resources>

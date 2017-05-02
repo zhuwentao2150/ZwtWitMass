@@ -93,6 +93,7 @@ public class BitmapUtil {
      * @return SD卡的路径和图片名称
      */
     public static String getPhotoFileName(Context context) {
+        // 截图保存到的文件夹
         String photoFils = "/photo";
         File file = new File(context.getExternalCacheDir().getAbsolutePath() + photoFils);
         // 判断文件是否已经存在，不存在则创建

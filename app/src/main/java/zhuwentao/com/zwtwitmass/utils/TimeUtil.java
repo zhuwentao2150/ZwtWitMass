@@ -211,4 +211,82 @@ public class TimeUtil {
         return retStr;
     }
 
+    /**
+     * 将日期转换成易于理解的字符串形式<br>
+     * 一分钟内，显示刚刚<br>
+     * 60分钟内，显示几分钟前<br>
+     * 24小时内，显示几小时前<br>
+     * 昨天<br>
+     * 前天<br>
+     * 7天内显示星期几<br>
+     * 今年内，显示 MM-dd HH:mm<br>
+     * 往年，显示yyyy-MM-dd HH:mm<br>
+     *
+     * @param date Date日期对象
+     * @return 日期转换成易于理解形式的字符串形式
+     */
+    public static String parseDateToUnderstandableString(Date date) {
+        String tag = null;
+
+        long time = date.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        Calendar curCal = Calendar.getInstance();
+        Date curDate = curCal.getTime();
+        long curTime = curCal.getTimeInMillis();
+
+        // 当前日期的零点时间
+        Calendar curCal_0 = Calendar.getInstance();
+        curCal_0.setTime(curDate);
+        curCal_0.set(curCal_0.get(Calendar.YEAR), curCal_0.get(Calendar.MONTH),
+                curCal_0.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        long curTime_0 = curCal_0.getTimeInMillis();
+
+        // 时间差，单位：分
+        long interval = (curTime - time) / 1000 / 60;
+        // 与当天0点的时间差，单位：小时
+        long interval_0 = (curTime_0 - time) / 1000 / 60 / 60;
+
+        // 一分钟内，显示刚刚
+        if (interval < 1) {
+            tag = "刚刚";
+        }
+        // 60分钟内，显示几分钟前
+        else if (interval < 60) {
+            tag = interval + "分钟前";
+        }
+        // 24小时内，显示几小时前
+        else if (interval < 24 * 60) {
+            tag = interval / 60 + "小时前";
+        }
+        // 昨天
+        else if (interval_0 < 24) {
+            tag = "昨天 "
+                    + new SimpleDateFormat("HH:mm", Locale.CHINA).format(date);
+        }
+        // 前天
+        else if (interval_0 < 24 * 2) {
+            tag = "前天 "
+                    + new SimpleDateFormat("HH:mm", Locale.CHINA).format(date);
+        }
+        // 7天内显示星期几
+        else if (interval_0 < 24 * 6) {
+            tag = new SimpleDateFormat("E", Locale.CHINA).format(date) + " "
+                    + new SimpleDateFormat("HH:mm", Locale.CHINA).format(date);
+        }
+        // 今年内，显示 MM-dd HH:mm
+        else if (cal.get(Calendar.YEAR) == curCal.get(Calendar.YEAR)) {
+            tag = new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA)
+                    .format(date);
+        }
+        // 往年，显示yyyy-MM-dd HH:mm
+        else {
+            tag = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA)
+                    .format(date);
+        }
+
+        return tag;
+    }
+
 }

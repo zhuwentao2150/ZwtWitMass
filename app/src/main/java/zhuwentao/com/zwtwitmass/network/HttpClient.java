@@ -17,8 +17,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import zhuwentao.com.zwtwitmass.network.callback.HttpCallBack;
 import zhuwentao.com.zwtwitmass.network.callback.HttpDownLoadCallBack;
+import zhuwentao.com.zwtwitmass.network.callback.ProgressListener;
 import zhuwentao.com.zwtwitmass.network.common.HttpLoggingInterceptor;
 import zhuwentao.com.zwtwitmass.network.common.HttpService;
+import zhuwentao.com.zwtwitmass.network.common.ProgressResponseBody;
 import zhuwentao.com.zwtwitmass.network.entity.Entity;
 import zhuwentao.com.zwtwitmass.utils.LogUtil;
 

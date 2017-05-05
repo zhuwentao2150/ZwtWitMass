@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import zhuwentao.com.zwtwitmass.R;
-import zhuwentao.com.zwtwitmass.network.ProgressListener;
-import zhuwentao.com.zwtwitmass.network.RetrofitDownLoadUtil;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar;
 import zhuwentao.com.zwtwitmass.utils.LogUtil;

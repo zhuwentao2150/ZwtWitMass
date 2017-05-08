@@ -44,6 +44,10 @@ public class HttpClient {
 	private Call<ResponseBody> call;
 	
 	private HttpCallBack onResultListener;
+
+	/**
+	 * 下载回调监听
+	 */
 	private HttpDownLoadCallBack onDownLoadListener;
 
 	private HttpClient(HttpService service) {

@@ -51,7 +51,8 @@ public class DownLoadService extends Service {
         // 启动下载请求
         if (intent != null) {
             if (intent.getAction().equals(DOWNLOAD_START)) {
-                intent.getStringExtra(DOWNLOAD_URL);
+                String url = intent.getStringExtra(DOWNLOAD_URL);
+                startDownLoad(url);
             }
 
             // 暂停请求/取消下载，需要记录当前下载到的位置
@@ -95,7 +96,7 @@ public class DownLoadService extends Service {
                         int prs = (int) ((double) progress / (double) total * 100);
 
                         // 发送广播
-                        // 目前是以发送广播的形式回传消息给UI，需要修改成以回调方式的形式
+                        // TODO: 目前是以发送广播的形式回传消息给UI，需要修改成以回调方式的形式
                         Intent intent = new Intent();
                         mContext.sendBroadcast(intent);
                     }

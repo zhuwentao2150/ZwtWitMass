@@ -50,14 +50,14 @@ public class DownLoadService extends Service {
 
         // 启动下载请求
         if (intent != null) {
+            String url = intent.getStringExtra(DOWNLOAD_URL);
             if (intent.getAction().equals(DOWNLOAD_START)) {
-                String url = intent.getStringExtra(DOWNLOAD_URL);
                 startDownLoad(url);
             }
 
             // 暂停请求/取消下载，需要记录当前下载到的位置
             if (intent.getAction().equals(DOWNLOAD_STOP)) {
-
+                stopDownLoad(url);
             }
 
         }

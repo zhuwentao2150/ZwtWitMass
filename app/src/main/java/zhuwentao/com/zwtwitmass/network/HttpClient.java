@@ -1,5 +1,7 @@
 package zhuwentao.com.zwtwitmass.network;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import java.io.IOException;
@@ -282,6 +284,31 @@ public class HttpClient {
 			}
 			
 		});
+	}
+
+
+	/**
+	 * 下载文件
+	 * @param context
+	 * @param url
+     */
+	public void downloadStart(Context context, String url){
+		Intent intent = new Intent(context, DownLoadService.class);
+		intent.setAction(DownLoadService.DOWNLOAD_START);
+		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
+		context.startService(intent);
+	}
+
+	/***
+	 * 取消下载
+	 * @param context
+	 * @param url
+     */
+	public void downloadStop(Context context, String url){
+		Intent intent = new Intent(context, DownLoadService.class);
+		intent.setAction(DownLoadService.DOWNLOAD_STOP);
+		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
+		context.startService(intent);
 	}
 
 	/**

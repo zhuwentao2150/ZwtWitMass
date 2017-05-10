@@ -124,6 +124,11 @@ public class DownLoadService extends Service {
                 // TODO: 需要修改成回调方式
                 // sendBroadcastToUI(ActivityDownload.DOWNLOAD_TYPE_FAILURE, url);
             }
+
+            @Override
+            public void onProgress(long progress, long total, boolean done) {
+
+            }
         });
     }
 

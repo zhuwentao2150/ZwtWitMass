@@ -13,4 +13,7 @@ public interface HttpDownLoadCallBack {
 	 */
 	void onFailure(String message);
 
+
+	void onProgress(long progress, long total, boolean done);
+
 }

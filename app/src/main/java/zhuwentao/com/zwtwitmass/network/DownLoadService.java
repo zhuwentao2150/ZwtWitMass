@@ -3,6 +3,7 @@ package zhuwentao.com.zwtwitmass.network;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 import java.util.LinkedHashMap;
@@ -33,6 +34,8 @@ public class DownLoadService extends Service {
     private Map<String, HttpClient> mDownloadTasks = new LinkedHashMap<>();
 
     private Context mContext;
+
+    private HttpDownLoadCallBack mCallback;
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -140,21 +143,12 @@ public class DownLoadService extends Service {
         httpClient.cancelRequest();
         mDownloadTasks.remove(url);
     }
-//
-//    /**
-//     * 发送下载状态
-//     *
-//     * @param type
-//     *            状态类型
-//     * @param url
-//     *            下载唯一标识
-//     */
-//    private void sendBroadcastToUI(String type, String url) {
-//        Intent intent = new Intent();
-//        intent.setAction(ActivityDownload.RECEIVER_DOWNLOAD);
-//        intent.putExtra(ActivityDownload.DOWNLOAD_TYPE, type);
-//        intent.putExtra(ActivityDownload.DOWNLOAD_URL, url);
-//        mContext.sendBroadcast(intent);
-//    }
+
+    public class MyBinder extends Binder {
+
+        public void setDownLoadListener(HttpDownLoadCallBack callback){
+            mCallback = callback;
+        }
+    }
 
 }

@@ -39,7 +39,7 @@ public class DownLoadService extends Service {
 
     @Override
     public IBinder onBind(Intent arg0) {
-        return null;
+        return new MyBinder();
     }
 
     @Override
@@ -51,19 +51,20 @@ public class DownLoadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        LogUtil.e("Service启动了onStartCommand");
         // 启动下载请求
-        if (intent != null) {
-            String url = intent.getStringExtra(DOWNLOAD_URL);
-            if (intent.getAction().equals(DOWNLOAD_START)) {
-                startDownLoad(url);
-            }
-
-            // 暂停请求/取消下载，需要记录当前下载到的位置
-            if (intent.getAction().equals(DOWNLOAD_STOP)) {
-                stopDownLoad(url);
-            }
-
-        }
+//        if (intent != null) {
+//            String url = intent.getStringExtra(DOWNLOAD_URL);
+//            if (intent.getAction().equals(DOWNLOAD_START)) {
+//                startDownLoad(url);
+//            }
+//
+//            // 暂停请求/取消下载，需要记录当前下载到的位置
+//            if (intent.getAction().equals(DOWNLOAD_STOP)) {
+//                stopDownLoad(url);
+//            }
+//
+//        }
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -71,7 +72,7 @@ public class DownLoadService extends Service {
     /**
      * 启动下载
      */
-    private void startDownLoad(final String url) {
+    public void startDownLoad(final String url) {
 
         if (mDownloadTasks.get(url) != null) {
             LogUtil.e("该下载任务已经存在");
@@ -89,19 +90,21 @@ public class DownLoadService extends Service {
                     @Override
                     public void onProgress(final long progress,
                                            final long total, boolean done) {
-                        try {
-                            // 防止频繁发送/接收广播造成的界面卡顿
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        int prs = (int) ((double) progress / (double) total * 100);
-
-                        // 发送广播
-                        // TODO: 目前是以发送广播的形式回传消息给UI，需要修改成以回调方式的形式
-                        Intent intent = new Intent();
-                        mContext.sendBroadcast(intent);
+//                        try {
+//                            // 防止频繁发送/接收广播造成的界面卡顿
+//                            Thread.sleep(300);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        int prs = (int) ((double) progress / (double) total * 100);
+//
+//                        // 发送广播
+//                        // TODO: 目前是以发送广播的形式回传消息给UI，需要修改成以回调方式的形式
+//                        Intent intent = new Intent();
+//                        mContext.sendBroadcast(intent);
+//
+                        mCallback.onProgress(progress, total, done);
                     }
                 }).create();
 
@@ -118,19 +121,21 @@ public class DownLoadService extends Service {
                 // 发送下载完毕广播
                 // TODO: 需要修改成回调方式
                 // sendBroadcastToUI("aa", url);
+                mCallback.onReturnData(body);
             }
 
             @Override
             public void onFailure(String message) {
                 mDownloadTasks.remove(url);
                 LogUtil.e("下载失败->>>" + message);
+                mCallback.onFailure(message);
                 // TODO: 需要修改成回调方式
                 // sendBroadcastToUI(ActivityDownload.DOWNLOAD_TYPE_FAILURE, url);
             }
 
             @Override
             public void onProgress(long progress, long total, boolean done) {
-
+                LogUtil.e("Service下载进度：" + progress);
             }
         });
     }
@@ -144,10 +149,13 @@ public class DownLoadService extends Service {
         mDownloadTasks.remove(url);
     }
 
-    public class MyBinder extends Binder {
+    public void setDownLoadListener(HttpDownLoadCallBack callback){
+        this.mCallback = callback;
+    }
 
-        public void setDownLoadListener(HttpDownLoadCallBack callback){
-            mCallback = callback;
+    public class MyBinder extends Binder {
+        public DownLoadService getService(){
+            return DownLoadService.this;
         }
     }
 

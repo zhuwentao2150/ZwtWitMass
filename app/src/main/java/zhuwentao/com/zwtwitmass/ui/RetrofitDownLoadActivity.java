@@ -1,6 +1,8 @@
 package zhuwentao.com.zwtwitmass.ui;
 
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -8,9 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import okhttp3.ResponseBody;
 import zhuwentao.com.zwtwitmass.R;
+import zhuwentao.com.zwtwitmass.network.DownLoadService;
+import zhuwentao.com.zwtwitmass.network.callback.HttpDownLoadCallBack;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar;
+import zhuwentao.com.zwtwitmass.utils.LogUtil;
 
 /**
  * 使用Retrofit下载文件
@@ -24,10 +30,16 @@ public class RetrofitDownLoadActivity extends BaseActivity{
 
     private DotProgressBar mDotProgressBar;
 
+    private DownLoadService mDownLoadService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_retrofit_test);
+
+        Intent intent = new Intent(RetrofitDownLoadActivity.this, DownLoadService.class);
+        startService(intent);
+        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
         mImageView = (ImageView) findViewById(R.id.iv_retrofit_download);
         mButton = (Button) findViewById(R.id.btn_download);
@@ -38,12 +50,59 @@ public class RetrofitDownLoadActivity extends BaseActivity{
             public void onClick(View v) {
                 // 下载地址
                 String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
-
+                mDownLoadService.startDownLoad(url);
             }
         });
+
+
 
     }
 
 
+    ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.e("Activity与Service开启连接");
+            mDownLoadService = ((DownLoadService.MyBinder) service).getService();
 
+
+
+            mDownLoadService.setDownLoadListener(new HttpDownLoadCallBack() {
+                @Override
+                public void onReturnData(ResponseBody body) {
+                    LogUtil.e("Activity下载完毕" + body.contentLength());
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    LogUtil.e("Activity下载失败");
+                }
+
+                @Override
+                public void onProgress(long progress, long total, boolean done) {
+                    final int proIndex = (int) ((double) progress / (double) total * 100);
+                    //LogUtil.e("Activity下载进度->" + proIndex);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDotProgressBar.setProgress(proIndex);
+                        }
+                    });
+                }
+            });
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtil.e("Activity与Service连接关闭");
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        //unbindService(mServiceConnection);
+        super.onDestroy();
+    }
 }

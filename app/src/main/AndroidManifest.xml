@@ -132,6 +132,8 @@
                 <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
             </intent-filter>
         </activity>
+
+        <service android:name="zhuwentao.com.zwtwitmass.network.DownLoadService" />
     </application>
 
 

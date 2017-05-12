@@ -54,8 +54,6 @@ public class RetrofitDownLoadActivity extends BaseActivity{
             }
         });
 
-
-
     }
 
 

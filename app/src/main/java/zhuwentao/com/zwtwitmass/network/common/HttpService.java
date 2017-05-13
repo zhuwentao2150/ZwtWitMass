@@ -1,10 +1,9 @@
 package zhuwentao.com.zwtwitmass.network.common;
 
 /**
- *
+ * Retrofit2.2网络请求通用接口
  * Created by zhuwentao on 2017-05-05.
  */
-
 import java.util.Map;
 
 import okhttp3.ResponseBody;

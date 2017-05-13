@@ -57,14 +57,11 @@ public class RetrofitDownLoadActivity extends BaseActivity{
 
     }
 
-
     ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtil.e("Activity与Service开启连接");
             mDownLoadService = ((DownLoadService.MyBinder) service).getService();
-
-
 
             mDownLoadService.setDownLoadListener(new HttpDownLoadCallBack() {
                 @Override
@@ -80,8 +77,6 @@ public class RetrofitDownLoadActivity extends BaseActivity{
                 @Override
                 public void onProgress(long progress, long total, boolean done) {
                     final int proIndex = (int) ((double) progress / (double) total * 100);
-                    //LogUtil.e("Activity下载进度->" + proIndex);
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

@@ -51,6 +51,8 @@ public class RetrofitDownLoadActivity extends BaseActivity{
             public void onClick(View v) {
                 // 下载地址
                 String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
+
+                // TODO: 启动下载服务的方式与Service耦合的太严重
                 mDownLoadService.startDownLoad(url);
             }
         });

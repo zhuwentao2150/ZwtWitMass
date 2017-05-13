@@ -42,14 +42,20 @@ public class HttpClient {
 	public final static int REQUEST_TIME_OUT = 30;
 
 	/**
-	 * 接口服务
+	 * 接口
 	 */
 	private HttpService mService;
 
 	private Call<ResponseBody> call;
-	
+
+	/**
+	 * get与post请求回调
+	 */
 	private HttpCallBack onResultListener;
 
+	/**
+	 * 下载服务
+	 */
 	private DownLoadService mDownLoadService;
 
 	/**
@@ -335,6 +341,10 @@ public class HttpClient {
 		this.onResultListener = mCallBack;
 	}
 
+	/**
+	 * 设置下载回调监听
+	 * @param mCallBack
+     */
 	public void setHttpDownLoadListener(HttpDownLoadCallBack mCallBack){
 		this.onDownLoadListener = mCallBack;
 	}

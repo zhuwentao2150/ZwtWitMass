@@ -33,8 +33,11 @@ public class DownLoadService extends Service {
      */
     private Map<String, HttpClient> mDownloadTasks = new LinkedHashMap<>();
 
+    private long downloadPosition;
+
     private Context mContext;
 
+    // 网络请求监听回调
     private HttpDownLoadCallBack mCallback;
 
     @Override
@@ -104,6 +107,7 @@ public class DownLoadService extends Service {
 //                        mContext.sendBroadcast(intent);
 //
                         mCallback.onProgress(progress, total, done);
+                        downloadPosition = progress;
                     }
                 }).create();
 
@@ -144,7 +148,9 @@ public class DownLoadService extends Service {
     public void stopDownLoad(String url) {
         HttpClient httpClient = mDownloadTasks.get(url);
         httpClient.cancelRequest();
+        // TODO：需要记录下载的当前进度
         mDownloadTasks.remove(url);
+        long position = downloadPosition;
     }
 
     /**

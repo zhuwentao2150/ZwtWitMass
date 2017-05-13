@@ -37,6 +37,7 @@ public class RetrofitDownLoadActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_retrofit_test);
 
+        // 启动服务，并与Service建立连接
         Intent intent = new Intent(RetrofitDownLoadActivity.this, DownLoadService.class);
         startService(intent);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
@@ -100,6 +101,7 @@ public class RetrofitDownLoadActivity extends BaseActivity{
 
     @Override
     protected void onDestroy() {
+        // TODO: 与服务断开连接后将接收不到下载进度
         //unbindService(mServiceConnection);
         super.onDestroy();
     }

@@ -50,8 +50,6 @@ public class DownLoadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        LogUtil.e("Service启动了onStartCommand");
         // 启动下载请求
 //        if (intent != null) {
 //            String url = intent.getStringExtra(DOWNLOAD_URL);
@@ -84,6 +82,7 @@ public class DownLoadService extends Service {
             return;
         }
 
+        // 创建请求实例
         HttpClient build = new HttpClient.Builder().setUrl(url + "/")
                 .setProgressListener(new ProgressListener() {
 
@@ -118,18 +117,17 @@ public class DownLoadService extends Service {
             @Override
             public void onReturnData(ResponseBody body) {
                 mDownloadTasks.remove(url);
-                // 发送下载完毕广播
-                // TODO: 需要修改成回调方式
-                // sendBroadcastToUI("aa", url);
                 mCallback.onReturnData(body);
+
+                // 发送下载完毕广播
+                // sendBroadcastToUI("aa", url);
             }
 
             @Override
             public void onFailure(String message) {
                 mDownloadTasks.remove(url);
-                LogUtil.e("下载失败->>>" + message);
                 mCallback.onFailure(message);
-                // TODO: 需要修改成回调方式
+
                 // sendBroadcastToUI(ActivityDownload.DOWNLOAD_TYPE_FAILURE, url);
             }
 
@@ -149,11 +147,19 @@ public class DownLoadService extends Service {
         mDownloadTasks.remove(url);
     }
 
+    /**
+     * 设置下载回调监听（其中的回调方法运行在子线程）
+     * @param callback
+     */
     public void setDownLoadListener(HttpDownLoadCallBack callback){
         this.mCallback = callback;
     }
 
     public class MyBinder extends Binder {
+        /**
+         * 得到一个Binder对象
+         * @return
+         */
         public DownLoadService getService(){
             return DownLoadService.this;
         }

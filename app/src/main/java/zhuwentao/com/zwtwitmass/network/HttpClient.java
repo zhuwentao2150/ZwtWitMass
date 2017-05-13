@@ -46,6 +46,9 @@ public class HttpClient {
 	 */
 	private HttpService mService;
 
+	/**
+	 * 执行请求实例
+	 */
 	private Call<ResponseBody> call;
 
 	/**
@@ -95,7 +98,7 @@ public class HttpClient {
 			} else {
 				throw new IllegalArgumentException();
 			}
-			
+
 			if(onProgressListener != null){
 				// 下载回调进度
 				OkHttpClient client = new OkHttpClient.Builder()
@@ -263,6 +266,8 @@ public class HttpClient {
 	 * @param url
 	 */
 	public void requestDownLoad(String url){
+		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
+
 		call = mService.downloadFile(url);
 		call.enqueue(new Callback<ResponseBody>() {
 

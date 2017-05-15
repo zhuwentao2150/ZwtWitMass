@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
     <!--AutofitTextView自适应字体大小控件的属性-->
     <declare-styleable name="AutofitTextView">
         <!-- Minimum size of the text. -->
@@ -12,5 +9,14 @@
         <attr name="precision" format="float" />
         <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
         <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="customDonutView">
+        <attr name="firstColor" format="color" />
+        <attr name="secondColor" format="color" />
+        <attr name="circleWidth" format="dimension" />
+        <attr name="dotCount" format="integer" />
+        <attr name="splitSize" format="integer" />
+        <attr name="bg" format="reference" />
     </declare-styleable>
 </resources>

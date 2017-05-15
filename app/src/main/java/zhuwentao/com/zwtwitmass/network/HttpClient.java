@@ -1,10 +1,7 @@
 package zhuwentao.com.zwtwitmass.network;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.text.TextUtils;
 
 import java.io.IOException;
@@ -55,11 +52,6 @@ public class HttpClient {
 	 * get与post请求回调
 	 */
 	private HttpCallBack onResultListener;
-
-	/**
-	 * 下载服务
-	 */
-	private DownLoadService mDownLoadService;
 
 	/**
 	 * 下载回调监听
@@ -379,16 +371,4 @@ public class HttpClient {
 
 		return map;
 	}
-
-	// 服务返回回调
-	ServiceConnection mServiceConnection = new ServiceConnection() {
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mDownLoadService = (DownLoadService) service;
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-		}
-	};
 }

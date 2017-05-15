@@ -151,6 +151,7 @@ public class DownLoadService extends Service {
         // TODO：需要记录下载的当前进度
         mDownloadTasks.remove(url);
         long position = downloadPosition;
+        LogUtil.e("Service当前下载进度：" + position);
     }
 
     /**

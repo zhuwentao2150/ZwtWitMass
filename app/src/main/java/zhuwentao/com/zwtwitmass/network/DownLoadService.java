@@ -35,6 +35,8 @@ public class DownLoadService extends Service {
 
     private long downloadPosition = 0;
 
+    private long size = 0;
+
     private Context mContext;
 
     // 网络请求监听回调
@@ -108,12 +110,14 @@ public class DownLoadService extends Service {
 //
                         mCallback.onProgress(progress, total, done);
                         downloadPosition = progress;
+                        size = total;
                     }
                 }).create();
 
         if(downloadPosition != 0){
             String range = String.valueOf(downloadPosition);
-            build.requestDownLoad(url, range);
+            String sizeRange = String.valueOf(size);
+            build.requestDownLoad(url, "bytes=" + range + "-" + sizeRange);
         }else{
             build.requestDownLoad(url);
         }
@@ -158,6 +162,7 @@ public class DownLoadService extends Service {
         mDownloadTasks.remove(url);
         long position = downloadPosition;
         LogUtil.e("Service当前下载进度：" + position);
+        LogUtil.e("Service当前需要下载的数据总量：" + size);
     }
 
     /**

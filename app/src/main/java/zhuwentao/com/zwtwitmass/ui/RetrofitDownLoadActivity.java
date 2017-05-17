@@ -27,10 +27,14 @@ public class RetrofitDownLoadActivity extends BaseActivity{
     private ImageView mImageView;
 
     private Button mButton;
+    private Button mButtonStop;
 
     private DotProgressBar mDotProgressBar;
 
     private DownLoadService mDownLoadService;
+
+    // 下载地址
+    String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +48,23 @@ public class RetrofitDownLoadActivity extends BaseActivity{
 
         mImageView = (ImageView) findViewById(R.id.iv_retrofit_download);
         mButton = (Button) findViewById(R.id.btn_download);
+        mButtonStop = (Button) findViewById(R.id.btn_stop);
         mDotProgressBar = (DotProgressBar) findViewById(R.id.dpb_download);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 下载地址
-                String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
+
 
                 // TODO: 启动下载服务的方式与Service耦合的太严重
                 mDownLoadService.startDownLoad(url);
+            }
+        });
+
+        mButtonStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDownLoadService.stopDownLoad(url);
             }
         });
 

@@ -294,6 +294,47 @@ public class HttpClient {
 		});
 	}
 
+	/**
+	 * 下载文件
+	 * @param url
+	 */
+	public void requestDownLoad(String url, String range){
+		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
+
+		call = mService.downloadFile(url, range);
+		call.enqueue(new Callback<ResponseBody>() {
+
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				if (onDownLoadListener != null) {
+					String message = t.getMessage();
+					// 是否为取消请求
+					if (call.isCanceled()) {
+						LogUtil.i("下载请求被取消");
+						onDownLoadListener.onFailure(t.getMessage());
+					} else {
+						LogUtil.e("下载发送请求失败：" + t.getMessage());
+						message = "下载服务器异常";
+						onDownLoadListener.onFailure(message);
+					}
+				}
+			}
+
+			@Override
+			public void onResponse(Call<ResponseBody> call,
+					Response<ResponseBody> response) {
+				if (onDownLoadListener != null) {
+					if (response.isSuccessful()) {
+						onDownLoadListener.onReturnData(response.body());
+					} else {
+						onDownLoadListener.onFailure("请求成功，下载失败");
+					}
+				}
+			}
+
+		});
+	}
+
 
 	/**
 	 * 下载文件

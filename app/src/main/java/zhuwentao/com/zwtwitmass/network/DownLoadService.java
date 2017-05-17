@@ -33,7 +33,7 @@ public class DownLoadService extends Service {
      */
     private Map<String, HttpClient> mDownloadTasks = new LinkedHashMap<>();
 
-    private long downloadPosition;
+    private long downloadPosition = 0;
 
     private Context mContext;
 
@@ -111,7 +111,13 @@ public class DownLoadService extends Service {
                     }
                 }).create();
 
-        build.requestDownLoad(url);
+        if(downloadPosition != 0){
+            String range = String.valueOf(downloadPosition);
+            build.requestDownLoad(url, range);
+        }else{
+            build.requestDownLoad(url);
+        }
+        // Activity下载完毕35712250
 
         // 添加到下载集合
         mDownloadTasks.put(url, build);

@@ -116,7 +116,6 @@ public class CustomMyDragLayout extends LinearLayout {
         mAutoBackOriginPos.y = mAutoBackView.getTop();
     }
 
-
     // 绑定控件
     @Override
     protected void onFinishInflate() {

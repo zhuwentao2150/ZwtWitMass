@@ -17,9 +17,6 @@ import zhuwentao.com.zwtwitmass.utils.ToastUtil;
 
 /**
  * 下载服务
- * 目前是用广播来收发信息
- * 广播和业务代码耦合严重，待改进
- *
  * @author zwt Create by 2017-5-2
  */
 public class DownLoadService extends Service {

@@ -323,6 +323,8 @@ public class HttpClient {
 			@Override
 			public void onResponse(Call<ResponseBody> call,
 					Response<ResponseBody> response) {
+
+
 				if (onDownLoadListener != null) {
 					if (response.isSuccessful()) {
 						onDownLoadListener.onReturnData(response.body());

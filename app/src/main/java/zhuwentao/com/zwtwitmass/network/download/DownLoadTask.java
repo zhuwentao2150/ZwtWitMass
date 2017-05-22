@@ -6,4 +6,19 @@ package zhuwentao.com.zwtwitmass.network.download;
  */
 public class DownLoadTask {
 
+    private String url;
+
+    public DownLoadTask(String url){
+        this.url = url;
+    }
+
+    public void start(){
+
+    }
+
+    public void stop(){
+
+    }
+
+
 }

@@ -10,10 +10,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.network.DownLoadService;
 import zhuwentao.com.zwtwitmass.network.callback.HttpDownLoadCallBack;
+import zhuwentao.com.zwtwitmass.network.callback.ProgressListener;
+import zhuwentao.com.zwtwitmass.network.common.HttpService;
+import zhuwentao.com.zwtwitmass.network.common.ProgressResponseBody;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar;
 import zhuwentao.com.zwtwitmass.utils.LogUtil;
@@ -22,7 +34,7 @@ import zhuwentao.com.zwtwitmass.utils.LogUtil;
  * 使用Retrofit下载文件
  * Created by zhuwentao on 2017-04-25.
  */
-public class RetrofitDownLoadActivity extends BaseActivity{
+public class RetrofitDownLoadActivity extends BaseActivity {
 
     private ImageView mImageView;
 
@@ -32,6 +44,8 @@ public class RetrofitDownLoadActivity extends BaseActivity{
     private DotProgressBar mDotProgressBar;
 
     private DownLoadService mDownLoadService;
+
+    private long mRange = 0;
 
     // 下载地址
     String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
@@ -57,18 +71,78 @@ public class RetrofitDownLoadActivity extends BaseActivity{
 
 
                 // TODO: 启动下载服务的方式与Service耦合的太严重
-                mDownLoadService.startDownLoad(url);
+                //mDownLoadService.startDownLoad(url);
             }
         });
 
         mButtonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDownLoadService.stopDownLoad(url);
+                //mDownLoadService.stopDownLoad(url);
             }
         });
 
     }
+
+
+    private Call<ResponseBody> call;
+    /**
+     * 正常下载
+     */
+    private void download(String url) {
+        Retrofit.Builder builder = new Retrofit.Builder();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+
+                        // 如果要添加断点下载
+                        // chain.request().newBuilder().addHeader("Range", "bytes="+postion+"-");
+                        okhttp3.Response orginalResponse = chain.proceed(chain.request());
+                        return orginalResponse.newBuilder().body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
+                            @Override
+                            public void onProgress(long progress, long total, boolean done) {
+                                mRange = progress;
+
+                                final int proIndex = (int) ((double) mRange / (double) total * 100);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mDotProgressBar.setProgress(proIndex);
+                                    }
+                                });
+                            }
+                        })).build();
+                    }
+                })
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+        builder.client(client);
+        Retrofit retrofit = builder.build();
+        HttpService httpService = retrofit.create(HttpService.class);
+
+        String rangeStr = "bytes=" + mRange + "-";
+        call = httpService.downloadFile(url, rangeStr);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void cancel(){
+        if (call != null){
+            call.cancel();
+        }
+    }
+
 
     ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override

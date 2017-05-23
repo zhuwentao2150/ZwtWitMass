@@ -1,7 +1,5 @@
 package zhuwentao.com.zwtwitmass.network;
 
-import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 
 import java.io.IOException;
@@ -253,114 +251,114 @@ public class HttpClient {
 	}
 	
 	
-	/**
-	 * 下载文件
-	 * @param url
-	 */
-	public void requestDownLoad(String url){
-		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
+//	/**
+//	 * 下载文件
+//	 * @param url
+//	 */
+//	public void requestDownLoad(String url){
+//		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
+//
+//		call = mService.downloadFile(url);
+//		call.enqueue(new Callback<ResponseBody>() {
+//
+//			@Override
+//			public void onFailure(Call<ResponseBody> call, Throwable t) {
+//				if (onDownLoadListener != null) {
+//					String message = t.getMessage();
+//					// 是否为取消请求
+//					if (call.isCanceled()) {
+//						LogUtil.i("下载请求被取消");
+//						onDownLoadListener.onFailure(t.getMessage());
+//					} else {
+//						LogUtil.e("下载发送请求失败：" + t.getMessage());
+//						message = "下载服务器异常";
+//						onDownLoadListener.onFailure(message);
+//					}
+//				}
+//			}
+//
+//			@Override
+//			public void onResponse(Call<ResponseBody> call,
+//					Response<ResponseBody> response) {
+//				if (onDownLoadListener != null) {
+//					if (response.isSuccessful()) {
+//						onDownLoadListener.onReturnData(response.body());
+//					} else {
+//						onDownLoadListener.onFailure("请求成功，下载失败");
+//					}
+//				}
+//			}
+//
+//		});
+//	}
 
-		call = mService.downloadFile(url);
-		call.enqueue(new Callback<ResponseBody>() {
-
-			@Override
-			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				if (onDownLoadListener != null) {
-					String message = t.getMessage();
-					// 是否为取消请求
-					if (call.isCanceled()) {
-						LogUtil.i("下载请求被取消");
-						onDownLoadListener.onFailure(t.getMessage());
-					} else {
-						LogUtil.e("下载发送请求失败：" + t.getMessage());
-						message = "下载服务器异常";
-						onDownLoadListener.onFailure(message);
-					}
-				}
-			}
-
-			@Override
-			public void onResponse(Call<ResponseBody> call,
-					Response<ResponseBody> response) {
-				if (onDownLoadListener != null) {
-					if (response.isSuccessful()) {
-						onDownLoadListener.onReturnData(response.body());
-					} else {
-						onDownLoadListener.onFailure("请求成功，下载失败");
-					}
-				}
-			}
-			
-		});
-	}
-
-	/**
-	 * 下载文件
-	 * @param url
-	 */
-	public void requestDownLoad(String url, String range){
-		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
-
-		call = mService.downloadFile(url, range);
-		call.enqueue(new Callback<ResponseBody>() {
-
-			@Override
-			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				if (onDownLoadListener != null) {
-					String message = t.getMessage();
-					// 是否为取消请求
-					if (call.isCanceled()) {
-						LogUtil.i("下载请求被取消");
-						onDownLoadListener.onFailure(t.getMessage());
-					} else {
-						LogUtil.e("下载发送请求失败：" + t.getMessage());
-						message = "下载服务器异常";
-						onDownLoadListener.onFailure(message);
-					}
-				}
-			}
-
-			@Override
-			public void onResponse(Call<ResponseBody> call,
-					Response<ResponseBody> response) {
-
-
-				if (onDownLoadListener != null) {
-					if (response.isSuccessful()) {
-						onDownLoadListener.onReturnData(response.body());
-					} else {
-						onDownLoadListener.onFailure("请求成功，下载失败");
-					}
-				}
-			}
-
-		});
-	}
-
-
-	/**
-	 * 下载文件
-	 * @param context
-	 * @param url
-     */
-	public void downloadStart(Context context, String url){
-		Intent intent = new Intent(context, DownLoadService.class);
-		intent.setAction(DownLoadService.DOWNLOAD_START);
-		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
-		context.startService(intent);
-	}
-
-	/***
-	 * 取消下载
-	 * @param context
-	 * @param url
-     */
-	public void downloadStop(Context context, String url){
-		Intent intent = new Intent(context, DownLoadService.class);
-		intent.setAction(DownLoadService.DOWNLOAD_STOP);
-		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
-		context.startService(intent);
-	}
+//	/**
+//	 * 下载文件
+//	 * @param url
+//	 */
+//	public void requestDownLoad(String url, String range){
+//		// TODO：在此执行下载请求前，需要根据URL检查数据库中是否已经存在了该条下载记录的断点记录，如果存在则从断点的位置开始下载文件
+//
+//		call = mService.downloadFile(url, range);
+//		call.enqueue(new Callback<ResponseBody>() {
+//
+//			@Override
+//			public void onFailure(Call<ResponseBody> call, Throwable t) {
+//				if (onDownLoadListener != null) {
+//					String message = t.getMessage();
+//					// 是否为取消请求
+//					if (call.isCanceled()) {
+//						LogUtil.i("下载请求被取消");
+//						onDownLoadListener.onFailure(t.getMessage());
+//					} else {
+//						LogUtil.e("下载发送请求失败：" + t.getMessage());
+//						message = "下载服务器异常";
+//						onDownLoadListener.onFailure(message);
+//					}
+//				}
+//			}
+//
+//			@Override
+//			public void onResponse(Call<ResponseBody> call,
+//					Response<ResponseBody> response) {
+//
+//
+//				if (onDownLoadListener != null) {
+//					if (response.isSuccessful()) {
+//						onDownLoadListener.onReturnData(response.body());
+//					} else {
+//						onDownLoadListener.onFailure("请求成功，下载失败");
+//					}
+//				}
+//			}
+//
+//		});
+//	}
+//
+//
+//	/**
+//	 * 下载文件
+//	 * @param context
+//	 * @param url
+//     */
+//	public void downloadStart(Context context, String url){
+//		Intent intent = new Intent(context, DownLoadService.class);
+//		intent.setAction(DownLoadService.DOWNLOAD_START);
+//		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
+//		context.startService(intent);
+//	}
+//
+//	/***
+//	 * 取消下载
+//	 * @param context
+//	 * @param url
+//     */
+//	public void downloadStop(Context context, String url){
+//		Intent intent = new Intent(context, DownLoadService.class);
+//		intent.setAction(DownLoadService.DOWNLOAD_STOP);
+//		intent.putExtra(DownLoadService.DOWNLOAD_URL, url);
+//		context.startService(intent);
+//	}
 
 	/**
 	 * 关闭请求

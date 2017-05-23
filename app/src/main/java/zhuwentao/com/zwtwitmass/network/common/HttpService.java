@@ -46,8 +46,9 @@ public interface HttpService {
      * @param url
      * @return
      */
+    @Streaming
     @GET()
-    Call<ResponseBody> downloadFile(@Url String url);
+    Call<ProgressResponseBody> downloadFile(@Url String url);
 
     /**
      * 下载文件，带断点
@@ -56,6 +57,6 @@ public interface HttpService {
      */
     @Streaming
     @GET()
-    Call<ResponseBody> downloadFile(@Url String url, @Header("Range") String range);
+    Call<ResponseBody> downloadFile(@Url String url, @Header("RANGE") String range);
 
 }

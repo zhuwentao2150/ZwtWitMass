@@ -1,11 +1,6 @@
 package zhuwentao.com.zwtwitmass.ui;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,14 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.network.DownLoadService;
-import zhuwentao.com.zwtwitmass.network.callback.HttpDownLoadCallBack;
 import zhuwentao.com.zwtwitmass.network.callback.ProgressListener;
 import zhuwentao.com.zwtwitmass.network.common.HttpService;
 import zhuwentao.com.zwtwitmass.network.common.ProgressResponseBody;
@@ -46,9 +39,11 @@ public class RetrofitDownLoadActivity extends BaseActivity {
     private DownLoadService mDownLoadService;
 
     private long mRange = 0;
+    private long mRangeIndex = 0;
+
 
     // 下载地址
-    String url = "http://gdown.baidu.com/data/wisegame/df65a597122796a4/weixin_821.apk";
+    String url = "http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +51,9 @@ public class RetrofitDownLoadActivity extends BaseActivity {
         setContentView(R.layout.act_retrofit_test);
 
         // 启动服务，并与Service建立连接
-        Intent intent = new Intent(RetrofitDownLoadActivity.this, DownLoadService.class);
-        startService(intent);
-        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+//        Intent intent = new Intent(RetrofitDownLoadActivity.this, DownLoadService.class);
+//        startService(intent);
+//        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
         mImageView = (ImageView) findViewById(R.id.iv_retrofit_download);
         mButton = (Button) findViewById(R.id.btn_download);
@@ -68,10 +63,9 @@ public class RetrofitDownLoadActivity extends BaseActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 // TODO: 启动下载服务的方式与Service耦合的太严重
                 //mDownLoadService.startDownLoad(url);
+                download(url);
             }
         });
 
@@ -79,31 +73,38 @@ public class RetrofitDownLoadActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //mDownLoadService.stopDownLoad(url);
+                cancel();
             }
         });
 
     }
 
 
-    private Call<ResponseBody> call;
+    private Call<ProgressResponseBody> call;
     /**
      * 正常下载
      */
     private void download(String url) {
         Retrofit.Builder builder = new Retrofit.Builder();
+        builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
         OkHttpClient client = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
 
                         // 如果要添加断点下载
-                        // chain.request().newBuilder().addHeader("Range", "bytes="+postion+"-");
+                        chain.request().newBuilder().addHeader("Range", "bytes="+mRange+"-");
                         okhttp3.Response orginalResponse = chain.proceed(chain.request());
                         return orginalResponse.newBuilder().body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
+
                             @Override
                             public void onProgress(long progress, long total, boolean done) {
-                                mRange = progress;
-
+                                if (mRangeIndex != 0) {
+                                    mRange = progress + mRangeIndex;
+                                }else{
+                                    mRange = progress;
+                                }
+                                LogUtil.e("下载进度：" + mRange);
                                 final int proIndex = (int) ((double) mRange / (double) total * 100);
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -118,20 +119,28 @@ public class RetrofitDownLoadActivity extends BaseActivity {
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .build();
         builder.client(client);
+
         Retrofit retrofit = builder.build();
         HttpService httpService = retrofit.create(HttpService.class);
 
         String rangeStr = "bytes=" + mRange + "-";
-        call = httpService.downloadFile(url, rangeStr);
-        call.enqueue(new Callback<ResponseBody>() {
+        call = httpService.downloadFile(url);
+        call.enqueue(new Callback<ProgressResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+            public void onResponse(Call<ProgressResponseBody> call, Response<ProgressResponseBody> response) {
+                try {
+                    LogUtil.e("下载完毕：" + response.body().bytes().length);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onFailure(Call<ProgressResponseBody> call, Throwable t) {
+                call.cancel();
+                mRangeIndex = mRange;
+                LogUtil.e("下载URL：" + call.request().url());
+                LogUtil.e("下载失败：" + t.getMessage());
             }
         });
 
@@ -142,44 +151,44 @@ public class RetrofitDownLoadActivity extends BaseActivity {
             call.cancel();
         }
     }
-
-
-    ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            LogUtil.e("Activity与Service开启连接");
-            mDownLoadService = ((DownLoadService.MyBinder) service).getService();
-
-            mDownLoadService.setDownLoadListener(new HttpDownLoadCallBack() {
-                @Override
-                public void onReturnData(ResponseBody body) {
-                    LogUtil.e("Activity下载完毕" + body.contentLength());
-                }
-
-                @Override
-                public void onFailure(String message) {
-                    LogUtil.e("Activity下载失败");
-                }
-
-                @Override
-                public void onProgress(long progress, long total, boolean done) {
-                    final int proIndex = (int) ((double) progress / (double) total * 100);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mDotProgressBar.setProgress(proIndex);
-                        }
-                    });
-                }
-            });
-
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            LogUtil.e("Activity与Service连接关闭");
-        }
-    };
+//
+//
+//    ServiceConnection mServiceConnection = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            LogUtil.e("Activity与Service开启连接");
+//            mDownLoadService = ((DownLoadService.MyBinder) service).getService();
+//
+//            mDownLoadService.setDownLoadListener(new HttpDownLoadCallBack() {
+//                @Override
+//                public void onReturnData(ResponseBody body) {
+//                    LogUtil.e("Activity下载完毕" + body.contentLength());
+//                }
+//
+//                @Override
+//                public void onFailure(String message) {
+//                    LogUtil.e("Activity下载失败");
+//                }
+//
+//                @Override
+//                public void onProgress(long progress, long total, boolean done) {
+//                    final int proIndex = (int) ((double) progress / (double) total * 100);
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mDotProgressBar.setProgress(proIndex);
+//                        }
+//                    });
+//                }
+//            });
+//
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//            LogUtil.e("Activity与Service连接关闭");
+//        }
+//    };
 
     @Override
     protected void onDestroy() {

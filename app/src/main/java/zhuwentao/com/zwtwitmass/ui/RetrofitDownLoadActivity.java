@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,54 +82,73 @@ public class RetrofitDownLoadActivity extends BaseActivity {
     }
 
 
-    private Call<ProgressResponseBody> call;
+    private Call<ResponseBody> call;
+    private boolean falge = true;
+    private HttpService httpService;
+
     /**
      * 正常下载
      */
     private void download(String url) {
+//        if(falge){
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
         OkHttpClient client = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request()
+                                .newBuilder()
+                                .addHeader("Range", "bytes="+mRange+"-")
+                                .build();
+                        okhttp3.Response orginalResponse = chain.proceed(request);
+
+
+
+
 
                         // 如果要添加断点下载
-                        chain.request().newBuilder().addHeader("Range", "bytes="+mRange+"-");
-                        okhttp3.Response orginalResponse = chain.proceed(chain.request());
-                        return orginalResponse.newBuilder().body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
+                        //chain.request().newBuilder().addHeader("Range", "bytes="+mRange+"-").build();
+                        //okhttp3.Response orginalResponse = chain.proceed(chain.request());
+                        return orginalResponse.newBuilder()
+                                .body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
 
-                            @Override
-                            public void onProgress(long progress, long total, boolean done) {
-                                if (mRangeIndex != 0) {
-                                    mRange = progress + mRangeIndex;
-                                }else{
-                                    mRange = progress;
-                                }
-                                LogUtil.e("下载进度：" + mRange);
-                                final int proIndex = (int) ((double) mRange / (double) total * 100);
-                                runOnUiThread(new Runnable() {
                                     @Override
-                                    public void run() {
-                                        mDotProgressBar.setProgress(proIndex);
+                                    public void onProgress(long progress, long total, boolean done) {
+                                        if (mRangeIndex != 0) {
+                                            mRange = mRangeIndex + progress;
+                                        } else {
+                                            mRange = progress;
+                                        }
+                                        LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
+                                        final int proIndex = (int) ((double) mRange / (double) total * 100);
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mDotProgressBar.setProgress(proIndex);
+                                            }
+                                        });
                                     }
-                                });
-                            }
-                        })).build();
+                                }))
+                                .build();
                     }
                 })
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .build();
+
         builder.client(client);
 
         Retrofit retrofit = builder.build();
         HttpService httpService = retrofit.create(HttpService.class);
+//            falge = false;
+//        } else {
+//            LogUtil.e("恢复下载");
+//        }
 
-        String rangeStr = "bytes=" + mRange + "-";
         call = httpService.downloadFile(url);
-        call.enqueue(new Callback<ProgressResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ProgressResponseBody> call, Response<ProgressResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     LogUtil.e("下载完毕：" + response.body().bytes().length);
                 } catch (IOException e) {
@@ -136,7 +157,7 @@ public class RetrofitDownLoadActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<ProgressResponseBody> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 call.cancel();
                 mRangeIndex = mRange;
                 LogUtil.e("下载URL：" + call.request().url());
@@ -146,8 +167,8 @@ public class RetrofitDownLoadActivity extends BaseActivity {
 
     }
 
-    private void cancel(){
-        if (call != null){
+    private void cancel() {
+        if (call != null) {
             call.cancel();
         }
     }

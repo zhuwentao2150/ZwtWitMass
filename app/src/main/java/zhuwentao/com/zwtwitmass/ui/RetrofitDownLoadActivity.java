@@ -97,29 +97,20 @@ public class RetrofitDownLoadActivity extends BaseActivity {
                 .addNetworkInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
+                        // 添加Http请求头部
                         Request request = chain.request()
                                 .newBuilder()
                                 .addHeader("Range", "bytes="+mRange+"-")
                                 .build();
                         okhttp3.Response orginalResponse = chain.proceed(request);
 
-
-
-
-
-                        // 如果要添加断点下载
-                        //chain.request().newBuilder().addHeader("Range", "bytes="+mRange+"-").build();
-                        //okhttp3.Response orginalResponse = chain.proceed(chain.request());
+                        // 监听返回
                         return orginalResponse.newBuilder()
                                 .body(new ProgressResponseBody(orginalResponse.body(), new ProgressListener() {
 
                                     @Override
                                     public void onProgress(long progress, long total, boolean done) {
-                                        if (mRangeIndex != 0) {
-                                            mRange = mRangeIndex + progress;
-                                        } else {
-                                            mRange = progress;
-                                        }
+                                        mRange = mRangeIndex + progress;
                                         LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
                                         final int proIndex = (int) ((double) mRange / (double) total * 100);
                                         runOnUiThread(new Runnable() {
@@ -149,11 +140,11 @@ public class RetrofitDownLoadActivity extends BaseActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    LogUtil.e("下载完毕：" + response.body().bytes().length);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    LogUtil.e("下载完毕：" + response.body().bytes().length);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
 
             @Override

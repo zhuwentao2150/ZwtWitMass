@@ -42,15 +42,6 @@ public interface HttpService {
     Call<ResponseBody> post(@FieldMap Map<String, String> map);
 
     /**
-     * 下载文件
-     * @param url
-     * @return
-     */
-    @Streaming
-    @GET()
-    Call<ResponseBody> downloadFile(@Url String url);
-
-    /**
      * 下载文件，带断点
      * @param url
      * @return
@@ -58,5 +49,13 @@ public interface HttpService {
     @Streaming
     @GET()
     Call<ResponseBody> downloadFile(@Url String url, @Header("RANGE") String range);
+
+    /**
+     * 下载文件
+     * @param url
+     * @return
+     */
+    @GET()
+    Call<ResponseBody> downloadFile(@Url String url);
 
 }

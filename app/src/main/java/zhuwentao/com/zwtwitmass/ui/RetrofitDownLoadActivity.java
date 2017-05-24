@@ -131,11 +131,6 @@ public class RetrofitDownLoadActivity extends BaseActivity {
 
         Retrofit retrofit = builder.build();
         HttpService httpService = retrofit.create(HttpService.class);
-//            falge = false;
-//        } else {
-//            LogUtil.e("恢复下载");
-//        }
-
         call = httpService.downloadFile(url);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

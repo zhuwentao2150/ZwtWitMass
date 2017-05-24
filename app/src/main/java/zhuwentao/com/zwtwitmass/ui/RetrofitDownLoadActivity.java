@@ -83,14 +83,10 @@ public class RetrofitDownLoadActivity extends BaseActivity {
 
 
     private Call<ResponseBody> call;
-    private boolean falge = true;
-    private HttpService httpService;
-
     /**
      * 正常下载
      */
     private void download(String url) {
-//        if(falge){
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
         OkHttpClient client = new OkHttpClient.Builder()
@@ -100,7 +96,7 @@ public class RetrofitDownLoadActivity extends BaseActivity {
                         // 添加Http请求头部
                         Request request = chain.request()
                                 .newBuilder()
-                                .addHeader("Range", "bytes="+mRange+"-")
+                                .addHeader("Range", "bytes=" + mRange + "-")
                                 .build();
                         okhttp3.Response orginalResponse = chain.proceed(request);
 

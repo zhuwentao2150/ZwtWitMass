@@ -1,7 +1,6 @@
 package zhuwentao.com.zwtwitmass.network.download;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * 下载管理
@@ -16,15 +15,14 @@ public class RetrofitDownLoadMange {
     }
 
 
-    private List<DownLoadTask> mDownLoadTasks = new ArrayList<>();
+    private HashMap<String, DownLoadTask> mDownLoadTasks = new HashMap<>();
 
 
     /***
-     * 下载方法
+     * 下载
      * @param url
      */
     public void download(String url){
-
 
     }
 

@@ -26,6 +26,8 @@ public class DownLoadTask {
 
     private Call<ResponseBody> call;
 
+    private DownloadCallBack callback;
+
     private long mRange = 0;
     private long mRangeIndex = 0;
 
@@ -33,6 +35,9 @@ public class DownLoadTask {
         this.url = url;
     }
 
+    /**
+     * 开始下载
+     */
     public void start() {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
@@ -56,7 +61,9 @@ public class DownLoadTask {
                                         mRange = mRangeIndex + progress;
                                         LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
                                         final int proIndex = (int) ((double) mRange / (double) total * 100);
-
+                                        if(callback != null){
+                                            callback.onProgress(progress, total, done);
+                                        }
                                     }
                                 }))
                                 .build();
@@ -72,22 +79,54 @@ public class DownLoadTask {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                if(callback != null){
+                    callback.onSuccess(response.body());
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                call.cancel();
                 mRangeIndex = mRange;
-                LogUtil.e("下载URL：" + call.request().url());
-                LogUtil.e("下载失败：" + t.getMessage());
+                try {
+                    long count = call.request().body().contentLength();
+                    LogUtil.e("下载失败，当前下载总量：" + count);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(callback != null){
+                    callback.onFailure("download error,url="+call.request().body()+"message=" + t.getMessage());
+                }
             }
         });
     }
 
+    /**
+     * 停止下载
+     */
     public void stop() {
         if (call != null) {
             call.cancel();
+        }
+    }
+
+    /**
+     * 设置请求回调监听
+     * @param callback
+     */
+    public void setDownloadCallback(DownloadCallBack callback){
+        this.callback = callback;
+    }
+
+    /**
+     * 获取URl
+     * @return
+     */
+    public String getUrl(){
+        if(url != null){
+            return url;
+        } else {
+            return null;
         }
     }
 

@@ -40,6 +40,7 @@ public class DownLoadTask {
      */
     public void start() {
         Retrofit.Builder builder = new Retrofit.Builder();
+        // 这里的URL会被自动忽略
         builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
         OkHttpClient client = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new Interceptor() {

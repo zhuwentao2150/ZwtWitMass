@@ -31,6 +31,6 @@ public interface DownloadCallBack {
      * @param total 下载总量
      * @param done 是否下载完毕
      */
-    void onProgress(long progress, long total, boolean done);
+    void onProgress(long progress, long total, boolean done, int mRange);
 
 }

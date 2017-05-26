@@ -14,9 +14,10 @@ public class RetrofitDownLoadMange {
 
     /**
      * 获取下载实例
+     *
      * @return
      */
-    public static RetrofitDownLoadMange getInstance(){
+    public static RetrofitDownLoadMange getInstance() {
         return mRetrofitDownLoadMange;
     }
 
@@ -27,33 +28,56 @@ public class RetrofitDownLoadMange {
 
     /***
      * 下载
+     *
      * @param url
      */
-    public void download(String url){
-        // 1.校验url是否已经存在
+    public void download(String url) {
+        // 启动下载服务
         for (int i = 0; i < mDownLoadTasks.size(); i++) {
-            if (mDownLoadTasks.get(url) != null){
+            if (mDownLoadTasks.get(url) != null) {
                 LogUtil.e("该url已经存在");
-                return;
+                mDownLoadTasks.get(url).start();
+            } else {
+                DownLoadTask downLoadTask = new DownLoadTask(url);
+                mDownLoadTasks.put(url, downLoadTask);
+                LogUtil.e("该url不存在");
             }
         }
-        // 2.启动下载服务
-        DownLoadTask downLoadTask = new DownLoadTask(url);
-        downLoadTask.start();
+        if(mDownLoadTasks.size() == 0){
+            DownLoadTask downLoadTask = new DownLoadTask(url);
+            mDownLoadTasks.put(url, downLoadTask);
+            downLoadTask.start();
+        }
+
     }
 
     /**
      * 取消下载
+     *
      * @param url
      */
-    public void close(String url){
+    public void close(String url) {
         for (int i = 0; i < mDownLoadTasks.size(); i++) {
-            if (mDownLoadTasks.get(url) != null){
+            if (mDownLoadTasks.get(url) != null) {
                 mDownLoadTasks.get(url).stop();
-                mDownLoadTasks.remove(url);
-                LogUtil.e("已移除该url下载任务：" + url);
+                //mDownLoadTasks.remove(url);
+                //LogUtil.e("已移除该url下载任务：" + url);
                 return;
             }
+        }
+    }
+
+    /**
+     * 返回一个下载实例
+     *
+     * @param url
+     * @return
+     */
+    public DownLoadTask getDownLoadTask(String url) {
+        if (mDownLoadTasks.get(url) != null) {
+            return mDownLoadTasks.get(url);
+        } else {
+            return null;
         }
     }
 

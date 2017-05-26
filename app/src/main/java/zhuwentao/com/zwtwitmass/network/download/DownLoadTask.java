@@ -14,7 +14,6 @@ import retrofit2.Retrofit;
 import zhuwentao.com.zwtwitmass.network.callback.ProgressListener;
 import zhuwentao.com.zwtwitmass.network.common.HttpService;
 import zhuwentao.com.zwtwitmass.network.common.ProgressResponseBody;
-import zhuwentao.com.zwtwitmass.utils.LogUtil;
 
 /**
  * 下载任务
@@ -31,6 +30,9 @@ public class DownLoadTask {
     private long mRange = 0;
     private long mRangeIndex = 0;
 
+    private boolean flag = true;
+    private long mFileSize = 0;
+
     public DownLoadTask(String url) {
         this.url = url;
     }
@@ -39,6 +41,10 @@ public class DownLoadTask {
      * 开始下载
      */
     public void start() {
+        if(callback != null){
+            callback.onStart();
+        }
+
         Retrofit.Builder builder = new Retrofit.Builder();
         // 这里的URL会被自动忽略
         builder.baseUrl("http://47.52.27.193:8088/myweb//software/Android/CN/OILRESET/V_PRO_OILRESET_V30.0_CN_20170112.7z/");
@@ -59,11 +65,16 @@ public class DownLoadTask {
 
                                     @Override
                                     public void onProgress(long progress, long total, boolean done) {
+                                        if (flag){
+                                            mFileSize = total;
+                                            flag = false;
+                                        }
+
                                         mRange = mRangeIndex + progress;
-                                        LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
-                                        final int proIndex = (int) ((double) mRange / (double) total * 100);
+                                        //LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
+                                        final int proIndex = (int) ((double) mRange / (double) mFileSize * 100);
                                         if(callback != null){
-                                            callback.onProgress(progress, total, done);
+                                            callback.onProgress(progress, total, done, proIndex);
                                         }
                                     }
                                 }))
@@ -88,15 +99,8 @@ public class DownLoadTask {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 mRangeIndex = mRange;
-                try {
-                    long count = call.request().body().contentLength();
-                    LogUtil.e("下载失败，当前下载总量：" + count);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
                 if(callback != null){
-                    callback.onFailure("download error,url="+call.request().body()+"message=" + t.getMessage());
+                    callback.onFailure("download error,url="+call.request().url()+"message=" + t.getMessage());
                 }
             }
         });

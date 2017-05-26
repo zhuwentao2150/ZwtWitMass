@@ -21,6 +21,9 @@ import zhuwentao.com.zwtwitmass.network.DownLoadService;
 import zhuwentao.com.zwtwitmass.network.callback.ProgressListener;
 import zhuwentao.com.zwtwitmass.network.common.HttpService;
 import zhuwentao.com.zwtwitmass.network.common.ProgressResponseBody;
+import zhuwentao.com.zwtwitmass.network.download.DownLoadTask;
+import zhuwentao.com.zwtwitmass.network.download.DownloadCallBack;
+import zhuwentao.com.zwtwitmass.network.download.RetrofitDownLoadMange;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.DotProgressBar;
 import zhuwentao.com.zwtwitmass.utils.LogUtil;
@@ -67,7 +70,42 @@ public class RetrofitDownLoadActivity extends BaseActivity {
             public void onClick(View v) {
                 // TODO: 启动下载服务的方式与Service耦合的太严重
                 //mDownLoadService.startDownLoad(url);
-                download(url);
+                //download(url);
+                RetrofitDownLoadMange.getInstance().download(url);
+                DownLoadTask downLoadTask = RetrofitDownLoadMange.getInstance().getDownLoadTask(url);
+                if(downLoadTask != null){
+                    downLoadTask.setDownloadCallback(new DownloadCallBack() {
+                        @Override
+                        public void onStart() {
+                            LogUtil.e("开始下载");
+                        }
+
+                        @Override
+                        public void onSuccess(ResponseBody result) {
+                            try {
+                                LogUtil.e("下载成功、大小：" + result.bytes().length);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(String message) {
+                            LogUtil.e("下载失败");
+                        }
+
+                        @Override
+                        public void onProgress(long progress, long total, boolean done, final int mRange) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mDotProgressBar.setProgress(mRange);
+                                }
+                            });
+                            LogUtil.e("下载进度：" + mRange + "、progress=" + progress + "、total=" + total);
+                        }
+                    });
+                }
             }
         });
 
@@ -75,7 +113,8 @@ public class RetrofitDownLoadActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //mDownLoadService.stopDownLoad(url);
-                cancel();
+                //cancel();
+                RetrofitDownLoadMange.getInstance().close(url);
             }
         });
 

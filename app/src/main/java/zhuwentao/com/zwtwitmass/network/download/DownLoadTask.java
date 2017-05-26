@@ -116,6 +116,17 @@ public class DownLoadTask {
     }
 
     /**
+     * 是否已经停止
+     * @return
+     */
+    public boolean isCanceled(){
+        if(call != null){
+            return call.isCanceled();
+        }
+        return false;
+    }
+
+    /**
      * 设置请求回调监听
      * @param callback
      */

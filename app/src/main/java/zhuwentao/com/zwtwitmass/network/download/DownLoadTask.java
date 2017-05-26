@@ -119,11 +119,15 @@ public class DownLoadTask {
      * 是否已经停止
      * @return
      */
-    public boolean isCanceled(){
+    public int isCanceled(){
         if(call != null){
-            return call.isCanceled();
+            if (call.isCanceled()) {
+                return 1;
+            }else{
+                return 2;
+            }
         }
-        return false;
+        return 3;
     }
 
     /**

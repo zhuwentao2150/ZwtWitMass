@@ -36,7 +36,9 @@ public class RetrofitDownLoadMange {
         for (int i = 0; i < mDownLoadTasks.size(); i++) {
             if (mDownLoadTasks.get(url) != null) {
                 LogUtil.e("该url已经存在");
-                mDownLoadTasks.get(url).start();
+                if (mDownLoadTasks.get(url).isCanceled() != 2){
+                    mDownLoadTasks.get(url).start();
+                }
             } else {
                 DownLoadTask downLoadTask = new DownLoadTask(url);
                 mDownLoadTasks.put(url, downLoadTask);

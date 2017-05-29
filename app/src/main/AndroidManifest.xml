@@ -136,6 +136,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.FlashlightActivity"
+            android:label="@string/demo_flashlight_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
+
         <service android:name="zhuwentao.com.zwtwitmass.network.DownLoadService" />
     </application>
 

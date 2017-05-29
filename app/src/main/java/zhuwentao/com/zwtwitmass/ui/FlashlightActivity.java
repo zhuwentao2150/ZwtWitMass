@@ -22,6 +22,8 @@ public class FlashlightActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_flashlight);
+
         mButtonOpenOrClose = (Button) findViewById(R.id.btn_open_flashlight);
         camera = Camera.open();
         isFlash = true;

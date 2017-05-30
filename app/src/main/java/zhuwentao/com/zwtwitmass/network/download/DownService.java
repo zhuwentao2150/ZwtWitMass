@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 /**
- * 下载服务
+ * 下载服务，保持页面的下载状态
  * Created by zhuwentao on 2017-05-27.
  */
 public class DownService extends Service{
@@ -24,6 +24,16 @@ public class DownService extends Service{
     }
 
 
+    public void setDownLoadURL(String url){
+        RetrofitDownLoadMange.getInstance().download(url);
+    }
+
+
+
+
+    /**
+     * 返回一个Binder对象
+     */
     public class MyBinder extends Binder {
         /**
          * 得到一个Binder对象

@@ -24,6 +24,10 @@ public class DownService extends Service{
     }
 
 
+    /**
+     * 设置URL
+     * @param url
+     */
     public void setDownLoadURL(String url){
         RetrofitDownLoadMange.getInstance().download(url);
     }

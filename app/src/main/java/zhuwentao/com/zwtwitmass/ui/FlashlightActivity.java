@@ -40,12 +40,14 @@ public class FlashlightActivity extends AppCompatActivity{
             mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             camera.setParameters(mParameters);
             mButtonOpenOrClose.setText("关闭手电筒");
+
             isFlash = false;
         }else{
             Camera.Parameters mParameterss = camera.getParameters();
             mParameterss.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             camera.setParameters(mParameterss);
             mButtonOpenOrClose.setText("打开手电筒");
+
             isFlash = true;
         }
     }
@@ -54,6 +56,7 @@ public class FlashlightActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         camera.release();	// 释放手电筒
     }
 }

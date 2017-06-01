@@ -57,6 +57,7 @@
             </intent-filter>
         </activity>
 
+        <!--动态放大缩小文字-->
         <activity
             android:name=".uimodule.TextViewActivity"
             android:label="@string/demo_auto_textview">
@@ -78,6 +79,7 @@
             </intent-filter>
         </activity>
 
+        <!--JAVA代码和js互相调用-->
         <activity
             android:name=".ui.JsHtmlActivity"
             android:label="@string/demo_js_html_java">
@@ -88,6 +90,7 @@
             </intent-filter>
         </activity>
 
+        <!--监听输入框-->
         <activity
             android:name=".ui.RemainEditTextActivity"
             android:label="@string/demo_rematin_edittext">
@@ -108,6 +111,7 @@
             </intent-filter>
         </activity>
 
+        <!--NFC界面-->
         <activity
             android:name=".ui.NFCActivity"
             android:label="@string/demo_nfc_activity">
@@ -126,6 +130,7 @@
             </intent-filter>
         </activity>
 
+        <!--下载界面-->
         <activity
             android:name=".ui.RetrofitDownLoadActivity"
             android:label="@string/demo_retrofit_download_activity">
@@ -136,6 +141,7 @@
             </intent-filter>
         </activity>
 
+        <!--手电筒界面-->
         <activity
             android:name=".ui.FlashlightActivity"
             android:label="@string/demo_flashlight_activity">

@@ -9,6 +9,7 @@
         android:id="@+id/btn_open_flashlight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="openOrClose"
         android:text="打开手电筒"/>
 
 </LinearLayout>

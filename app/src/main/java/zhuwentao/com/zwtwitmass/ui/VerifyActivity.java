@@ -12,6 +12,7 @@ import zhuwentao.com.zwtwitmass.utils.ValidateUtil;
 public class VerifyActivity extends BaseActivity {
 
     private EditText mEditText;
+
     private Button mButton;
 
     @Override

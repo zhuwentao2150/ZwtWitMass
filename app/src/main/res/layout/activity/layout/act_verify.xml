@@ -12,10 +12,10 @@
         android:hint="请输入文字"/>
 
     <Button
-        android:layout_gravity="bottom"
         android:id="@+id/btn_verify_commit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:text="校验"/>
 
 </LinearLayout>

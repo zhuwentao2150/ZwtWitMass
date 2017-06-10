@@ -12,6 +12,7 @@ import android.view.View;
 public class CircleMeterView extends View{
 
     public CircleMeterView(Context context) {
+
         super(context);
     }
 

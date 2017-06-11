@@ -152,6 +152,19 @@
             </intent-filter>
         </activity>
 
+        <!--手电筒界面-->
+        <activity
+            android:name=".ui.CircleMeterActivity"
+            android:label="@string/demo_circlemetter_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
+
+
+
         <service android:name="zhuwentao.com.zwtwitmass.network.DownLoadService" />
     </application>
 

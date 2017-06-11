@@ -17,5 +17,7 @@
     <string name="demo_nfc_activity">NFC测试</string>
     <string name="demo_retrofit_download_activity">使用Retroift下载文件-进度显示</string>
     <string name="demo_flashlight_activity">手电筒界面</string>
+    <string name="demo_circlemetter_activity">仪表盘</string>
+
 
 </resources>

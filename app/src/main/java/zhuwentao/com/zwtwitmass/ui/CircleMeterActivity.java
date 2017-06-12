@@ -15,6 +15,7 @@ import zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView;
 public class CircleMeterActivity extends BaseActivity {
 
 
+
     private SeekBar indexSb;
 
     private CircleMeterView circleMeter;

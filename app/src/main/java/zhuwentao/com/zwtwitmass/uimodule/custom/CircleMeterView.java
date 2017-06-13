@@ -2,6 +2,7 @@ package zhuwentao.com.zwtwitmass.uimodule.custom;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -10,6 +11,11 @@ import android.view.View;
  * Created by zhuwentao on 2017-06-08.
  */
 public class CircleMeterView extends View{
+
+    private int raduis;
+
+    private Paint mPaint;
+
 
     public CircleMeterView(Context context) {
 
@@ -32,5 +38,43 @@ public class CircleMeterView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        drawArcScale(canvas);
+    }
+
+    /**
+     * 画外刻度
+     */
+    private void drawArcScale(Canvas canvas) {
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
+        raduis = 150;
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(1);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+
+
+        for (int i = 0; i < 60; i++) {
+            if (i % 6 == 0) {
+                canvas.drawLine(pointX - raduis + 10, pointY, pointX - raduis + 50 , pointY, mPaint);
+            } else {
+                canvas.drawLine(pointX - raduis + 10, pointY, pointX - raduis + 30, pointY, mPaint);
+            }
+            canvas.rotate(6, pointX, pointY);
+        }
+    }
+
+    /**
+     * 画内弧形
+     */
+    private void drawArcInside(Canvas canvas) {
+
+    }
+
+    /**
+     * 画内部数值
+     */
+    private void drawInsideSumText(Canvas canvas) {
+
     }
 }

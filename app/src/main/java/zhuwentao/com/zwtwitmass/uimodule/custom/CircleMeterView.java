@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -40,6 +41,7 @@ public class CircleMeterView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawArcScale(canvas);
+        drawArcInside(canvas);
     }
 
     /**
@@ -71,6 +73,15 @@ public class CircleMeterView extends View{
      * 画内弧形
      */
     private void drawArcInside(Canvas canvas) {
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
+        raduis = 250;
+
+        // 用于定义的圆弧的形状和大小的界限
+        RectF oval = new RectF(pointX, pointY, pointX, pointY);
+        mPaint.setColor(Color.GREEN);
+        // 绘制圆弧：oval:圆弧所在的椭圆对象，startAngle:圆弧的起始角度，sweepAngle:圆弧的角度，useCenter:是否显示半径连线,true表示显示圆弧与圆心的半径连线，false表示不显示
+        canvas.drawArc(oval, -90, 10, false, mPaint);    // 根据进度画圆弧
 
     }
 

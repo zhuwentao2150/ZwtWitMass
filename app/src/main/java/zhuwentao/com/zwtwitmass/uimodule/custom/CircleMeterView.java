@@ -2,6 +2,7 @@ package zhuwentao.com.zwtwitmass.uimodule.custom;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -47,12 +48,14 @@ public class CircleMeterView extends View{
     private void drawArcScale(Canvas canvas) {
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
-        raduis = 150;
+        raduis = 250;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(1);
+        mPaint.setStrokeWidth(5);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawCircle(pointX, pointY, raduis, mPaint);
 
         for (int i = 0; i < 60; i++) {
             if (i % 6 == 0) {

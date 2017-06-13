@@ -12,7 +12,7 @@ import android.view.View;
  * 圆形仪表盘
  * Created by zhuwentao on 2017-06-08.
  */
-public class CircleMeterView extends View{
+public class CircleMeterView extends View {
 
     private int raduis;
 
@@ -48,6 +48,7 @@ public class CircleMeterView extends View{
      * 画外刻度
      */
     private void drawArcScale(Canvas canvas) {
+        canvas.save();
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         raduis = 250;
@@ -57,16 +58,46 @@ public class CircleMeterView extends View{
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setTextSize(12);
         canvas.drawCircle(pointX, pointY, raduis, mPaint);
 
         for (int i = 0; i < 60; i++) {
             if (i % 5 == 0) {
-                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 25 , pointY, mPaint);
+                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 25, pointY, mPaint);
             } else {
                 canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 10, pointY, mPaint);
             }
             canvas.rotate(6, pointX, pointY);
         }
+
+        canvas.drawText("1",
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
+                (float) (raduis - (raduis/2 - 60) * Math.cos(Math.toRadians(30))) + 20,
+                mPaint);
+        canvas.drawText("2",
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))) - 20,
+                (float) (raduis - (raduis/2 - 60) * Math.cos(Math.toRadians(60))) + 20,
+                mPaint);
+        canvas.drawText("3",
+                getWidth() - 90,
+                getHeight() / 2 + 10,
+                mPaint);
+        canvas.drawText("4",
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))) - 20,
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))),
+                mPaint);
+
+        canvas.drawText("5",
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))),
+                mPaint);
+
+        canvas.drawText("6",
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
+                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))),
+                mPaint);
+
+        canvas.restore();
     }
 
     /**

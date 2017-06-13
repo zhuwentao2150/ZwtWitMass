@@ -60,10 +60,10 @@ public class CircleMeterView extends View{
         canvas.drawCircle(pointX, pointY, raduis, mPaint);
 
         for (int i = 0; i < 60; i++) {
-            if (i % 6 == 0) {
-                canvas.drawLine(pointX - raduis + 10, pointY, pointX - raduis + 50 , pointY, mPaint);
+            if (i % 5 == 0) {
+                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 25 , pointY, mPaint);
             } else {
-                canvas.drawLine(pointX - raduis + 10, pointY, pointX - raduis + 30, pointY, mPaint);
+                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 10, pointY, mPaint);
             }
             canvas.rotate(6, pointX, pointY);
         }

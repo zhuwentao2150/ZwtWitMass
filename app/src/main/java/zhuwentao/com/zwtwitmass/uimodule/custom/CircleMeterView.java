@@ -14,7 +14,7 @@ import android.view.View;
  */
 public class CircleMeterView extends View {
 
-    private int raduis;
+    private int raduis = 250;
 
     private Paint mPaint;
 
@@ -51,7 +51,6 @@ public class CircleMeterView extends View {
         canvas.save();
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
-        raduis = 250;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(5);

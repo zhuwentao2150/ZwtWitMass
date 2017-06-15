@@ -16,6 +16,7 @@ public class CircleMeterView extends View {
 
     private int raduis = 250;
 
+
     private Paint mPaint;
 
 

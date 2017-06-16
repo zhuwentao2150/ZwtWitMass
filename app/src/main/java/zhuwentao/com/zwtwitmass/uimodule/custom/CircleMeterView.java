@@ -19,6 +19,44 @@ public class CircleMeterView extends View {
 
     private Paint mPaint;
 
+    private int mWidth;
+    private int mHeight;
+
+    private int mPercent;
+
+    //刻度宽度
+    private float mTikeWidth;
+
+    //第二个弧的宽度
+    private int mScendArcWidth;
+
+    //最小圆的半径
+    private int mMinCircleRadius;
+
+    //文字矩形的宽
+    private int mRectWidth;
+
+    //文字矩形的高
+    private int mRectHeight;
+
+
+    //文字内容
+    private String mText = "";
+
+    //文字的大小
+    private int mTextSize;
+
+    //设置文字颜色
+    private int mTextColor;
+    private int mArcColor;
+
+    //小圆和指针颜色
+    private int mMinCircleColor;
+
+    //刻度的个数
+    private int mTikeCount;
+
+    private Context mContext;
 
     public CircleMeterView(Context context) {
 
@@ -41,8 +79,19 @@ public class CircleMeterView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        drawArcScale(canvas);
-        drawArcInside(canvas);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(5);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStyle(Paint.Style.STROKE);
+
+        float x = (getWidth() - getHeight());
+        float y = getHeight();
+        canvas.drawArc(new RectF(x, y, getWidth() - x, getHeight() - y), 145, 250, false, mPaint);
+
+        //drawArcScale(canvas);
+        //drawArcInside(canvas);
     }
 
     /**
@@ -59,7 +108,7 @@ public class CircleMeterView extends View {
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setTextSize(12);
-        canvas.drawCircle(pointX, pointY, raduis, mPaint);
+        //canvas.drawCircle(pointX, pointY, raduis, mPaint);
 
         for (int i = 0; i < 60; i++) {
             if (i % 5 == 0) {

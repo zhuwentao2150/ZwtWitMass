@@ -182,8 +182,8 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         mPaint.setStrokeWidth(2);
-        mPaint.setTextSize(66);
+        mPaint.setTextSize(80);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawText("3620", getWidth()/2 - 70, getHeight()/2, mPaint);
+        canvas.drawText("3620", getWidth()/2 - 90, getHeight()/2, mPaint);
     }
 }

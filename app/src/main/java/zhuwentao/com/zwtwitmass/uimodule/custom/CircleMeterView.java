@@ -14,7 +14,7 @@ import android.view.View;
  */
 public class CircleMeterView extends View {
 
-    private int raduis = 250;
+    private int raduis = 500;
 
 
     private Paint mPaint;
@@ -79,18 +79,8 @@ public class CircleMeterView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(5);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setColor(Color.BLUE);
-        mPaint.setStyle(Paint.Style.STROKE);
 
-        float x = (getWidth() - getHeight());
-        float y = getHeight();
-        canvas.drawArc(new RectF(x, y, getWidth() - x, getHeight() - y), 145, 250, false, mPaint);
-
-        //drawArcScale(canvas);
+        drawArcScale(canvas);
         //drawArcInside(canvas);
     }
 
@@ -98,34 +88,54 @@ public class CircleMeterView extends View {
      * 画外刻度
      */
     private void drawArcScale(Canvas canvas) {
-        canvas.save();
-        int pointX = getHeight() / 2;
-        int pointY = getWidth() / 2;
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(5);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setTextSize(12);
-        //canvas.drawCircle(pointX, pointY, raduis, mPaint);
 
+        // 画外圆
+        canvas.save();
+        float x = (getWidth() - getHeight());
+        float y = getHeight();
+        canvas.drawArc(new RectF(getWidth() / 2 - raduis / 2, getHeight() / 2 - raduis / 2, getWidth() / 2 + raduis / 2, getHeight() / 2 + raduis / 2), 150, 240, false, mPaint);
+        canvas.restore();
+
+        // 画线刻度
+        canvas.save();
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
         for (int i = 0; i < 60; i++) {
+            if (i > 35 && i < 55) {
+                canvas.rotate(6, pointX, pointY);
+                continue;
+            }
             if (i % 5 == 0) {
-                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 25, pointY, mPaint);
+                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
             } else {
-                canvas.drawLine(pointX - raduis, pointY, pointX - raduis + 10, pointY, mPaint);
+                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
             }
             canvas.rotate(6, pointX, pointY);
         }
+        canvas.restore();
 
+
+        // 画文字刻度
+        mPaint.setStrokeWidth(1);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setTextSize(24);
+        for (int i = 0; i < 60; i++) {
+            if (i > 35 && i < 55) {
+                canvas.rotate(6, pointX, pointY);
+                continue;
+            }
+            canvas.drawText("" + i, pointX - raduis / 2 + 30, pointY + 30, mPaint);
+            canvas.rotate(6, pointX, pointY);
+        }
 //        canvas.drawText("1",
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
-//                (float) (raduis - (raduis/2 - 60) * Math.cos(Math.toRadians(30))) + 20,
-//                mPaint);
-//        canvas.drawText("2",
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))) - 20,
-//                (float) (raduis - (raduis/2 - 60) * Math.cos(Math.toRadians(60))) + 20,
+//                (float) (raduis/2 + (raduis/4 - 60) * Math.cos(Math.toRadians(60))) - 20,
+//                (float) (raduis/2 - (raduis/4 - 60) * Math.cos(Math.toRadians(30))) + 20,
 //                mPaint);
 //        canvas.drawText("3",
 //                getWidth() - 90,

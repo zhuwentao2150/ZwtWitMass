@@ -82,6 +82,7 @@ public class CircleMeterView extends View {
 
         drawArcScale(canvas);
         drawArcInside(canvas);
+        drawInsideSumText(canvas);
     }
 
     /**
@@ -124,7 +125,7 @@ public class CircleMeterView extends View {
         // 画文字刻度
         canvas.save();
         mPaint.setStrokeWidth(1);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(24);
         canvas.rotate(-30, pointX, pointY);
         for (int i = 0; i < 60; i++) {
@@ -180,6 +181,9 @@ public class CircleMeterView extends View {
      * 画内部数值
      */
     private void drawInsideSumText(Canvas canvas) {
-
+        mPaint.setStrokeWidth(2);
+        mPaint.setTextSize(66);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawText("3620", getWidth()/2 - 70, getHeight()/2, mPaint);
     }
 }

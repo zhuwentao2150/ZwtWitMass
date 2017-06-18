@@ -81,7 +81,7 @@ public class CircleMeterView extends View {
         super.onDraw(canvas);
 
         drawArcScale(canvas);
-        //drawArcInside(canvas);
+        drawArcInside(canvas);
     }
 
     /**
@@ -122,17 +122,22 @@ public class CircleMeterView extends View {
 
 
         // 画文字刻度
+        canvas.save();
         mPaint.setStrokeWidth(1);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setTextSize(24);
+        canvas.rotate(-30, pointX, pointY);
         for (int i = 0; i < 60; i++) {
-            if (i > 35 && i < 55) {
+            if (i > 40) {
                 canvas.rotate(6, pointX, pointY);
                 continue;
             }
-            canvas.drawText("" + i, pointX - raduis / 2 + 30, pointY + 30, mPaint);
+            if (i % 5 == 0) {
+                canvas.drawText("" + i/5, pointX - raduis / 2 + 30, pointY , mPaint);
+            }
             canvas.rotate(6, pointX, pointY);
         }
+        canvas.restore();
 //        canvas.drawText("1",
 //                (float) (raduis/2 + (raduis/4 - 60) * Math.cos(Math.toRadians(60))) - 20,
 //                (float) (raduis/2 - (raduis/4 - 60) * Math.cos(Math.toRadians(30))) + 20,
@@ -155,24 +160,20 @@ public class CircleMeterView extends View {
 //                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
 //                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))),
 //                mPaint);
-
-        canvas.restore();
     }
 
     /**
      * 画内弧形
      */
     private void drawArcInside(Canvas canvas) {
-        int pointX = getHeight() / 2;
-        int pointY = getWidth() / 2;
-        raduis = 250;
-
-        // 用于定义的圆弧的形状和大小的界限
-        RectF oval = new RectF(pointX, pointY, pointX, pointY);
-        mPaint.setColor(Color.GREEN);
-        // 绘制圆弧：oval:圆弧所在的椭圆对象，startAngle:圆弧的起始角度，sweepAngle:圆弧的角度，useCenter:是否显示半径连线,true表示显示圆弧与圆心的半径连线，false表示不显示
-        canvas.drawArc(oval, -90, 10, false, mPaint);    // 根据进度画圆弧
-
+        // 画外圆
+        canvas.save();
+        canvas.rotate(10, getWidth() / 2, getWidth() / 2);
+        mPaint.setStrokeCap(Paint.Cap.SQUARE);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(30);
+        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + 80, (getHeight() / 2 - raduis / 2) + 80, (getWidth() / 2 + raduis / 2) - 80, (getHeight() / 2 + raduis / 2) - 80), 140, 240, false, mPaint);
+        canvas.restore();
     }
 
     /**

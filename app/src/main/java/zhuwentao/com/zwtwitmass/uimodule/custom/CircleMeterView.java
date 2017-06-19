@@ -128,16 +128,23 @@ public class CircleMeterView extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(24);
         canvas.rotate(-30, pointX, pointY);
-        for (int i = 0; i < 60; i++) {
-            if (i > 40) {
-                canvas.rotate(6, pointX, pointY);
-                continue;
-            }
-            if (i % 5 == 0) {
-                canvas.drawText("" + i/5, pointX - raduis / 2 + 30, pointY , mPaint);
-            }
-            canvas.rotate(6, pointX, pointY);
-        }
+
+
+        canvas.drawText("1", pointX - raduis / 2 + 30, pointY, mPaint);
+        canvas.rotate(30, pointX, pointY);
+        canvas.drawText("2", pointX - raduis / 2 + 30, pointY, mPaint);
+
+
+//        for (int i = 0; i < 60; i++) {
+//            if (i > 40) {
+//                canvas.rotate(6, pointX, pointY);
+//                continue;
+//            }
+//            if (i % 5 == 0) {
+//                canvas.drawText("" + i/5, pointX - raduis / 2 + 30, pointY , mPaint);
+//            }
+//            canvas.rotate(6, pointX, pointY);
+//        }
         canvas.restore();
 //        canvas.drawText("1",
 //                (float) (raduis/2 + (raduis/4 - 60) * Math.cos(Math.toRadians(60))) - 20,

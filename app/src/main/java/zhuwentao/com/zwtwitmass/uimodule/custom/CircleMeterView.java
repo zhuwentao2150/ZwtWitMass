@@ -74,6 +74,31 @@ public class CircleMeterView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int myWidthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int myWidthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        if (myWidthSpecMode == MeasureSpec.EXACTLY) {
+            mWidth = myWidthSpecSize;
+        } else {
+            // wrap_content
+
+        }
+
+        /**
+         * 设置高度
+         */
+        int myHeightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int myHeightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        if (myHeightSpecMode == MeasureSpec.EXACTLY) {
+            mHeight = myHeightSpecSize;
+        } else {
+            // wrap_content
+
+        }
+
+        // 设置该view的宽高
+        setMeasuredDimension(mWidth, mHeight);
     }
 
     @Override

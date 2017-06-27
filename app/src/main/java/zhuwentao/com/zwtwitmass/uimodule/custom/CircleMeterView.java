@@ -10,6 +10,7 @@ import android.view.View;
 
 /**
  * 圆形仪表盘
+ *
  * Created by zhuwentao on 2017-06-08.
  */
 public class CircleMeterView extends View {
@@ -160,6 +161,8 @@ public class CircleMeterView extends View {
         canvas.drawText("2", pointX - raduis / 2 + 30, pointY, mPaint);
         canvas.rotate(30, pointX, pointY);
         canvas.drawText("3", pointX - raduis / 2 + 30, pointY, mPaint);
+        canvas.rotate(30, pointX, pointY);
+        canvas.drawText("4", pointX - raduis / 2 + 30, pointY, mPaint);
 
         canvas.restore();
 //        for (int i = 0; i < 60; i++) {

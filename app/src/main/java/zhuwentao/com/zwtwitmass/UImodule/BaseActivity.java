@@ -14,6 +14,7 @@ import zhuwentao.com.zwtwitmass.utils.ToastUtil;
 
 /**
  * 基类Activity
+ *
  */
 public class BaseActivity extends AppCompatActivity {
 
@@ -78,8 +79,7 @@ public class BaseActivity extends AppCompatActivity {
 		// 将内容填充进父视图
 		contentLl.addView(contentView);
 		// 内容视图的参数
-		android.view.ViewGroup.LayoutParams layoutParams = contentView
-				.getLayoutParams();
+		android.view.ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
 		// 设置宽高均为MATCH_PARENT
 		layoutParams.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 		layoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT;

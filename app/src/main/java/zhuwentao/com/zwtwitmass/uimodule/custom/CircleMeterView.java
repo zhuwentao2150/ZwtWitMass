@@ -19,6 +19,7 @@ public class CircleMeterView extends View {
 
 
     private Paint mPaint;
+    private Paint mPaintText;
 
     private int mWidth;
     private int mHeight;
@@ -60,16 +61,28 @@ public class CircleMeterView extends View {
     private Context mContext;
 
     public CircleMeterView(Context context) {
-
         super(context);
+        initUI();
     }
 
     public CircleMeterView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initUI();
     }
 
     public CircleMeterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initUI();
+    }
+
+    private void initUI(){
+        mPaint = new Paint();
+
+
+        mPaintText = new Paint();
+        mPaintText.setStrokeWidth(1);
+        mPaintText.setStyle(Paint.Style.FILL);
+        mPaintText.setTextSize(24);
     }
 
     @Override
@@ -115,7 +128,6 @@ public class CircleMeterView extends View {
      * 画外刻度
      */
     private void drawArcScale(Canvas canvas) {
-        mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(5);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -140,6 +152,7 @@ public class CircleMeterView extends View {
             }
             if (i % 5 == 0) {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
+                canvas.drawText("" + i, pointX - raduis / 2 + 30, pointY, mPaintText);
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
             }
@@ -154,36 +167,6 @@ public class CircleMeterView extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setTextSize(24);
         canvas.rotate(-30, pointX, pointY);
-
-
-        canvas.drawText("1", (pointX - raduis / 2 + 30), pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("2", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("3", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("4", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("5", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("6", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("7", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("8", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("9", pointX - raduis / 2 + 30, pointY, mPaint);
-
-        canvas.rotate(30, pointX, pointY);
-        canvas.drawText("10", pointX - raduis / 2 + 30, pointY, mPaint);
 
         canvas.restore();
 //        for (int i = 0; i < 60; i++) {

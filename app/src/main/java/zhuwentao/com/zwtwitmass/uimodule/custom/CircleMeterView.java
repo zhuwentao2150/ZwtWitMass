@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -152,7 +153,16 @@ public class CircleMeterView extends View {
             }
             if (i % 5 == 0) {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
-                canvas.drawText("" + i, pointX - raduis / 2 + 30, pointY, mPaintText);
+// http://blog.csdn.net/qq_26971803/article/details/52061943
+                String text = "" + i;
+                Rect textBound = new Rect();
+                mPaintText.getTextBounds(text, 0, text.length(), textBound);
+                int textHeight = textBound.bottom - textBound.top; //获得文字高度
+                canvas.save();
+                canvas.translate(0,  raduis/2 + textHeight);
+                canvas.rotate(-6 * i);
+                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom, mPaintText);
+                canvas.restore();
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
             }

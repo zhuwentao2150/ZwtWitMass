@@ -154,7 +154,7 @@ public class CircleMeterView extends View {
             if (i % 5 == 0) {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
-                String text = "" + i;
+                String text = String.valueOf(i);
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);
                 int textHeight = textBound.bottom - textBound.top; //获得文字高度

@@ -1,5 +1,7 @@
 package zhuwentao.com.zwtwitmass.utils;
 
+import android.util.Log;
+
 import java.io.File;
 
 /**
@@ -8,13 +10,26 @@ import java.io.File;
  */
 public class FileUtil {
 
-    public static boolean isFileExists(String path){
+    private static String TAG = "FileUtil";
 
+
+    /**
+     * 删除文件
+     * @param path
+     * @return
+     */
+    public static boolean delFile(String path) {
         File file = new File(path);
         if (file.exists()) {
-            return true;
+            if (file.isFile()) {
+                file.delete();
+                return true;
+            } else {
+                Log.e("FileUtil", "file is directory!");
+            }
+        } else {
+            Log.e("FileUtil", "file not find!");
         }
-
         return false;
     }
 

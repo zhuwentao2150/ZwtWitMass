@@ -166,7 +166,7 @@
         <!--文件读写-->
         <activity
             android:name=".ui.FileWRActivity"
-            android:label="@string/demo_circlemetter_activity">
+            android:label="@string/demo_filewr_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

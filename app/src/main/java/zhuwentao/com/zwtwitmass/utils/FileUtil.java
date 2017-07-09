@@ -56,23 +56,27 @@ public class FileUtil {
         bufw.close();
     }
 
-    public static void readFileToStr(String rootPath, String fileName) throws Exception {
+    public static String readFileToStr(String rootPath, String fileName, int index) throws Exception {
         File file = new File(rootPath, fileName);
         if (!file.exists()) {
             LogUtil.e("file is not exists");
-            return;
+            return null;
         }
 
         FileReader fileReader = new FileReader(file.getAbsoluteFile());
         BufferedReader bufr = new BufferedReader(fileReader);
 
         String line = null;
+        int poi = 0;
         while((line = bufr.readLine()) != null){
-            LogUtil.e("读出的信息：" + line);
+            if (poi == index) {
+                break;
+            }
+            poi++;
         }
-
         fileReader.close();
         bufr.close();
+        return line;
     }
 
 }

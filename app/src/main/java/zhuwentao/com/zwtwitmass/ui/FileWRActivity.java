@@ -11,6 +11,7 @@ import android.widget.TextView;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.utils.FileUtil;
+import zhuwentao.com.zwtwitmass.utils.LogUtil;
 
 /**
  * 文件读写
@@ -19,6 +20,7 @@ import zhuwentao.com.zwtwitmass.utils.FileUtil;
 public class FileWRActivity extends BaseActivity{
 
     private String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ZWTTest";
+    private String fileName = "FileTest2.zwt";
 
 
     private Button mFileWBtn;
@@ -28,7 +30,6 @@ public class FileWRActivity extends BaseActivity{
     private TextView mShowContentTv;
 
     private EditText mInputContentEdt;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class FileWRActivity extends BaseActivity{
                 String content = mInputContentEdt.getText().toString();
                 try {
                     if (!TextUtils.isEmpty(content)) {
-                        FileUtil.saveStrToFile(filePath, "FileTest.txt", content);
+                        FileUtil.saveStrToFile(filePath, fileName, content);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -67,7 +68,7 @@ public class FileWRActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 try {
-                    FileUtil.readFileToStr(filePath, "FileTest.txt");
+                    LogUtil.e(FileUtil.readFileToStr(filePath, fileName, 0));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

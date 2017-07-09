@@ -163,6 +163,17 @@
             </intent-filter>
         </activity>
 
+        <!--文件读写-->
+        <activity
+            android:name=".ui.FileWRActivity"
+            android:label="@string/demo_circlemetter_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
+
 
 
         <!--下载服务-->

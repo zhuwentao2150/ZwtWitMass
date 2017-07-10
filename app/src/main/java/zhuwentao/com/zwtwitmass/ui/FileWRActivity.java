@@ -22,6 +22,8 @@ public class FileWRActivity extends BaseActivity{
     private String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ZWTTest";
     private String fileName = "FileTest2.zwt";
 
+    private int index = 0;
+
 
     private Button mFileWBtn;
 
@@ -68,7 +70,14 @@ public class FileWRActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 try {
-                    LogUtil.e(FileUtil.readFileToStr(filePath, fileName, 0));
+                    String stringFile = FileUtil.readFileToStr(filePath, fileName, index);
+                    if (TextUtils.isEmpty(stringFile)) {
+                        index = 0;
+                        return;
+                    }
+                    mShowContentTv.setText(stringFile);
+                    LogUtil.e(stringFile);
+                    index++;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

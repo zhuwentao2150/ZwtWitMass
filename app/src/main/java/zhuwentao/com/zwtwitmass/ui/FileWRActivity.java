@@ -20,6 +20,7 @@ import zhuwentao.com.zwtwitmass.utils.LogUtil;
 public class FileWRActivity extends BaseActivity{
 
     private String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ZWTTest";
+
     private String fileName = "FileTest2.zwt";
 
     private int index = 0;

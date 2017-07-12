@@ -25,7 +25,6 @@ public class FileWRActivity extends BaseActivity{
 
     private int index = 0;
 
-
     private Button mFileWBtn;
 
     private Button mFileRBtn;

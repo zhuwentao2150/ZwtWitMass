@@ -11,7 +11,7 @@ import android.view.View;
 
 /**
  * 圆形仪表盘
- *
+ * <p>
  * Created by zhuwentao on 2017-06-08.
  */
 public class CircleMeterView extends View {
@@ -76,7 +76,7 @@ public class CircleMeterView extends View {
         initUI();
     }
 
-    private void initUI(){
+    private void initUI() {
         mPaint = new Paint();
 
 
@@ -158,12 +158,11 @@ public class CircleMeterView extends View {
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);
                 int textHeight = textBound.bottom - textBound.top; //获得文字高度
-
-
                 canvas.save();
-                canvas.translate(0,  raduis/2 + textHeight);
+                canvas.translate(pointX - raduis / 2, pointY);
                 canvas.rotate(-6 * i);
-                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom, mPaintText);
+                //canvas.drawText(text, -(textBound.right - textBound.left) - 20, textBound.bottom, mPaintText);
+                canvas.drawText(text, getWidth()/2 - raduis/2, getHeight()/2 - raduis/2, mPaintText);
                 canvas.restore();
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
@@ -237,6 +236,6 @@ public class CircleMeterView extends View {
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(80);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawText("3620", getWidth()/2 - 90, getHeight()/2, mPaint);
+        canvas.drawText("3620", getWidth() / 2 - 90, getHeight() / 2, mPaint);
     }
 }

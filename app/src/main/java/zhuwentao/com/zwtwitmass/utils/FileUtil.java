@@ -16,7 +16,6 @@ public class FileUtil {
 
     private static String TAG = "FileUtil";
 
-
     /**
      * 删除文件
      *

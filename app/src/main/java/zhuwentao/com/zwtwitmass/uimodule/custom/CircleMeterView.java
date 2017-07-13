@@ -158,6 +158,8 @@ public class CircleMeterView extends View {
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);
                 int textHeight = textBound.bottom - textBound.top; //获得文字高度
+
+
                 canvas.save();
                 canvas.translate(0,  raduis/2 + textHeight);
                 canvas.rotate(-6 * i);

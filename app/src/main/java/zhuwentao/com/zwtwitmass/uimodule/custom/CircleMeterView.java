@@ -161,7 +161,7 @@ public class CircleMeterView extends View {
                 canvas.save();
                 canvas.translate(pointX - raduis / 2, pointY);
                 canvas.rotate(-6 * i);
-                canvas.drawText(text, -(textBound.right - textBound.left) - 20, textBound.bottom, mPaintText);
+                //canvas.drawText(text, -(textBound.right - textBound.left) - 20, textBound.bottom, mPaintText);
                 canvas.drawText(text, getWidth()/2 - raduis/2, getHeight()/2 - raduis/2, mPaintText);
                 canvas.restore();
             } else {

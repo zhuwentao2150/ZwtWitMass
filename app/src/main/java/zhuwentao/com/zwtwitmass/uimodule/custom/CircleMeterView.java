@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -155,15 +154,15 @@ public class CircleMeterView extends View {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
                 String text = String.valueOf(i);
-                Rect textBound = new Rect();
-                mPaintText.getTextBounds(text, 0, text.length(), textBound);
-                int textHeight = textBound.bottom - textBound.top; //获得文字高度
+//                Rect textBound = new Rect();
+//                mPaintText.getTextBounds(text, 0, text.length(), textBound);
+//                int textHeight = textBound.bottom - textBound.top; //获得文字高度
                 canvas.save();
-                // 移动圆点坐标到文字
-                canvas.translate(pointX - raduis / 2, pointY);
-                canvas.rotate(-6 * i);
+//                // 移动圆点坐标到文字
+                canvas.translate(0, 0);
+//                canvas.rotate(-6 * i);
                 //canvas.drawText(text, -(textBound.right - textBound.left) - 20, textBound.bottom, mPaintText);
-                canvas.drawText(text, getWidth()/2 - raduis/2, getHeight()/2 - raduis/2, mPaintText);
+                canvas.drawText(text, pointX - raduis / 2 + 30, pointY, mPaintText);
                 canvas.restore();
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);

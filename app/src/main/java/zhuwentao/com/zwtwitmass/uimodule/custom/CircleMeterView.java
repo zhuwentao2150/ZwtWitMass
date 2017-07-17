@@ -123,6 +123,7 @@ public class CircleMeterView extends View {
         drawArcScale(canvas);
         drawArcInside(canvas);
         drawInsideSumText(canvas);
+        drawLine(canvas);
     }
 
     /**
@@ -180,6 +181,12 @@ public class CircleMeterView extends View {
         mPaint.setTextSize(24);
         canvas.rotate(-30, pointX, pointY);
 
+
+
+
+
+
+
         canvas.restore();
 //        for (int i = 0; i < 60; i++) {
 //            if (i > 40) {
@@ -229,7 +236,8 @@ public class CircleMeterView extends View {
 
         mPaint.setStrokeWidth(3);
         mPaint.setColor(Color.WHITE);
-        canvas.save();
+
+        canvas.rotate(-10, getWidth() / 2, getWidth() / 2);
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         for (int i = 0; i < 60; i++) {
@@ -240,7 +248,6 @@ public class CircleMeterView extends View {
             canvas.drawLine((pointX - raduis / 2) + 85, pointY, (pointX - raduis / 2) + 100 + 15, pointY, mPaint);
             canvas.rotate(6, pointX, pointY);
         }
-        canvas.restore();
 
 
         canvas.restore();
@@ -250,9 +257,25 @@ public class CircleMeterView extends View {
      * 画内部数值
      */
     private void drawInsideSumText(Canvas canvas) {
+        canvas.save();
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(60);
+        mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawText("3620", getWidth() / 2 - 60, getHeight() / 2, mPaint);
+        canvas.restore();
+    }
+
+    /**
+     * 画指针
+     */
+    private void drawLine(Canvas canvas) {
+        canvas.save();
+        canvas.rotate(70, getWidth() / 2, getHeight() / 2);
+        mPaint.setStrokeWidth(5);
+        mPaint.setColor(Color.GRAY);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawLine((getWidth() / 2 - raduis / 2), getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
+        canvas.restore();
     }
 }

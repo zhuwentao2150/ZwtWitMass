@@ -172,55 +172,6 @@ public class CircleMeterView extends View {
             canvas.rotate(6, pointX, pointY);
         }
         canvas.restore();
-
-
-        // 画文字刻度
-        canvas.save();
-        mPaint.setStrokeWidth(1);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setTextSize(24);
-        canvas.rotate(-30, pointX, pointY);
-
-
-
-
-
-
-
-        canvas.restore();
-//        for (int i = 0; i < 60; i++) {
-//            if (i > 40) {
-//                canvas.rotate(6, pointX, pointY);
-//                continue;
-//            }
-//            if (i % 5 == 0) {
-//                canvas.drawText("" + i/5, pointX - raduis / 2 + 30, pointY , mPaint);
-//            }
-//            canvas.rotate(6, pointX, pointY);
-//        }
-
-//        canvas.drawText("1",
-//                (float) (raduis/2 + (raduis/4 - 60) * Math.cos(Math.toRadians(60))) - 20,
-//                (float) (raduis/2 - (raduis/4 - 60) * Math.cos(Math.toRadians(30))) + 20,
-//                mPaint);
-//        canvas.drawText("3",
-//                getWidth() - 90,
-//                getHeight() / 2 + 10,
-//                mPaint);
-//        canvas.drawText("4",
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))) - 20,
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))),
-//                mPaint);
-//
-//        canvas.drawText("5",
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))),
-//                mPaint);
-//
-//        canvas.drawText("6",
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(60))) - 20,
-//                (float) (raduis + (raduis/2 - 60) * Math.cos(Math.toRadians(30))),
-//                mPaint);
     }
 
     /**

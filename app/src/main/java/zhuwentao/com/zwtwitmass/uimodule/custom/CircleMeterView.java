@@ -156,7 +156,7 @@ public class CircleMeterView extends View {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
 
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
-                String text = String.valueOf(i/5);
+                String text = String.valueOf(i/5 + 1 == 12?0:i/5+1);
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);
                 int textHeight = textBound.bottom - textBound.top;  //获得文字高度
@@ -222,10 +222,11 @@ public class CircleMeterView extends View {
      */
     private void drawLine(Canvas canvas) {
         canvas.save();
-        canvas.rotate(70, getWidth() / 2, getHeight() / 2);
+        canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
         mPaint.setStrokeWidth(5);
         mPaint.setColor(Color.GRAY);
         mPaint.setStyle(Paint.Style.FILL);
+        canvas.rotate(10, getWidth() / 2, getHeight() / 2);
         canvas.drawLine((getWidth() / 2 - raduis / 2), getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
         canvas.restore();
     }

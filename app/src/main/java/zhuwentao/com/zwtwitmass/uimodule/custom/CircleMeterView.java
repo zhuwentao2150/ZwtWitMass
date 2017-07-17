@@ -121,7 +121,7 @@ public class CircleMeterView extends View {
         super.onDraw(canvas);
 
         drawArcScale(canvas);
-        //drawArcInside(canvas);
+        drawArcInside(canvas);
         drawInsideSumText(canvas);
     }
 
@@ -155,13 +155,13 @@ public class CircleMeterView extends View {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
 
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
-                String text = String.valueOf(i);
+                String text = String.valueOf(i/5);
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);
-                int textHeight = textBound.bottom - textBound.top; //获得文字高度
+                int textHeight = textBound.bottom - textBound.top;  //获得文字高度
+
                 canvas.save();
-                // 移动圆点坐标到文字
-                canvas.translate(pointX - raduis / 2 + 25 + 20, pointY);
+                canvas.translate(pointX - raduis / 2 + 25 + textHeight + 5, pointY);    // 移动圆点坐标到文字
                 canvas.rotate(-6 * i);
                 canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + 5, mPaintText);
                 canvas.restore();
@@ -225,7 +225,24 @@ public class CircleMeterView extends View {
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(30);
-        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + 80, (getHeight() / 2 - raduis / 2) + 80, (getWidth() / 2 + raduis / 2) - 80, (getHeight() / 2 + raduis / 2) - 80), 140, 240, false, mPaint);
+        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + 100, (getHeight() / 2 - raduis / 2) + 100, (getWidth() / 2 + raduis / 2) - 100, (getHeight() / 2 + raduis / 2) - 100), 140, 240, false, mPaint);
+
+        mPaint.setStrokeWidth(3);
+        mPaint.setColor(Color.WHITE);
+        canvas.save();
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
+        for (int i = 0; i < 60; i++) {
+            if (i > 35 && i < 55) {
+                canvas.rotate(6, pointX, pointY);
+                continue;
+            }
+            canvas.drawLine((pointX - raduis / 2) + 85, pointY, (pointX - raduis / 2) + 100 + 15, pointY, mPaint);
+            canvas.rotate(6, pointX, pointY);
+        }
+        canvas.restore();
+
+
         canvas.restore();
     }
 
@@ -234,8 +251,8 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         mPaint.setStrokeWidth(2);
-        mPaint.setTextSize(80);
+        mPaint.setTextSize(60);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawText("3620", getWidth() / 2 - 90, getHeight() / 2, mPaint);
+        canvas.drawText("3620", getWidth() / 2 - 60, getHeight() / 2, mPaint);
     }
 }

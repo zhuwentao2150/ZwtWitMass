@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -120,7 +121,7 @@ public class CircleMeterView extends View {
         super.onDraw(canvas);
 
         drawArcScale(canvas);
-        drawArcInside(canvas);
+        //drawArcInside(canvas);
         drawInsideSumText(canvas);
     }
 
@@ -152,17 +153,17 @@ public class CircleMeterView extends View {
             }
             if (i % 5 == 0) {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
+
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
                 String text = String.valueOf(i);
-//                Rect textBound = new Rect();
-//                mPaintText.getTextBounds(text, 0, text.length(), textBound);
-//                int textHeight = textBound.bottom - textBound.top; //获得文字高度
+                Rect textBound = new Rect();
+                mPaintText.getTextBounds(text, 0, text.length(), textBound);
+                int textHeight = textBound.bottom - textBound.top; //获得文字高度
                 canvas.save();
-//                // 移动圆点坐标到文字
-                canvas.translate(0, 0);
-//                canvas.rotate(-6 * i);
-                //canvas.drawText(text, -(textBound.right - textBound.left) - 20, textBound.bottom, mPaintText);
-                canvas.drawText(text, pointX - raduis / 2 + 30, pointY, mPaintText);
+                // 移动圆点坐标到文字
+                canvas.translate(pointX - raduis / 2 + 25 + 20, pointY);
+                canvas.rotate(-6 * i);
+                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + 5, mPaintText);
                 canvas.restore();
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
@@ -219,7 +220,6 @@ public class CircleMeterView extends View {
      * 画内弧形
      */
     private void drawArcInside(Canvas canvas) {
-        // 画外圆
         canvas.save();
         canvas.rotate(10, getWidth() / 2, getWidth() / 2);
         mPaint.setStrokeCap(Paint.Cap.SQUARE);

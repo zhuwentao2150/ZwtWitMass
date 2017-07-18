@@ -227,7 +227,7 @@ public class CircleMeterView extends View {
         mPaint.setColor(Color.GRAY);
         mPaint.setStyle(Paint.Style.FILL);
         canvas.rotate(10, getWidth() / 2, getHeight() / 2);
-        canvas.drawLine((getWidth() / 2 - raduis / 2), getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
+        canvas.drawLine((getWidth() / 2 - raduis / 2) + 25, getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
         canvas.restore();
     }
 }

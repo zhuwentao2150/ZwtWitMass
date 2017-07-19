@@ -83,7 +83,7 @@ public class CircleMeterView extends View {
         mPaintText = new Paint();
         mPaintText.setStrokeWidth(1);
         mPaintText.setStyle(Paint.Style.FILL);
-        mPaintText.setColor(Color.WHITE);
+        mPaintText.setColor(Color.BLACK);
         mPaintText.setTextSize(24);
     }
 

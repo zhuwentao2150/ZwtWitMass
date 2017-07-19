@@ -83,6 +83,7 @@ public class CircleMeterView extends View {
         mPaintText = new Paint();
         mPaintText.setStrokeWidth(1);
         mPaintText.setStyle(Paint.Style.FILL);
+        mPaintText.setColor(Color.WHITE);
         mPaintText.setTextSize(24);
     }
 
@@ -213,7 +214,7 @@ public class CircleMeterView extends View {
         mPaint.setTextSize(60);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawText("3620", getWidth() / 2 - 60, getHeight() / 2, mPaint);
+        canvas.drawText("3620", getWidth() / 2 - 70, getHeight() / 2 + 120, mPaint);
         canvas.restore();
     }
 
@@ -222,12 +223,18 @@ public class CircleMeterView extends View {
      */
     private void drawLine(Canvas canvas) {
         canvas.save();
+
         canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
         mPaint.setStrokeWidth(5);
         mPaint.setColor(Color.GRAY);
         mPaint.setStyle(Paint.Style.FILL);
         canvas.rotate(10, getWidth() / 2, getHeight() / 2);
         canvas.drawLine((getWidth() / 2 - raduis / 2) + 25, getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
+
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.RED);
+        canvas.drawCircle(getWidth()/2, getHeight()/2, 20, mPaint);
+
         canvas.restore();
     }
 }

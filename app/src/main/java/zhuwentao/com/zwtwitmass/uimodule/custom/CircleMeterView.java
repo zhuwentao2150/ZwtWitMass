@@ -163,7 +163,7 @@ public class CircleMeterView extends View {
                 int textHeight = textBound.bottom - textBound.top;  //获得文字高度
 
                 canvas.save();
-                canvas.translate(pointX - raduis / 2 + 25 + textHeight + 5, pointY);    // 移动圆点坐标到文字
+                canvas.translate(pointX - raduis / 2 + 25 + textHeight + 5, pointY);    // 移动圆点坐标到文字需要绘制的区域
                 canvas.rotate(-6 * i);
                 canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + 5, mPaintText);
                 canvas.restore();

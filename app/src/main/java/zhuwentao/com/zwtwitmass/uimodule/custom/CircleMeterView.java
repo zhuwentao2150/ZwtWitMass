@@ -59,6 +59,8 @@ public class CircleMeterView extends View {
     //刻度的个数
     private int mTikeCount;
 
+    private int mProgress;
+
     private Context mContext;
 
     public CircleMeterView(Context context) {
@@ -236,5 +238,12 @@ public class CircleMeterView extends View {
         canvas.drawCircle(getWidth()/2, getHeight()/2, 20, mPaint);
 
         canvas.restore();
+    }
+
+
+    public void setProgress(int progress) {
+        this.mProgress = progress;
+
+        invalidate();
     }
 }

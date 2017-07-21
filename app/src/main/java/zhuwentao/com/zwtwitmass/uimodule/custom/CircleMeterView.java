@@ -212,10 +212,13 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
+
+        // 需要让文字居中显示
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(60);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
+
         canvas.drawText("3620", getWidth() / 2 - 70, getHeight() / 2 + 120, mPaint);
         canvas.restore();
     }

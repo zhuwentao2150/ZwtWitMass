@@ -229,6 +229,7 @@ public class CircleMeterView extends View {
     private void drawLine(Canvas canvas) {
         canvas.save();
 
+        // 旋转到0的位置
         canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
         mPaint.setStrokeWidth(8);
         mPaint.setColor(Color.RED);

@@ -16,8 +16,10 @@ import android.view.View;
  */
 public class CircleMeterView extends View {
 
+    /**
+     * 圆的直径
+     */
     private int raduis = 500;
-
 
     private Paint mPaint;
     private Paint mPaintText;
@@ -247,7 +249,6 @@ public class CircleMeterView extends View {
 
     public void setProgress(int progress) {
         this.mProgress = progress;
-
         invalidate();
     }
 }

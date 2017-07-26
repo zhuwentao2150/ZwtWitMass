@@ -16,6 +16,7 @@ import android.view.View;
  */
 public class CircleMeterView extends View {
 
+
     /**
      * 圆的直径
      */

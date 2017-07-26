@@ -25,6 +25,7 @@ public class CircleMeterActivity extends BaseActivity {
         setContentView(R.layout.act_circle_meter);
 
         initUI();
+
     }
 
     private void initUI() {

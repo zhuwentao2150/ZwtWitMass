@@ -195,6 +195,7 @@ public class CircleMeterView extends View {
         mPaint.setColor(Color.WHITE);
 
         canvas.rotate(-10, getWidth() / 2, getWidth() / 2);
+
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         for (int i = 0; i < 60; i++) {

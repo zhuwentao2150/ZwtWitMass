@@ -189,6 +189,7 @@ public class CircleMeterView extends View {
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(30);
+
         canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + 100, (getHeight() / 2 - raduis / 2) + 100, (getWidth() / 2 + raduis / 2) - 100, (getHeight() / 2 + raduis / 2) - 100), 140, 240, false, mPaint);
 
         mPaint.setStrokeWidth(3);

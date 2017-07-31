@@ -161,7 +161,7 @@ public class CircleMeterView extends View {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
 
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
-                String text = String.valueOf(i/5 + 1 == 12?0:i/5+1);
+                String text = String.valueOf(i/5 + 1 == 12?0:i/5+1);    // 修改11位子上的数字
 
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);    // 获取文字的矩形范围

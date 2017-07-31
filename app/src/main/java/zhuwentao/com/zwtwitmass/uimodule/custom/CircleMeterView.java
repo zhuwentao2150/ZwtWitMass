@@ -164,7 +164,7 @@ public class CircleMeterView extends View {
                 String text = String.valueOf(i/5 + 1 == 12?0:i/5+1);
 
                 Rect textBound = new Rect();
-                mPaintText.getTextBounds(text, 0, text.length(), textBound);
+                mPaintText.getTextBounds(text, 0, text.length(), textBound);    // 获取文字的矩形范围
                 int textHeight = textBound.bottom - textBound.top;  //获得文字高度
 
                 canvas.save();

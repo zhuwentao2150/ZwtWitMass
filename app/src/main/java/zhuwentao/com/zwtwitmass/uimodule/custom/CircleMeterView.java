@@ -96,7 +96,6 @@ public class CircleMeterView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         int myWidthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int myWidthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
         if (myWidthSpecMode == MeasureSpec.EXACTLY) {

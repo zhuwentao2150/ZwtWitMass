@@ -207,8 +207,6 @@ public class CircleMeterView extends View {
             canvas.drawLine((pointX - raduis / 2) + 85, pointY, (pointX - raduis / 2) + 100 + 15, pointY, mPaint);
             canvas.rotate(6, pointX, pointY);
         }
-
-
         canvas.restore();
     }
 

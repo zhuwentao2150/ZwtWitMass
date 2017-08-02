@@ -11,7 +11,6 @@ import android.view.View;
 
 /**
  * 圆形仪表盘
- * <p>
  * Created by zhuwentao on 2017-06-08.
  */
 public class CircleMeterView extends View {
@@ -21,10 +20,13 @@ public class CircleMeterView extends View {
      */
     private int raduis = 500;
 
+    // 普通画笔
     private Paint mPaint;
     private Paint mPaintText;
 
+    // View宽
     private int mWidth;
+    // View高
     private int mHeight;
 
     private int mPercent;

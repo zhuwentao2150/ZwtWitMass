@@ -74,7 +74,6 @@ public class CircleMeterView extends View {
 
     public CircleMeterView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         initUI();
     }
 

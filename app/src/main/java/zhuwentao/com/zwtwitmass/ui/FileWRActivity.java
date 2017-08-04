@@ -57,6 +57,7 @@ public class FileWRActivity extends BaseActivity{
                 String content = mInputContentEdt.getText().toString();
                 try {
                     if (!TextUtils.isEmpty(content)) {
+                        // 写入数据
                         FileUtil.saveStrToFile(filePath, fileName, content);
                     }
                 } catch (Exception e) {

@@ -99,6 +99,7 @@ public class CircleMeterView extends View {
         int myWidthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int myWidthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
         if (myWidthSpecMode == MeasureSpec.EXACTLY) {
+            // match_parent
             mWidth = myWidthSpecSize;
         } else {
             // wrap_content

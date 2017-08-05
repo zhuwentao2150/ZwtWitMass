@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.stuxuhai.jpinyin.ChineseHelper;
 import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
@@ -97,6 +98,26 @@ public class FileWRActivity extends BaseActivity{
         } catch (PinyinException e) {
             e.printStackTrace();
         }
+
+
+        // 繁体转简体
+        Log.e("ChineseHelper1", ChineseHelper.convertToSimplifiedChinese("飛龍"));
+
+        // 简体转繁体
+        Log.e("ChineseHelper2", ChineseHelper.convertToTraditionalChinese("飞龙"));
+
+        // 字符串是否包含中文
+        Log.e("ChineseHelper3", String.valueOf(ChineseHelper.containsChinese("飞龙在天asdfasdf")));
+
+        // 当个文字转换为繁体
+        Log.e("ChineseHelper4", String.valueOf(ChineseHelper.convertToTraditionalChinese('飛')));
+
+        ChineseHelper.isChinese('龙');
+
+        // 判断某个字符是否为繁体
+        ChineseHelper.isTraditionalChinese('龙');
+
+
 
 
     }

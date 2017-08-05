@@ -53,6 +53,7 @@ public class TextViewActivity extends AppCompatActivity {
         }
 
 
+        // 拼音格式输出
 //        PinyinHelper.toTongyongPinyinStringArray();
 //        PinyinHelper.toWadeGilesPinyinStringArray();
 //        PinyinHelper.toYalePinyinStringArray();
@@ -71,8 +72,6 @@ public class TextViewActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
         mAutotv.setText(strPull);

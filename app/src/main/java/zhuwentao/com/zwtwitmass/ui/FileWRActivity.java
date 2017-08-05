@@ -14,6 +14,8 @@ import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinFormat;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
 
+import java.io.FileNotFoundException;
+
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.utils.FileUtil;
@@ -99,6 +101,17 @@ public class FileWRActivity extends BaseActivity{
             e.printStackTrace();
         }
 
+        try {
+            PinyinHelper.addPinyinDict("asd");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            PinyinHelper.addMutilPinyinDict("afwe");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         // 繁体转简体
         Log.e("ChineseHelper1", ChineseHelper.convertToSimplifiedChinese("飛龍"));
@@ -118,6 +131,11 @@ public class FileWRActivity extends BaseActivity{
         ChineseHelper.isTraditionalChinese('龙');
 
 
+        try {
+            ChineseHelper.addChineseDict("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }

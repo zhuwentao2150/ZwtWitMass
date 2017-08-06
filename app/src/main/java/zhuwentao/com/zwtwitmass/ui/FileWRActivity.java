@@ -20,6 +20,7 @@ import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.utils.FileUtil;
 import zhuwentao.com.zwtwitmass.utils.LogUtil;
+import zhuwentao.com.zwtwitmass.utils.TextPinyinUtil;
 
 /**
  * 文件读写
@@ -136,6 +137,8 @@ public class FileWRActivity extends BaseActivity{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        TextPinyinUtil.getInstance().getPinyin("ZHU_文涛");
 
 
     }

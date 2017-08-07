@@ -137,9 +137,7 @@ public class FileWRActivity extends BaseActivity{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         TextPinyinUtil.getInstance().getPinyin("ZHU_文涛");
-
 
     }
 

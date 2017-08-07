@@ -1,10 +1,7 @@
 package zhuwentao.com.zwtwitmass.utils;
 
-import java.util.Collections;
-
 /**
  * 汉子转拼音工具
- * Created by zhuwentao on 2017-04-13.
  */
 public class TextPinyinUtil {
 
@@ -137,46 +134,4 @@ public class TextPinyinUtil {
         }
         return false;
     }
-
-//    /**
-//     * 对汉字按照首字母排序
-//     *
-//     * @param data
-//     */
-//    public static void sortChinaData(List<AppData> data) {
-//        Collections.sort(data, new Comparator<AppData>() {
-//
-//            @Override
-//            public int compare(AppData lhs, AppData rhs) {
-//                if (lhs.appVehiclePinyinName
-//                        .compareTo(rhs.appVehiclePinyinName) > 0) {
-//                    return 1;
-//                } else if (lhs.appVehiclePinyinName
-//                        .compareTo(rhs.appVehiclePinyinName) == 0) {
-//                    return 0;
-//                }
-//                return -1;
-//            }
-//        });
-//    }
-
-//    /**
-//     * 对英文名进行排序
-//     *
-//     * @param data
-//     */
-//    public static void sortData(List<AppData> data) {
-//        Collections.sort(data, new Comparator<AppData>() {
-//
-//            @Override
-//            public int compare(AppData lhs, AppData rhs) {
-//                if (lhs.appVehicleName.compareTo(rhs.appVehicleName) > 0) {
-//                    return 1;
-//                } else if (lhs.appVehicleName.compareTo(rhs.appVehicleName) == 0) {
-//                    return 0;
-//                }
-//                return -1;
-//            }
-//        });
-//    }
 }

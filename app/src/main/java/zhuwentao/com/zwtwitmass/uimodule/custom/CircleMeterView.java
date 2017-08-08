@@ -261,7 +261,7 @@ public class CircleMeterView extends View {
 
 
     public void setProgress(int progress) {
-        this.mProgress = (float) progress / (48/100);
+        this.mProgress = (float) progress * 2.4f;
         invalidate();
     }
 }

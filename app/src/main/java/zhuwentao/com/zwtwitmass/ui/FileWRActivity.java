@@ -123,9 +123,10 @@ public class FileWRActivity extends BaseActivity{
         // 字符串是否包含中文
         Log.e("ChineseHelper3", String.valueOf(ChineseHelper.containsChinese("飞龙在天asdfasdf")));
 
-        // 当个文字转换为繁体
+        // 单个文字转换为繁体
         Log.e("ChineseHelper4", String.valueOf(ChineseHelper.convertToTraditionalChinese('飛')));
 
+        // 判断某个字是否为汉字
         ChineseHelper.isChinese('龙');
 
         // 判断某个字符是否为繁体

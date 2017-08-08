@@ -129,9 +129,16 @@ public class CircleMeterView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // 画刻度
         drawArcScale(canvas);
+
+        // 画内圆弧
         drawArcInside(canvas);
+
+        // 画中间文字
         drawInsideSumText(canvas);
+
+        // 画指针
         drawLine(canvas);
     }
 
@@ -237,6 +244,7 @@ public class CircleMeterView extends View {
 
         // 旋转到0的位置
         canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
+
         mPaint.setStrokeWidth(8);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);

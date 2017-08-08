@@ -6,6 +6,7 @@ import android.widget.SeekBar;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView;
+import zhuwentao.com.zwtwitmass.utils.LogUtil;
 
 /**
  *
@@ -26,6 +27,29 @@ public class CircleMeterActivity extends BaseActivity {
 
         initUI();
 
+        indexSb.setMax(100);
+
+        initListener();
+    }
+
+    private void initListener() {
+        indexSb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                LogUtil.e("进度：" + progress);
+                circleMeter.setProgress(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void initUI() {

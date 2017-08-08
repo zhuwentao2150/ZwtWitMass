@@ -63,7 +63,7 @@ public class CircleMeterView extends View {
     //刻度的个数
     private int mTikeCount;
 
-    private int mProgress;
+    private float mProgress = 0;
 
     private Context mContext;
 
@@ -248,7 +248,7 @@ public class CircleMeterView extends View {
         mPaint.setStrokeWidth(8);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.rotate(10, getWidth() / 2, getHeight() / 2);
+        canvas.rotate(mProgress, getWidth() / 2, getHeight() / 2);
         canvas.drawLine((getWidth() / 2 - raduis / 2) + 80, getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
 
 
@@ -261,7 +261,7 @@ public class CircleMeterView extends View {
 
 
     public void setProgress(int progress) {
-        this.mProgress = progress;
+        this.mProgress = (float) progress / (48/100);
         invalidate();
     }
 }

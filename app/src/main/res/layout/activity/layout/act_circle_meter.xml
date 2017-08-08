@@ -18,6 +18,7 @@
     <SeekBar
         android:id="@+id/sb_index_position"
         android:layout_width="match_parent"
+        android:max="100"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

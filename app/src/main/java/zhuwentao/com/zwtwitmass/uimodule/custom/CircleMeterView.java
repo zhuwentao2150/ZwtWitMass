@@ -261,6 +261,7 @@ public class CircleMeterView extends View {
 
 
     public void setProgress(int progress) {
+        // 计算公式 = progress * ((格子数目40 * 每个小刻度6) / 100)
         this.mProgress = (float) progress * 2.4f;
         invalidate();
     }

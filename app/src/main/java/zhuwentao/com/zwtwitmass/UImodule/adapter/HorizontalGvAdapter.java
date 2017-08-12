@@ -47,6 +47,7 @@ public class HorizontalGvAdapter extends BaseAdapter {
             pageStart++;
         }
     }
+
     public int getCount() {
         return mAppDatas.size();
     }

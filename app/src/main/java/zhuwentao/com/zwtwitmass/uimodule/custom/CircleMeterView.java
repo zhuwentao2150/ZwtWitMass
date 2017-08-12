@@ -202,14 +202,14 @@ public class CircleMeterView extends View {
         canvas.save();
         canvas.rotate(10, getWidth() / 2, getWidth() / 2);
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
+        mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(30);
+        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 10));
 
-        float inside = DensityUtil.dip2px(mContext, 50);
-        //canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 240, false, mPaint);
+        float inside = DensityUtil.dip2px(mContext, 35);
+        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 240, false, mPaint);
         // 一个小方格占用6等份的角度
-        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 140+6, false, mPaint);
-
+        // canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside + 1, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 12, false, mPaint);
 
         mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mPaint.setColor(Color.WHITE);
@@ -223,7 +223,7 @@ public class CircleMeterView extends View {
                 canvas.rotate(6, pointX, pointY);
                 continue;
             }
-            canvas.drawLine((pointX - raduis / 2) + 85, pointY, (pointX - raduis / 2) + 100 + 15, pointY, mPaint);
+            canvas.drawLine((pointX - raduis / 2) + DensityUtil.dip2px(mContext, 30), pointY, (pointX - raduis / 2) + inside + DensityUtil.dip2px(mContext, 5), pointY, mPaint);
             canvas.rotate(6, pointX, pointY);
         }
         canvas.restore();

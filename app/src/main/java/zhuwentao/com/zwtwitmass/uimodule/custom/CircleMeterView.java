@@ -9,6 +9,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import zhuwentao.com.zwtwitmass.utils.DensityUtil;
+
 /**
  * 圆形仪表盘
  * Created by zhuwentao on 2017-06-08.
@@ -149,7 +151,7 @@ public class CircleMeterView extends View {
      */
     private void drawArcScale(Canvas canvas) {
         mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(5);
+        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setColor(Color.BLUE);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -171,22 +173,22 @@ public class CircleMeterView extends View {
                 continue;
             }
             if (i % 5 == 0) {
-                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 25, pointY, mPaint);
+                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10), pointY, mPaint);
 
                 // http://blog.csdn.net/qq_26971803/article/details/52061943
-                String text = String.valueOf(i/5 + 1 == 12?0:i/5+1);    // 修改11位子上的数字
+                String text = String.valueOf(i / 5 + 1 == 12 ? 0 : i / 5 + 1);    // 修改11位子上的数字
 
                 Rect textBound = new Rect();
                 mPaintText.getTextBounds(text, 0, text.length(), textBound);    // 获取文字的矩形范围
                 int textHeight = textBound.bottom - textBound.top;  //获得文字高度
 
                 canvas.save();
-                canvas.translate(pointX - raduis / 2 + 25 + textHeight + 5, pointY);    // 移动圆点坐标到文字需要绘制的区域
+                canvas.translate(pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10) + textHeight, pointY);    // 移动圆点坐标到文字需要绘制的区域
                 canvas.rotate(-6 * i);
                 canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + 5, mPaintText);
                 canvas.restore();
             } else {
-                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + 10, pointY, mPaint);
+                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 5), pointY, mPaint);
             }
             canvas.rotate(6, pointX, pointY);
         }
@@ -203,8 +205,13 @@ public class CircleMeterView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(30);
 
-        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + 100, (getHeight() / 2 - raduis / 2) + 100, (getWidth() / 2 + raduis / 2) - 100, (getHeight() / 2 + raduis / 2) - 100), 140, 240, false, mPaint);
-        mPaint.setStrokeWidth(3);
+        float inside = DensityUtil.dip2px(mContext, 50);
+        //canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 240, false, mPaint);
+        // 一个小方格占用6等份的角度
+        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 140+6, false, mPaint);
+
+
+        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mPaint.setColor(Color.WHITE);
 
         canvas.rotate(-10, getWidth() / 2, getWidth() / 2);
@@ -227,7 +234,7 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
-        canvas.translate(getWidth()/2, getHeight()/2);
+        canvas.translate(getWidth() / 2, getHeight() / 2);
 
         // 需要让文字居中显示
         mPaint.setStrokeWidth(2);
@@ -241,7 +248,7 @@ public class CircleMeterView extends View {
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
 
-        canvas.drawText(showValue, -textWidth - textWidth/2 + 8, textHeight + 100, mPaint);
+        canvas.drawText(showValue, -textWidth - textWidth / 2 + 8, textHeight + 100, mPaint);
         canvas.restore();
     }
 
@@ -263,7 +270,7 @@ public class CircleMeterView extends View {
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.RED);
-        canvas.drawCircle(getWidth()/2, getHeight()/2, 20, mPaint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, 20, mPaint);
 
         canvas.restore();
     }

@@ -20,6 +20,8 @@ public class CircleMeterView extends View {
      */
     private int raduis = 500;
 
+    private float value = 0;
+
     // 普通画笔
     private Paint mPaint;
     private Paint mPaintText;
@@ -83,9 +85,9 @@ public class CircleMeterView extends View {
     }
 
     private void initUI() {
+        mContext = getContext();
+
         mPaint = new Paint();
-
-
         mPaintText = new Paint();
         mPaintText.setStrokeWidth(1);
         mPaintText.setStyle(Paint.Style.FILL);
@@ -225,14 +227,21 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
+        canvas.translate(getWidth()/2, getHeight()/2);
 
         // 需要让文字居中显示
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(60);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
+        String showValue = String.valueOf(value);
 
-        canvas.drawText("3620", getWidth() / 2 - 70, getHeight() / 2 + 120, mPaint);
+        Rect textBound = new Rect();
+        mPaintText.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
+        float textWidth = textBound.right - textBound.left;  // 获得文字宽
+        float textHeight = textBound.bottom - textBound.top; // 获得文字高
+
+        canvas.drawText(showValue, -textWidth - textWidth/2 + 8, textHeight + 100, mPaint);
         canvas.restore();
     }
 
@@ -263,6 +272,7 @@ public class CircleMeterView extends View {
     public void setProgress(int progress) {
         // 计算公式 = progress * ((格子数目40 * 每个小刻度6) / 100)
         this.mProgress = (float) progress * 2.4f;
+        this.value = (float) (progress * 0.08);
         invalidate();
     }
 }

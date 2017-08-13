@@ -187,7 +187,7 @@ public class CircleMeterView extends View {
                 canvas.save();
                 canvas.translate(pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10) + textHeight, pointY);    // 移动圆点坐标到文字需要绘制的区域
                 canvas.rotate(-6 * i);
-                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + 5, mPaintText);
+                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + DensityUtil.dip2px(mContext, 2), mPaintText);
                 canvas.restore();
             } else {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 5), pointY, mPaint);

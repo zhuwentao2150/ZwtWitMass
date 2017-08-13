@@ -282,7 +282,10 @@ public class CircleMeterView extends View {
 
     public void setProgress(int progress) {
         // 计算公式 = progress * ((格子数目40 * 每个小刻度6) / 100)
+        // 设置指针旋转的位置
         this.mProgress = (float) progress * 2.4f;
+
+        // 设置显示的数值
         this.value = (float) (progress * 0.08);
         invalidate();
     }

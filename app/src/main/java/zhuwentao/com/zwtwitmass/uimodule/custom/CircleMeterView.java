@@ -206,7 +206,7 @@ public class CircleMeterView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 10));
 
-        float inside = DensityUtil.dip2px(mContext, 35);
+        float inside = DensityUtil.dip2px(mContext, 40);
         canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 240, false, mPaint);
         // 一个小方格占用6等份的角度
         // canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside + 1, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 12, false, mPaint);
@@ -261,16 +261,18 @@ public class CircleMeterView extends View {
         // 旋转到0的位置
         canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
 
-        mPaint.setStrokeWidth(8);
+        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 3));
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
         canvas.rotate(mProgress, getWidth() / 2, getHeight() / 2);
-        canvas.drawLine((getWidth() / 2 - raduis / 2) + 80, getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
+        canvas.drawLine((getWidth() / 2 - raduis / 2) + DensityUtil.dip2px(mContext, 50), getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
 
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.RED);
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, 20, mPaint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, DensityUtil.dip2px(mContext, 10), mPaint);
+        mPaint.setColor(Color.GRAY);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, DensityUtil.dip2px(mContext, 5), mPaint);
 
         canvas.restore();
     }

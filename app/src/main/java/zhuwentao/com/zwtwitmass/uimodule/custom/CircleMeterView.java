@@ -20,7 +20,7 @@ public class CircleMeterView extends View {
     /**
      * 圆的直径
      */
-    private int raduis = 500;
+    private float raduis = 250;
 
     private float value = 0;
 
@@ -89,9 +89,11 @@ public class CircleMeterView extends View {
     private void initUI() {
         mContext = getContext();
 
+        raduis = DensityUtil.dip2px(mContext, raduis);
+
         mPaint = new Paint();
         mPaintText = new Paint();
-        mPaintText.setStrokeWidth(1);
+        mPaintText.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mPaintText.setStyle(Paint.Style.FILL);
 
         mPaintText.setColor(Color.BLACK);

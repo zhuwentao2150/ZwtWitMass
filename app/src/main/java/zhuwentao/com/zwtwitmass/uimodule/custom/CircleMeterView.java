@@ -235,6 +235,7 @@ public class CircleMeterView extends View {
      * 画内部数值
      */
     private void drawInsideSumText(Canvas canvas) {
+
         canvas.save();
         canvas.translate(getWidth() / 2, getHeight() / 2);
 

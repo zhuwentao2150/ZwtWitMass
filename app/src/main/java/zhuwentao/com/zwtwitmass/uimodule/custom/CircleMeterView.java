@@ -238,13 +238,13 @@ public class CircleMeterView extends View {
         canvas.save();
         canvas.translate(getWidth() / 2, getHeight() / 2);
 
-        // 需要让文字居中显示
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(60);
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
-        String showValue = String.valueOf(value);
 
+        // 获取文字居中显示需要的参数
+        String showValue = String.valueOf(value);
         Rect textBound = new Rect();
         mPaintText.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽

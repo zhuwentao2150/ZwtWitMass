@@ -236,6 +236,8 @@ public class CircleMeterView extends View {
      */
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
+
+        // 将画布圆点移动到View中心
         canvas.translate(getWidth() / 2, getHeight() / 2);
 
         mPaint.setStrokeWidth(2);
@@ -249,9 +251,8 @@ public class CircleMeterView extends View {
         mPaintText.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
-
-        // 在中间显示数值
         canvas.drawText(showValue, -textWidth - textWidth / 2 + DensityUtil.dip2px(mContext, 8), textHeight + DensityUtil.dip2px(mContext, 100), mPaint);
+
         canvas.restore();
     }
 

@@ -89,6 +89,7 @@ public class CircleMeterView extends View {
     private void initUI() {
         mContext = getContext();
 
+        // 设置圆的直径
         raduis = DensityUtil.dip2px(mContext, raduis);
 
         mPaint = new Paint();

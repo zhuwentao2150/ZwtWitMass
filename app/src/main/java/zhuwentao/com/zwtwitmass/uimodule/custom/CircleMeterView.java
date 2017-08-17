@@ -44,23 +44,6 @@ public class CircleMeterView extends View {
     //最小圆的半径
     private int mMinCircleRadius;
 
-    //文字矩形的宽
-    private int mRectWidth;
-
-    //文字矩形的高
-    private int mRectHeight;
-
-
-    //文字内容
-    private String mText = "";
-
-    //文字的大小
-    private int mTextSize;
-
-    //设置文字颜色
-    private int mTextColor;
-    private int mArcColor;
-
     //小圆和指针颜色
     private int mMinCircleColor;
 

@@ -5,6 +5,7 @@ import android.widget.SeekBar;
 
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
+import zhuwentao.com.zwtwitmass.uimodule.custom.CircleLoadingView;
 import zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView;
 
 /**
@@ -18,17 +19,18 @@ public class CircleMeterActivity extends BaseActivity {
     private SeekBar indexSb;
 
     private CircleMeterView circleMeter;
+    private CircleLoadingView circleLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_circle_meter);
 
-        //initUI();
+        initUI();
 
-        //indexSb.setMax(100);
+        indexSb.setMax(100);
 
-        //initListener();
+        initListener();
     }
 
     private void initListener() {
@@ -36,6 +38,7 @@ public class CircleMeterActivity extends BaseActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 circleMeter.setProgress(progress);
+                circleLoading.setProgress(progress);
             }
 
             @Override
@@ -53,5 +56,6 @@ public class CircleMeterActivity extends BaseActivity {
     private void initUI() {
         indexSb = (SeekBar) findViewById(R.id.sb_index_position);
         circleMeter = (CircleMeterView) findViewById(R.id.cmv_meter);
+        circleLoading = (CircleLoadingView) findViewById(R.id.clv_loading);
     }
 }

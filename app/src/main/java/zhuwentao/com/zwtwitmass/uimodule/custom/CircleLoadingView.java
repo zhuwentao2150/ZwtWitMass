@@ -2,6 +2,7 @@ package zhuwentao.com.zwtwitmass.uimodule.custom;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -22,7 +23,7 @@ public class CircleLoadingView extends View {
     /**
      * 圆的直径
      */
-    private float raduis = 250;
+    private float raduis = 200;
 
     // View宽
     private int mWidth;
@@ -49,11 +50,34 @@ public class CircleLoadingView extends View {
         mContext = getContext();
         // 设置圆的直径
         raduis = DensityUtil.dip2px(mContext, raduis);
+
+        mPaint = new Paint();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+        drawArcScale(canvas);
+    }
+
+    /**
+     * 画刻度
+     */
+    private void drawArcScale(Canvas canvas) {
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setColor(Color.GRAY);
+        mPaint.setStyle(Paint.Style.STROKE);
+
+        canvas.save();
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
+        for (int i = 0; i < 100; i++) {
+            canvas.rotate(3.6f, pointX, pointY);
+            canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 15), pointY, mPaint);
+        }
+
+        canvas.restore();
     }
 
 

@@ -8,10 +8,15 @@
     android:orientation="vertical">
 
     <!--仪表盘-->
-    <zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView
+    <!--<zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView-->
+        <!--android:id="@+id/cmv_meter"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp"/>-->
+
+    <zhuwentao.com.zwtwitmass.uimodule.custom.CircleLoadingView
         android:id="@+id/cmv_meter"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 
 
     <!--滚动条-->

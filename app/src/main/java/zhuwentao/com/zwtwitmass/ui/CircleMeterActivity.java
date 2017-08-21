@@ -24,11 +24,11 @@ public class CircleMeterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_circle_meter);
 
-        initUI();
+        //initUI();
 
-        indexSb.setMax(100);
+        //indexSb.setMax(100);
 
-        initListener();
+        //initListener();
     }
 
     private void initListener() {

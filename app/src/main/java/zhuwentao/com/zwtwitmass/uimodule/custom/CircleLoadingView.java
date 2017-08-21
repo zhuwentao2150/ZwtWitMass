@@ -20,6 +20,9 @@ public class CircleLoadingView extends View {
     // 普通画笔
     private Paint mPaint;
 
+    // 当前进度
+    private int progress = 0;
+
     /**
      * 圆的直径
      */
@@ -88,10 +91,19 @@ public class CircleLoadingView extends View {
         mPaint.setColor(Color.BLUE);
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < progress; i++) {
             canvas.rotate(3.6f, pointX, pointY);
             canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
         }
+    }
+
+    /**
+     * 设置进度
+     * @param progress
+     */
+    public void setProgress(int progress){
+        this.progress = progress;
+        invalidate();
     }
 
 

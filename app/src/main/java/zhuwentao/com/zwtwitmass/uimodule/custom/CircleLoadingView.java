@@ -77,6 +77,7 @@ public class CircleLoadingView extends View {
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         for (int i = 0; i < 100; i++) {
+            // 旋转的度数 = 100 % 360
             canvas.rotate(3.6f, pointX, pointY);
             canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
         }

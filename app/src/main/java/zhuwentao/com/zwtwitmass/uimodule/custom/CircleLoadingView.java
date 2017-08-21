@@ -57,6 +57,7 @@ public class CircleLoadingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         drawArcScale(canvas);
+        drawArcIntoScale(canvas);
     }
 
     /**
@@ -66,7 +67,7 @@ public class CircleLoadingView extends View {
         mPaint.setAntiAlias(true);
         mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setColor(Color.GRAY);
+        mPaint.setColor(Color.LTGRAY);
         mPaint.setStyle(Paint.Style.STROKE);
 
         canvas.save();
@@ -74,10 +75,23 @@ public class CircleLoadingView extends View {
         int pointY = getWidth() / 2;
         for (int i = 0; i < 100; i++) {
             canvas.rotate(3.6f, pointX, pointY);
-            canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 15), pointY, mPaint);
+            canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
         }
-
         canvas.restore();
+    }
+
+    /**
+     * 画进度圆
+     * @param canvas
+     */
+    private void drawArcIntoScale(Canvas canvas) {
+        mPaint.setColor(Color.BLUE);
+        int pointX = getHeight() / 2;
+        int pointY = getWidth() / 2;
+        for (int i = 0; i < 50; i++) {
+            canvas.rotate(3.6f, pointX, pointY);
+            canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
+        }
     }
 
 

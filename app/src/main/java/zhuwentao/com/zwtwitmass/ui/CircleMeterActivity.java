@@ -31,6 +31,8 @@ public class CircleMeterActivity extends BaseActivity {
         indexSb.setMax(100);
 
         initListener();
+
+        circleLoading.start();
     }
 
     private void initListener() {

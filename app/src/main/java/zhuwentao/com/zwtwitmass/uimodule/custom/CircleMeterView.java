@@ -235,7 +235,6 @@ public class CircleMeterView extends View {
         mPaint.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
-        //canvas.drawText(showValue, -textWidth - textWidth / 2 + DensityUtil.dip2px(mContext, 8), textHeight + DensityUtil.dip2px(mContext, 100), mPaint);
         canvas.drawText(showValue, getWidth()/2 - textWidth/2, getHeight()/2 + textHeight + DensityUtil.dip2px(mContext, 45), mPaint);
 
         canvas.restore();

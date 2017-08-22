@@ -26,7 +26,7 @@ public class CircleLoadingView extends View {
     /**
      * 圆的直径
      */
-    private float raduis = 200;
+    private float raduis = 180;
 
     // View宽
     private int mWidth;
@@ -60,7 +60,7 @@ public class CircleLoadingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         drawArcScale(canvas);
-        drawArcIntoScale(canvas);
+        //drawArcIntoScale(canvas);
     }
 
     /**
@@ -77,24 +77,30 @@ public class CircleLoadingView extends View {
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         for (int i = 0; i < 100; i++) {
+            if (progress > i) {
+                mPaint.setColor(Color.RED);
+                canvas.drawLine(getWidth() / 2, 0, pointX, DensityUtil.dip2px(mContext, 10), mPaint);
+            } else {
+                mPaint.setColor(Color.LTGRAY);
+                canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 10), mPaint);
+            }
             // 旋转的度数 = 100 % 360
             canvas.rotate(3.6f, pointX, pointY);
-            canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
         }
         canvas.restore();
     }
 
     /**
-     * 画进度圆
+     * 画内部数值
      * @param canvas
      */
-    private void drawArcIntoScale(Canvas canvas) {
+    private void drawTextValue(Canvas canvas) {
         mPaint.setColor(Color.BLUE);
         int pointX = getHeight() / 2;
         int pointY = getWidth() / 2;
         for (int i = 0; i < progress; i++) {
+            canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 10), mPaint);
             canvas.rotate(3.6f, pointX, pointY);
-            canvas.drawLine(getWidth()/2, 0, pointX, DensityUtil.dip2px(mContext, 15), mPaint);
         }
     }
 

@@ -222,7 +222,7 @@ public class CircleMeterView extends View {
         canvas.save();
 
         // 将画布圆点移动到View中心
-        canvas.translate(getWidth() / 2, getHeight() / 2);
+        //canvas.translate(getWidth() / 2, getHeight() / 2);
 
         mPaint.setStrokeWidth(2);
         mPaint.setTextSize(60);
@@ -232,10 +232,11 @@ public class CircleMeterView extends View {
         // 获取文字居中显示需要的参数
         String showValue = String.valueOf(value);
         Rect textBound = new Rect();
-        mPaintText.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
+        mPaint.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
-        canvas.drawText(showValue, -textWidth - textWidth / 2 + DensityUtil.dip2px(mContext, 8), textHeight + DensityUtil.dip2px(mContext, 100), mPaint);
+        //canvas.drawText(showValue, -textWidth - textWidth / 2 + DensityUtil.dip2px(mContext, 8), textHeight + DensityUtil.dip2px(mContext, 100), mPaint);
+        canvas.drawText(showValue, getWidth()/2 - textWidth/2, getHeight()/2 + textHeight + DensityUtil.dip2px(mContext, 45), mPaint);
 
         canvas.restore();
     }

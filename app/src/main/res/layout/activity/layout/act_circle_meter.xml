@@ -15,8 +15,8 @@
 
     <zhuwentao.com.zwtwitmass.uimodule.custom.CircleLoadingView
         android:id="@+id/clv_loading"
-        android:layout_width="200dp"
-        android:layout_height="200dp"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
 
 
     <!--滚动条-->

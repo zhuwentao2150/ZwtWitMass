@@ -44,9 +44,6 @@ public class CircleLoadingView extends View {
     // View高
     private int mHeight;
 
-    // 圆半径
-    private float raduis = 180;
-
     private int indexColor;
 
     private int baseColor;
@@ -67,6 +64,7 @@ public class CircleLoadingView extends View {
 
     public CircleLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        // 获取用户配置属性
         TypedArray tya = context.obtainStyledAttributes(attrs, R.styleable.CircleLoading);
         baseColor = tya.getColor(R.styleable.CircleLoading_baseColor, Color.LTGRAY);
         indexColor = tya.getColor(R.styleable.CircleLoading_indexColor, Color.BLUE);
@@ -80,7 +78,6 @@ public class CircleLoadingView extends View {
 
     private void initUI() {
         mContext = getContext();
-
 
         // 刻度画笔
         mScalePaint = new Paint();
@@ -140,10 +137,10 @@ public class CircleLoadingView extends View {
         canvas.save();
         for (int i = 0; i < 100; i++) {
             if (progress > i) {
-                mScalePaint.setColor(Color.BLUE);
+                mScalePaint.setColor(indexColor);
                 canvas.drawLine(mWidth / 2, 0, mHeight / 2, DensityUtil.dip2px(mContext, 10), mScalePaint);
             } else {
-                mScalePaint.setColor(Color.LTGRAY);
+                mScalePaint.setColor(baseColor);
                 canvas.drawLine(mWidth / 2, 0, mHeight / 2, DensityUtil.dip2px(mContext, 10), mScalePaint);
             }
             // 旋转的度数 = 100 / 360

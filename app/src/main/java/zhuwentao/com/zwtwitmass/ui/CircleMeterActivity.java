@@ -32,8 +32,8 @@ public class CircleMeterActivity extends BaseActivity {
 
         initListener();
 
-        circleLoading.start();
-        circleLoadingTwo.start();
+        circleLoading.startDotAnimator();
+        circleLoadingTwo.startDotAnimator();
     }
 
     private void initListener() {

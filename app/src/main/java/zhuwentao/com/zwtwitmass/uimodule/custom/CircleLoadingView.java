@@ -54,6 +54,8 @@ public class CircleLoadingView extends View {
 
     private int textColor;
 
+    private ValueAnimator animator;
+
     public CircleLoadingView(Context context) {
         this(context, null);
     }
@@ -135,17 +137,18 @@ public class CircleLoadingView extends View {
      */
     private void drawArcScale(Canvas canvas) {
         canvas.save();
+
         for (int i = 0; i < 100; i++) {
             if (progress > i) {
                 mScalePaint.setColor(indexColor);
-                canvas.drawLine(mWidth / 2, 0, mHeight / 2, DensityUtil.dip2px(mContext, 10), mScalePaint);
             } else {
                 mScalePaint.setColor(baseColor);
-                canvas.drawLine(mWidth / 2, 0, mHeight / 2, DensityUtil.dip2px(mContext, 10), mScalePaint);
             }
+            canvas.drawLine(mWidth / 2, 0, mHeight / 2, DensityUtil.dip2px(mContext, 10), mScalePaint);
             // 旋转的度数 = 100 / 360
             canvas.rotate(3.6f, mWidth / 2, mHeight / 2);
         }
+
         canvas.restore();
     }
 
@@ -162,36 +165,36 @@ public class CircleLoadingView extends View {
         mTextPaint.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
-
         canvas.drawText(showValue, mWidth / 2 - textWidth / 2, mHeight / 2 + textHeight / 2, mTextPaint);
 
         canvas.restore();
     }
 
     /**
-     * 画外部旋转小圆点
+     * 画旋转小圆点
      */
     private void drawRotateDot(final Canvas canvas) {
         canvas.save();
+
         canvas.rotate(mDotProgress * 3.6f, mWidth / 2, mHeight / 2);
         canvas.drawCircle(mWidth / 2, DensityUtil.dip2px(mContext, 10) + DensityUtil.dip2px(mContext, 5), DensityUtil.dip2px(mContext, 3), mDotPaint);
+
         canvas.restore();
     }
 
     /**
      * 启动小圆点旋转动画
      */
-    public void start() {
-        final ValueAnimator animator = ValueAnimator.ofFloat(0, 100);
+    public void startDotAnimator() {
+        animator = ValueAnimator.ofFloat(0, 100);
         animator.setDuration(1500);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
-        // 设置旋转速率
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                // 只能转成float类型
+                // 设置小圆点的进度，并通知界面重绘
                 mDotProgress = (Float) animation.getAnimatedValue();
                 invalidate();
             }
@@ -199,10 +202,9 @@ public class CircleLoadingView extends View {
         animator.start();
     }
 
+
     /**
      * 设置进度
-     *
-     * @param progress
      */
     public void setProgress(int progress) {
         this.progress = progress;
@@ -213,27 +215,28 @@ public class CircleLoadingView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
         int myWidthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int myWidthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int myHeightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int myHeightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        // 获取宽
         if (myWidthSpecMode == MeasureSpec.EXACTLY) {
             // match_parent
             mWidth = myWidthSpecSize;
         } else {
             // wrap_content
-
+            mWidth = DensityUtil.dip2px(mContext, 120);
         }
 
-        /**
-         * 设置高度
-         */
-        int myHeightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
-        int myHeightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
-
+        // 获取高
         if (myHeightSpecMode == MeasureSpec.EXACTLY) {
+            // match_parent
             mHeight = myHeightSpecSize;
         } else {
             // wrap_content
-
+            mHeight = DensityUtil.dip2px(mContext, 120);
         }
 
         // 设置该view的宽高

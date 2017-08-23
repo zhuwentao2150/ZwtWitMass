@@ -19,4 +19,15 @@
         <attr name="splitSize" format="integer" />
         <attr name="bg" format="reference" />
     </declare-styleable>
+
+
+    <!-- 仿华为圆形加载进度条 -->
+    <declare-styleable name="CircleLoading">
+        <attr name="radius" format="dimension"/>
+        <attr name="indexColor" format="color"/>
+        <attr name="baseColor" format="color"/>
+        <attr name="dotColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
 </resources>

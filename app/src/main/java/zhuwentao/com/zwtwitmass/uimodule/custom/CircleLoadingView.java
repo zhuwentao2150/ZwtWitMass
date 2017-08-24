@@ -15,7 +15,7 @@ import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.utils.DensityUtil;
 
 /**
- * 圆形加载进度条
+ * 仿华为圆形加载进度条
  * Created by zhuwentao on 2017-08-19.
  */
 public class CircleLoadingView extends View {
@@ -25,7 +25,7 @@ public class CircleLoadingView extends View {
     // 刻度画笔
     private Paint mScalePaint;
 
-    // 原点画笔
+    // 小原点画笔
     private Paint mDotPaint;
 
     // 文字画笔
@@ -35,12 +35,13 @@ public class CircleLoadingView extends View {
     private int progress = 0;
 
     /**
-     * 小圆的当前进度
+     * 小圆点的当前进度
      */
     public float mDotProgress;
 
     // View宽
     private int mWidth;
+
     // View高
     private int mHeight;
 
@@ -103,26 +104,6 @@ public class CircleLoadingView extends View {
         mTextPaint.setTextSize(textSize);
         mTextPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mTextPaint.setStyle(Paint.Style.FILL);
-
-
-//        // 绘图线程
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    mDotProgress++;
-//                    if (mDotProgress == 100) {
-//                        mDotProgress = 0;
-//                    }
-//                    postInvalidate();
-//                    try {
-//                        Thread.sleep(50);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }.start();
     }
 
     @Override
@@ -154,8 +135,6 @@ public class CircleLoadingView extends View {
 
     /**
      * 画内部数值
-     *
-     * @param canvas
      */
     private void drawTextValue(Canvas canvas) {
         canvas.save();
@@ -202,7 +181,6 @@ public class CircleLoadingView extends View {
         animator.start();
     }
 
-
     /**
      * 设置进度
      */
@@ -210,7 +188,6 @@ public class CircleLoadingView extends View {
         this.progress = progress;
         invalidate();
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -223,7 +200,7 @@ public class CircleLoadingView extends View {
 
         // 获取宽
         if (myWidthSpecMode == MeasureSpec.EXACTLY) {
-            // match_parent
+            // match_parent/精确值
             mWidth = myWidthSpecSize;
         } else {
             // wrap_content
@@ -232,7 +209,7 @@ public class CircleLoadingView extends View {
 
         // 获取高
         if (myHeightSpecMode == MeasureSpec.EXACTLY) {
-            // match_parent
+            // match_parent/精确值
             mHeight = myHeightSpecSize;
         } else {
             // wrap_content

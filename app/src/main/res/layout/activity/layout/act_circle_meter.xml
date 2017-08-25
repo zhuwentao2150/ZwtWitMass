@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--&lt;!&ndash;仪表盘&ndash;&gt;-->
-    <!--<zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView-->
-    <!--android:id="@+id/cmv_meter"-->
-    <!--android:layout_width="300dp"-->
-    <!--android:layout_height="300dp"/>-->
+    <!--仪表盘-->
+    <zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView
+    android:id="@+id/cmv_meter"
+    android:layout_width="300dp"
+    android:layout_height="300dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

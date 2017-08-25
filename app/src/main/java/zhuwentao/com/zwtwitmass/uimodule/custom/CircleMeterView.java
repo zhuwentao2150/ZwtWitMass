@@ -55,17 +55,20 @@ public class CircleMeterView extends View {
     private Context mContext;
 
     public CircleMeterView(Context context) {
-        super(context);
-        initUI();
+        this(context, null);
     }
 
     public CircleMeterView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initUI();
+        this(context, attrs, 0);
     }
 
     public CircleMeterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        // 获取用户配置属性
+
+
+
         initUI();
     }
 
@@ -161,7 +164,6 @@ public class CircleMeterView extends View {
             if (i % 5 == 0) {
                 canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10), pointY, mPaint);
 
-                // http://blog.csdn.net/qq_26971803/article/details/52061943
                 String text = String.valueOf(i / 5 + 1 == 12 ? 0 : i / 5 + 1);    // 修改11位子上的数字
 
                 Rect textBound = new Rect();

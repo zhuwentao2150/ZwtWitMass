@@ -4,13 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <!--仪表盘-->
     <zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView
     android:id="@+id/cmv_meter"
-    android:layout_width="300dp"
-    android:layout_height="300dp"/>
+    android:layout_width="250dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="250dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

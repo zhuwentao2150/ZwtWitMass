@@ -29,4 +29,15 @@
         <attr name="textSize" format="dimension"/>
         <attr name="textColor" format="color"/>
     </declare-styleable>
+
+
+    <!-- 仪表盘属性 -->
+    <declare-styleable name="CircleMeter">
+        <attr name="scaleColor" format="color"/>
+        <attr name="scaleTextColor" format="color"/>
+        <attr name="insideCircleColor" format="color"/>
+        <attr name="textColor2" format="color"/>
+        <attr name="textSize2" format="dimension"/>
+        <attr name="pointerColor" format="color"/>
+    </declare-styleable>
 </resources>

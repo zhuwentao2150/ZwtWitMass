@@ -19,31 +19,28 @@ import zhuwentao.com.zwtwitmass.utils.DensityUtil;
  */
 public class CircleMeterView extends View {
 
-    /**
-     * 圆的直径
-     */
-    private float raduis = 250;
-
+    // 中间显示的数值
     private float value = 0;
 
-    // 普通画笔
-    private Paint mPaint;
 
+    // 外圆刻度画笔
     private Paint mScalePaint;
 
-    private Paint mPaintText;
-
+    // 外圆刻度数值画笔
     private Paint mScaleTextPaint;
 
-    private Paint mTextPaint;
-
-    private Paint mPointerPaint;
-
+    // 内圆画笔
     private Paint mInsidePaint;
 
+    // 中间数值画笔
+    private Paint mTextPaint;
+
+    // 指针画笔
+    private Paint mPointerPaint;
 
     // View宽
     private float mWidth;
+
     // View高
     private float mHeight;
 
@@ -83,7 +80,7 @@ public class CircleMeterView extends View {
         scaleTextColor = tya.getColor(R.styleable.CircleMeter_scaleTextColor, Color.BLACK);
         insideCircleColor = tya.getColor(R.styleable.CircleMeter_insideCircleColor, Color.BLUE);
         textSize = tya.getDimensionPixelSize(R.styleable.CircleMeter_textSize2, 36);
-        textColor = tya.getColor(R.styleable.CircleMeter_textColor2, Color.RED);
+        textColor = tya.getColor(R.styleable.CircleMeter_textColor2, Color.BLACK);
         pointerColor = tya.getColor(R.styleable.CircleMeter_pointerColor, Color.RED);
         tya.recycle();
 
@@ -92,9 +89,6 @@ public class CircleMeterView extends View {
 
     private void initUI() {
         mContext = getContext();
-
-        // 设置圆的直径
-        raduis = DensityUtil.dip2px(mContext, raduis);
 
         // 刻度圆画笔
         mScalePaint = new Paint();
@@ -128,22 +122,13 @@ public class CircleMeterView extends View {
         mInsidePaint.setColor(insideCircleColor);
         mInsidePaint.setStyle(Paint.Style.FILL);
 
+        // 指针画笔
         mPointerPaint = new Paint();
         mPointerPaint.setAntiAlias(true);
         mPointerPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 5));
         mPointerPaint.setColor(pointerColor);
         mPointerPaint.setStrokeCap(Paint.Cap.ROUND);
         mPointerPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-
-        mPaint = new Paint();
-        mPaintText = new Paint();
-        mPaintText.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
-        mPaintText.setStyle(Paint.Style.FILL);
-
-        mPaintText.setColor(Color.BLACK);
-
-        mPaintText.setTextSize(24);
     }
 
     @Override
@@ -264,6 +249,11 @@ public class CircleMeterView extends View {
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
 
+        if (mInsideProgress > 75) {
+            mTextPaint.setColor(Color.RED);
+        } else {
+            mTextPaint.setColor(Color.BLACK);
+        }
         // 获取文字居中显示需要的参数
         String showValue = String.valueOf(value);
         Rect textBound = new Rect();

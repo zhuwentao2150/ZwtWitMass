@@ -47,7 +47,11 @@ public class CircleMeterView extends View {
     // View高
     private float mHeight;
 
+    // 外刻度圆进度
     private float mProgress = 0;
+
+    // 内刻度圆进度
+    private float mInsideProgress = 0;
 
     private int scaleColor;
 
@@ -79,7 +83,7 @@ public class CircleMeterView extends View {
         scaleTextColor = tya.getColor(R.styleable.CircleMeter_scaleTextColor, Color.BLACK);
         insideCircleColor = tya.getColor(R.styleable.CircleMeter_insideCircleColor, Color.BLUE);
         textSize = tya.getDimensionPixelSize(R.styleable.CircleMeter_textSize2, 36);
-        textColor = tya.getColor(R.styleable.CircleMeter_textColor2, Color.BLACK);
+        textColor = tya.getColor(R.styleable.CircleMeter_textColor2, Color.RED);
         pointerColor = tya.getColor(R.styleable.CircleMeter_pointerColor, Color.RED);
         tya.recycle();
 
@@ -111,8 +115,8 @@ public class CircleMeterView extends View {
         // 中间值的画笔
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
-        mTextPaint.setTextSize(24);
+        mTextPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 2));
+        mTextPaint.setTextSize(36);
         mTextPaint.setColor(textColor);
         mTextPaint.setStrokeJoin(Paint.Join.ROUND);
         mTextPaint.setStyle(Paint.Style.FILL);
@@ -123,6 +127,13 @@ public class CircleMeterView extends View {
         mInsidePaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
         mInsidePaint.setColor(insideCircleColor);
         mInsidePaint.setStyle(Paint.Style.FILL);
+
+        mPointerPaint = new Paint();
+        mPointerPaint.setAntiAlias(true);
+        mPointerPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 5));
+        mPointerPaint.setColor(pointerColor);
+        mPointerPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPointerPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
 
         mPaint = new Paint();
@@ -143,14 +154,6 @@ public class CircleMeterView extends View {
         drawPointer(canvas);
     }
 
-    private void drawArcScaleText(Canvas canvas) {
-        canvas.save();
-        for (int i = 0; i <= 40; i++) {
-
-        }
-        canvas.restore();
-    }
-
     /**
      * 画外圆和文字刻度
      */
@@ -167,7 +170,6 @@ public class CircleMeterView extends View {
 
         // 定义文字旋转回的角度
         int rotateValue = 30;
-
         // 总八个等分，每等分5个刻度，所以总共需要40个刻度
         for (int i = 0; i <= 40; i++) {
             if (i % 5 == 0) {
@@ -219,7 +221,6 @@ public class CircleMeterView extends View {
 //                if (i == 40) {
 //                    canvas.rotate(-210);
 //                }
-//                canvas.drawText(text, -textWidth + DensityUtil.dip2px(mContext, 2),  textHeight/2, mScaleTextPaint);
                 canvas.drawText(text, -textWidth / 2, textHeight / 2, mScaleTextPaint);
                 canvas.restore();
 
@@ -228,34 +229,6 @@ public class CircleMeterView extends View {
             }
             canvas.rotate(6, mWidth / 2, mHeight / 2);
         }
-
-//
-//        int pointX = getHeight() / 2;
-//        int pointY = getWidth() / 2;
-//        for (int i = 0; i < 60; i++) {
-//            if (i > 35 && i < 55) {
-//                canvas.rotate(6, pointX, pointY);
-//                continue;
-//            }
-//            if (i % 5 == 0) {
-//                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10), pointY, mPaint);
-//
-//                String text = String.valueOf(i / 5 + 1 == 12 ? 0 : i / 5 + 1);    // 修改11位子上的数字
-//
-//                Rect textBound = new Rect();
-//                mPaintText.getTextBounds(text, 0, text.length(), textBound);    // 获取文字的矩形范围
-//                int textHeight = textBound.bottom - textBound.top;  //获得文字高度
-//
-//                canvas.save();
-//                canvas.translate(pointX - raduis / 2 + DensityUtil.dip2px(mContext, 10) + textHeight, pointY);    // 移动圆点坐标到文字需要绘制的区域
-//                canvas.rotate(-6 * i);
-//                canvas.drawText(text, -(textBound.right - textBound.left) / 2, textBound.bottom + DensityUtil.dip2px(mContext, 2), mPaintText);
-//                canvas.restore();
-//            } else {
-//                canvas.drawLine(pointX - raduis / 2, pointY, pointX - raduis / 2 + DensityUtil.dip2px(mContext, 5), pointY, mPaint);
-//            }
-//            canvas.rotate(6, pointX, pointY);
-//        }
         canvas.restore();
     }
 
@@ -264,32 +237,24 @@ public class CircleMeterView extends View {
      */
     private void drawArcInside(Canvas canvas) {
         canvas.save();
-        canvas.rotate(10, getWidth() / 2, getWidth() / 2);
-        mPaint.setStrokeCap(Paint.Cap.SQUARE);
-        mPaint.setAntiAlias(true);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 10));
 
-        float inside = DensityUtil.dip2px(mContext, 40);
-        canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 240, false, mPaint);
-        // 一个小方格占用6等份的角度
-        // canvas.drawArc(new RectF((getWidth() / 2 - raduis / 2) + inside + 1, (getHeight() / 2 - raduis / 2) + inside, (getWidth() / 2 + raduis / 2) - inside, (getHeight() / 2 + raduis / 2) - inside), 140, 12, false, mPaint);
-
-        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 1));
-        mPaint.setColor(Color.WHITE);
-
-        canvas.rotate(-10, getWidth() / 2, getWidth() / 2);
-
-        int pointX = getHeight() / 2;
-        int pointY = getWidth() / 2;
-        for (int i = 0; i < 60; i++) {
-            if (i > 35 && i < 55) {
-                canvas.rotate(6, pointX, pointY);
-                continue;
+        canvas.rotate(-30, mWidth / 2, mHeight / 2);
+        for (int i = 0; i < 100; i++) {
+            if (mInsideProgress > i) {
+                if (i <= 75) {
+                    // 当进度到达外刻度6~8时，显示为红色，此时的计算方式为100/8=12.5， 也就是这八个等份中每等份12.5，通过6*12.5得75，得知需要在75开始时改变内刻度颜色
+                    mInsidePaint.setColor(insideCircleColor);
+                } else {
+                    mInsidePaint.setColor(Color.RED);
+                }
+            } else {
+                mInsidePaint.setColor(Color.LTGRAY);
             }
-            canvas.drawLine((pointX - raduis / 2) + DensityUtil.dip2px(mContext, 30), pointY, (pointX - raduis / 2) + inside + DensityUtil.dip2px(mContext, 5), pointY, mPaint);
-            canvas.rotate(6, pointX, pointY);
+            canvas.drawLine(DensityUtil.dip2px(mContext, 40), mHeight / 2, DensityUtil.dip2px(mContext, 50), mHeight / 2, mInsidePaint);
+            // 旋转的度数 = 100 / 240，因为之前我们最外面的扇形圆是180~240度，实际上就是跨越了240度，所以用100/240得到旋转的角度
+            canvas.rotate(2.4f, mWidth / 2, mHeight / 2);
         }
+
         canvas.restore();
     }
 
@@ -299,21 +264,13 @@ public class CircleMeterView extends View {
     private void drawInsideSumText(Canvas canvas) {
         canvas.save();
 
-        // 将画布圆点移动到View中心
-        //canvas.translate(getWidth() / 2, getHeight() / 2);
-
-        mPaint.setStrokeWidth(2);
-        mPaint.setTextSize(60);
-        mPaint.setColor(Color.RED);
-        mPaint.setStyle(Paint.Style.FILL);
-
         // 获取文字居中显示需要的参数
         String showValue = String.valueOf(value);
         Rect textBound = new Rect();
-        mPaint.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
+        mTextPaint.getTextBounds(showValue, 0, showValue.length(), textBound);    // 获取文字的矩形范围
         float textWidth = textBound.right - textBound.left;  // 获得文字宽
         float textHeight = textBound.bottom - textBound.top; // 获得文字高
-        canvas.drawText(showValue, getWidth() / 2 - textWidth / 2, getHeight() / 2 + textHeight + DensityUtil.dip2px(mContext, 45), mPaint);
+        canvas.drawText(showValue, mWidth / 2 - textWidth / 2, mHeight / 2 + textHeight + DensityUtil.dip2px(mContext, 45), mTextPaint);
 
         canvas.restore();
     }
@@ -325,20 +282,10 @@ public class CircleMeterView extends View {
         canvas.save();
 
         // 旋转到0的位置
-        canvas.rotate(-30, getWidth() / 2, getHeight() / 2);
-
-        mPaint.setStrokeWidth(DensityUtil.dip2px(mContext, 3));
-        mPaint.setColor(Color.RED);
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.rotate(mProgress, getWidth() / 2, getHeight() / 2);
-        canvas.drawLine((getWidth() / 2 - raduis / 2) + DensityUtil.dip2px(mContext, 50), getHeight() / 2, getHeight() / 2, getHeight() / 2, mPaint);
-
-
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(Color.RED);
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, DensityUtil.dip2px(mContext, 10), mPaint);
-        mPaint.setColor(Color.GRAY);
-        canvas.drawCircle(getWidth() / 2, getHeight() / 2, DensityUtil.dip2px(mContext, 5), mPaint);
+        canvas.rotate(-30, mWidth / 2, mHeight / 2);
+        canvas.rotate(mProgress, mWidth / 2, mHeight / 2);
+        canvas.drawLine(mWidth / 2 - DensityUtil.dip2px(mContext, 60), mHeight / 2, mWidth / 2, mHeight / 2, mPointerPaint);
+        canvas.drawCircle(mWidth / 2, mHeight / 2, DensityUtil.dip2px(mContext, 5), mPointerPaint);
 
         canvas.restore();
     }
@@ -346,6 +293,8 @@ public class CircleMeterView extends View {
 
     public void setProgress(int progress) {
         // 计算公式 = progress * ((格子数目40 * 每个小刻度6) / 100)
+        this.mInsideProgress = progress;
+
         // 设置指针旋转的位置
         this.mProgress = (float) progress * 2.4f;
 

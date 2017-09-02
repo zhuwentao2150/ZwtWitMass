@@ -15,13 +15,9 @@ import zhuwentao.com.zwtwitmass.utils.DensityUtil;
 
 /**
  * 圆形仪表盘
- * Created by zhuwentao on 2017-06-08.
+ * Created by zhuwentao on 2017-08-28.
  */
 public class CircleMeterView extends View {
-
-    // 中间显示的数值
-    private float value = 0;
-
 
     // 外圆刻度画笔
     private Paint mScalePaint;
@@ -49,6 +45,9 @@ public class CircleMeterView extends View {
 
     // 内刻度圆进度
     private float mInsideProgress = 0;
+
+    // 中间显示的数值
+    private float value = 0;
 
     private int scaleColor;
 
@@ -145,7 +144,6 @@ public class CircleMeterView extends View {
     private void drawArcScale(Canvas canvas) {
         canvas.save();
 
-        // 让画布逆向旋转30度
         canvas.rotate(-30, mWidth / 2, mHeight / 2);
 
         // 最外圆的线条宽度，避免线条粗时被遮蔽
@@ -170,42 +168,15 @@ public class CircleMeterView extends View {
                 canvas.save();
                 canvas.translate(DensityUtil.dip2px(mContext, 15) + textWidth + DensityUtil.dip2px(mContext, 5), mHeight / 2);  // 移动画布的圆点
 
-                // 简化写法
                 if (i == 0) {
+                    // 如果刻度为0，则旋转度数为30度
                     canvas.rotate(rotateValue);
                 } else {
+                    // 大于0的刻度，需要逐渐递减30度
                     canvas.rotate(rotateValue);
                 }
                 rotateValue = rotateValue - 30;
 
-                // 笨方法
-//                if (i == 0) {
-//                    canvas.rotate(30);
-//                }
-//                if (i == 5) {
-//                    canvas.rotate(0);
-//                }
-//                if (i == 10) {
-//                    canvas.rotate(-30);
-//                }
-//                if (i == 15) {
-//                    canvas.rotate(-60);
-//                }
-//                if (i == 20) {
-//                    canvas.rotate(-90);
-//                }
-//                if (i == 25) {
-//                    canvas.rotate(-120);
-//                }
-//                if (i == 30) {
-//                    canvas.rotate(-150);
-//                }
-//                if (i == 35) {
-//                    canvas.rotate(-180);
-//                }
-//                if (i == 40) {
-//                    canvas.rotate(-210);
-//                }
                 canvas.drawText(text, -textWidth / 2, textHeight / 2, mScaleTextPaint);
                 canvas.restore();
 
@@ -218,7 +189,7 @@ public class CircleMeterView extends View {
     }
 
     /**
-     * 画内弧形
+     * 画内圆刻度
      */
     private void drawArcInside(Canvas canvas) {
         canvas.save();
@@ -226,8 +197,8 @@ public class CircleMeterView extends View {
         canvas.rotate(-30, mWidth / 2, mHeight / 2);
         for (int i = 0; i < 100; i++) {
             if (mInsideProgress > i) {
+                // 大于外圆刻度6时显示红色
                 if (i <= 75) {
-                    // 当进度到达外刻度6~8时，显示为红色，此时的计算方式为100/8=12.5， 也就是这八个等份中每等份12.5，通过6*12.5得75，得知需要在75开始时改变内刻度颜色
                     mInsidePaint.setColor(insideCircleColor);
                 } else {
                     mInsidePaint.setColor(Color.RED);
@@ -236,7 +207,6 @@ public class CircleMeterView extends View {
                 mInsidePaint.setColor(Color.LTGRAY);
             }
             canvas.drawLine(DensityUtil.dip2px(mContext, 40), mHeight / 2, DensityUtil.dip2px(mContext, 50), mHeight / 2, mInsidePaint);
-            // 旋转的度数 = 100 / 240，因为之前我们最外面的扇形圆是180~240度，实际上就是跨越了240度，所以用100/240得到旋转的角度
             canvas.rotate(2.4f, mWidth / 2, mHeight / 2);
         }
 
@@ -281,15 +251,20 @@ public class CircleMeterView extends View {
     }
 
 
+    /**
+     * 设置进度
+     */
     public void setProgress(int progress) {
-        // 计算公式 = progress * ((格子数目40 * 每个小刻度6) / 100)
+
+        // 内部刻度的进度
         this.mInsideProgress = progress;
 
-        // 设置指针旋转的位置
+        // 指针显示的进度
         this.mProgress = (float) progress * 2.4f;
 
-        // 设置显示的数值
+        // 设置中间文字显示的数值
         this.value = (float) (progress * 0.08);
+
         invalidate();
     }
 

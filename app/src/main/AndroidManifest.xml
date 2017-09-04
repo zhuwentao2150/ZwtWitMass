@@ -4,19 +4,19 @@
 
     <!-- 配置NFC权限 -->
     <uses-permission android:name="android.permission.NFC"/>
-    <!-- 网络权限-->
+    <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--WiFi使用权限-->
+    <!-- WiFi使用权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <!--上网权限-->
+    <!-- 上网权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <!--读写权限-->
+    <!-- 读写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
     <!-- 使用照相机的权限，因为闪光灯是属于照相机的 -->
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".uimodule.HorizontalGridViewAct"
             android:label="@string/demo_horizontal_gridview"
@@ -45,7 +44,6 @@
                 <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".uimodule.HorizontalGridViewLineAct"
             android:label="@string/demo_horizontal_gridview_line"
@@ -57,7 +55,7 @@
             </intent-filter>
         </activity>
 
-        <!--动态放大缩小文字-->
+        <!-- 动态放大缩小文字 -->
         <activity
             android:name=".uimodule.TextViewActivity"
             android:label="@string/demo_auto_textview">
@@ -79,7 +77,7 @@
             </intent-filter>
         </activity>
 
-        <!--JAVA代码和js互相调用-->
+        <!-- JAVA代码和js互相调用 -->
         <activity
             android:name=".ui.JsHtmlActivity"
             android:label="@string/demo_js_html_java">
@@ -90,7 +88,7 @@
             </intent-filter>
         </activity>
 
-        <!--监听输入框-->
+        <!-- 监听输入框 -->
         <activity
             android:name=".ui.RemainEditTextActivity"
             android:label="@string/demo_rematin_edittext">
@@ -100,7 +98,6 @@
                 <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.VerifyActivity"
             android:label="@string/demo_verify_activity">
@@ -111,7 +108,7 @@
             </intent-filter>
         </activity>
 
-        <!--NFC界面-->
+        <!-- NFC界面 -->
         <activity
             android:name=".ui.NFCActivity"
             android:label="@string/demo_nfc_activity">
@@ -124,13 +121,14 @@
             <!-- 设置NFC监听 -->
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
                 <!-- 过滤文本数据 -->
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
 
-        <!--下载界面-->
+        <!-- 下载界面 -->
         <activity
             android:name=".ui.RetrofitDownLoadActivity"
             android:label="@string/demo_retrofit_download_activity">
@@ -141,7 +139,7 @@
             </intent-filter>
         </activity>
 
-        <!--手电筒界面-->
+        <!-- 手电筒界面 -->
         <activity
             android:name=".ui.FlashlightActivity"
             android:label="@string/demo_flashlight_activity">
@@ -152,7 +150,7 @@
             </intent-filter>
         </activity>
 
-        <!--手电筒界面-->
+        <!-- 手电筒界面 -->
         <activity
             android:name=".ui.CircleMeterActivity"
             android:label="@string/demo_circlemetter_activity">
@@ -163,7 +161,7 @@
             </intent-filter>
         </activity>
 
-        <!--文件读写-->
+        <!-- 文件读写 -->
         <activity
             android:name=".ui.FileWRActivity"
             android:label="@string/demo_filewr_activity">
@@ -174,12 +172,11 @@
             </intent-filter>
         </activity>
 
+        <!-- 下载服务 -->
+        <service android:name=".network.DownLoadService"/>
 
-
-        <!--下载服务-->
-        <service android:name="zhuwentao.com.zwtwitmass.network.DownLoadService" />
+        <activity android:name=".ui.FragmentLinkActivity">
+        </activity>
     </application>
-
-
 
 </manifest>

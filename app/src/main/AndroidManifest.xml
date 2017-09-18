@@ -175,7 +175,14 @@
         <!-- 下载服务 -->
         <service android:name=".network.DownLoadService"/>
 
-        <activity android:name=".ui.FragmentLinkActivity">
+        <activity
+            android:name=".ui.FragmentLinkActivity"
+            android:label="@string/demo_add_view">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
         </activity>
     </application>
 

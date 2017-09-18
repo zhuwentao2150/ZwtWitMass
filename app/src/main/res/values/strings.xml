@@ -19,6 +19,7 @@
     <string name="demo_flashlight_activity">手电筒界面</string>
     <string name="demo_circlemetter_activity">zwt_CircleMeterViewDemo</string>
     <string name="demo_filewr_activity">文件读写</string>
+    <string name="demo_add_view">动态添加按钮</string>
 
 
 </resources>

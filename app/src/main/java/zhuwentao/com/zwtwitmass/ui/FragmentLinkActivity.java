@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,8 +47,15 @@ public class FragmentLinkActivity extends AppCompatActivity {
         mLinearLayout.addView(getTextView("one TextView"), layoutParams);
         mLinearLayout.addView(getTextView("two TextView"), layoutParams);
         mLinearLayout.addView(getTextView("Three TextView"), layoutParams);
+
+        if (mLinearLayout.getChildAt(0) instanceof TextView) {
+            ((TextView) mLinearLayout.getChildAt(0)).getText();
+        } else if (mLinearLayout.getChildAt(0) instanceof EditText){
+            ((EditText) mLinearLayout.getChildAt(0)).setText("");
+        }
     }
 
+    // 画一行控件
     private View getLine() {
         ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout linearLayout = new LinearLayout(this);

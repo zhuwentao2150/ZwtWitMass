@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import zhuwentao.com.zwtwitmass.R;
+import zhuwentao.com.zwtwitmass.utils.LogUtil;
 
 
 /**
@@ -41,27 +42,33 @@ public class FragmentLinkActivity extends AppCompatActivity {
 
     private void addView() {
         ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams layoutMatchParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        mLinearLayout.addView(getTextView("one TextView"), layoutParams);
+//        mLinearLayout.addView(getTextView("two TextView"), layoutParams);
+//        mLinearLayout.addView(getTextView("Three TextView"), layoutParams);
 
-
-
-        mLinearLayout.addView(getTextView("one TextView"), layoutParams);
-        mLinearLayout.addView(getTextView("two TextView"), layoutParams);
-        mLinearLayout.addView(getTextView("Three TextView"), layoutParams);
+        mLinearLayout.addView(getEditTextLine(), layoutMatchParams);
 
         if (mLinearLayout.getChildAt(0) instanceof TextView) {
-            ((TextView) mLinearLayout.getChildAt(0)).getText();
+            String name = ((TextView) mLinearLayout.getChildAt(0)).getText().toString();
+            LogUtil.e("名字：" + name);
         } else if (mLinearLayout.getChildAt(0) instanceof EditText){
-            ((EditText) mLinearLayout.getChildAt(0)).setText("");
+            ((EditText) mLinearLayout.getChildAt(0)).setText("aaaaa");
         }
     }
 
     // 画一行控件
-    private View getLine() {
+    private View getEditTextLine() {
         ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.setLayoutParams(layoutParams);
 
+        ViewGroup.LayoutParams layoutWrapParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams layoutMatchParams = new LinearLayout.LayoutParams(300, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linearLayout.addView(getTextView("Text Name"), layoutWrapParams);
+        linearLayout.addView(getEditText(), layoutMatchParams);
 
 
         return linearLayout;
@@ -75,6 +82,14 @@ public class FragmentLinkActivity extends AppCompatActivity {
         mNameTv.setTextSize(22);
         mNameTv.setGravity(Gravity.CENTER);
         return mNameTv;
+    }
+
+    private View getEditText() {
+        EditText mEditEdt = new EditText(this);
+        mEditEdt.setPadding(5, 5, 5, 5);
+        mEditEdt.setTextSize(24);
+        mEditEdt.setTextColor(Color.BLUE);
+        return mEditEdt;
     }
 
 

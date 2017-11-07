@@ -63,6 +63,16 @@ public class CircleMeterMaxMinView extends View {
 
     private Context mContext;
 
+    /**
+     * 最小值
+     */
+    private float minValue = 0;
+
+    /**
+     * 最大值
+     */
+    private float maxValue = 100;
+
     public CircleMeterMaxMinView(Context context) {
         this(context, null);
     }
@@ -159,7 +169,8 @@ public class CircleMeterMaxMinView extends View {
                 canvas.drawLine(scaleWidth, mHeight / 2, DensityUtil.dip2px(mContext, 15), mHeight / 2, mScalePaint);
 
                 // 画文字
-                String text = String.valueOf(i / 5);
+                double valueText = i * (maxValue / 40);
+                String text = String.valueOf(valueText);
                 Rect textBound = new Rect();
                 mScaleTextPaint.getTextBounds(text, 0, text.length(), textBound);   // 获取文字的矩形范围
                 int textWidth = textBound.right - textBound.left;  // 获得文字宽度
@@ -250,8 +261,14 @@ public class CircleMeterMaxMinView extends View {
         canvas.restore();
     }
 
-    public void setMaxMinValue(double minValue, double maxValue){
-
+    /**
+     * 设置最大值最小值
+     * @param minValue 最小值
+     * @param maxValue 最大值
+     */
+    public void setMaxMinValue(float minValue, float maxValue) {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 
     /**
@@ -260,13 +277,13 @@ public class CircleMeterMaxMinView extends View {
     public void setProgress(int progress) {
 
         // 内部刻度的进度
-        this.mInsideProgress = progress;
+        this.mInsideProgress = (progress / (maxValue / 100));
 
-        // 指针显示的进度
-        this.mProgress = (float) progress * 2.4f;
+        // 指针显示的进度，需要换算成100的等份
+        this.mProgress = (progress / (maxValue / 100)) * 2.4f;
 
         // 设置中间文字显示的数值
-        this.value = (float) (progress * 0.08);
+        this.value = progress;
 
         invalidate();
     }

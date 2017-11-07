@@ -6,7 +6,7 @@ import android.widget.SeekBar;
 import zhuwentao.com.zwtwitmass.R;
 import zhuwentao.com.zwtwitmass.uimodule.BaseActivity;
 import zhuwentao.com.zwtwitmass.uimodule.custom.CircleLoadingView;
-import zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView;
+import zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterMaxMinView;
 
 /**
  *
@@ -18,7 +18,7 @@ public class CircleMeterActivity extends BaseActivity {
 
     private SeekBar indexSb;
 
-    private CircleMeterView circleMeter;
+    private CircleMeterMaxMinView circleMeter;
     private CircleLoadingView circleLoading;
     private CircleLoadingView circleLoadingTwo;
 
@@ -33,6 +33,7 @@ public class CircleMeterActivity extends BaseActivity {
 
         initListener();
 
+        circleMeter.setMaxMinValue(0, 100);
         circleLoading.startDotAnimator();
         circleLoadingTwo.startDotAnimator();
     }
@@ -60,7 +61,7 @@ public class CircleMeterActivity extends BaseActivity {
 
     private void initUI() {
         indexSb = (SeekBar) findViewById(R.id.sb_index_position);
-        circleMeter = (CircleMeterView) findViewById(R.id.cmv_meter);
+        circleMeter = (CircleMeterMaxMinView) findViewById(R.id.cmv_meter);
         circleLoading = (CircleLoadingView) findViewById(R.id.clv_loading);
         circleLoadingTwo = (CircleLoadingView) findViewById(R.id.clv_loading_two);
     }

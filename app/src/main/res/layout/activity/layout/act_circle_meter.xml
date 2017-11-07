@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <!--仪表盘-->
-    <zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterView
+    <zhuwentao.com.zwtwitmass.uimodule.custom.CircleMeterMaxMinView
         android:id="@+id/cmv_meter"
         android:layout_width="250dp"
         android:layout_marginTop="10dp"

@@ -184,6 +184,26 @@
                 <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.MPChartActivity"
+            android:label="@string/demo_wave_chart">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.RadarScanActivity"
+            android:label="@string/demo_scan_radar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.ZWT_SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

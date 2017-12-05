@@ -20,6 +20,10 @@
     <string name="demo_circlemetter_activity">zwt_CircleMeterViewDemo</string>
     <string name="demo_filewr_activity">文件读写</string>
     <string name="demo_add_view">动态添加按钮</string>
+    <string name="demo_wave_chart">波形显示界面</string>
+    <string name="demo_scan_radar">雷达扫描控件</string>
+
+
 
 
 </resources>

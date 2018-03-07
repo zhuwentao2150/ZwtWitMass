@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+
+<!-- 网页样式 -->
+<style type="text/css">
+    body, html {
+        width:  100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+        font-size: 16px;
+    }
+
+    div.div300 {
+        margin:0px;
+        padding:5px;
+        background:#ffffff;
+        border:solid 1px #c3c3c3;
+    }
+
+    h3.h300 {
+        margin:0px;
+        padding:5px;
+        background:#F5F5F5;
+        border:solid 1px #c3c3c3;
+        color:black;
+    }
+</style>
+
+<!-- 控制逻辑 -->
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".h300").click(function(){
+        $(".div300").slideToggle("fast");
+    });
+});
+</script>
+
+<title>标题</title>
+</head>
+<body>
+
+<div style="padding:10px; text-align: justify;">
+    <h3 class="h300">item点击显示或隐藏0</h3>
+    <div class="div300">
+        <p>
+            1.上图中的功能在很多APP上都可能用到过，例如app的帮助界面，告诉用户如何使用APP。<br><br>
+            2.一般的实现方式都是通过ListView来实现的，实际上此类需求非常的简单，完全可以用HTML来实现。<br><br>
+            3.显示隐藏的特效可以使用jQuery来实现，一个函数就可以搞定。<br><br>
+            4.网页中需要使用到jQuery，最新版本可以去官网下载。<br>
+        </p>
+    </div>
+</div>
+</body>
+</html>

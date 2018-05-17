@@ -9,9 +9,10 @@ import android.os.StrictMode;
 /**
  * 应用Application
  * Created by zhuwentao on 2017-04-18.
+ * TODO:分支测试
  */
 public class AppApplication extends Application {
-    private Context mContext;
+    private static Context mContext;
 
     /**
      * 开发模式，发布前需要将值修改为 false
@@ -68,6 +69,10 @@ public class AppApplication extends Application {
             StrictMode.setVmPolicy(vmPolicyBuilder.build());
         }
 
+    }
+
+    public static Context getContext(){
+        return mContext;
     }
 
 

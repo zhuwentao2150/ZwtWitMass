@@ -23,6 +23,7 @@
     <string name="demo_wave_chart">波形显示界面</string>
     <string name="demo_scan_radar">雷达扫描控件</string>
     <string name="demo_js_guide">zwt_jQuery显示或隐藏</string>
+    <string name="demo_view_ripple">zwt_水涟漪波形效果</string>
 
 
 
